@@ -42,3 +42,9 @@ Here are some ideas to get you started:
     <img src="https://cultofthepartyparrot.com/parrots/hd/mustacheparrot.gif" width="30" height="30"/>
 </div>
 <br/>
+
+| rr | r |    | rr |   |
+|:--:|---|----|----|---|
+|    |   |    | r  |   |
+|    |   |    |    |   |
+|    |   | rr |    |   |
