@@ -2,9 +2,9 @@
 
 <div align = "center">
     <br>
-    <h3>Gabriel Ju Hyun, Yoon : 윤주현</h3>
+    <h1>Gabriel Ju Hyun, Yoon : 윤주현</h1>
     <br>
-    
+
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgabrielyoon7&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gabrielyoon7@gmail.com)](mailto:gabrielyoon7@gmail.com)
 [![Blog Badge](http://img.shields.io/badge/-Blog-green?style=flat-square&link=https://leirbag.tistory.com/)](https://leirbag.tistory.com/)
     
@@ -86,9 +86,30 @@
     
 </details>   
 
+    
+    
+    
+    
+<h3>💻 Tech Stack 💻</h3>
+    
+    
+    
+    
 
+<h3>💻 Github Stat 💻</h3>
+    
+![](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=gabrielyoon7&theme=vue)
+
+<!-- [![gabrielyoon7's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats) -->
+
+[![gabrielyoon7's GitHub stats](https://github-readme-stats.vercel.app/api?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats)    
+<!--     [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats) -->
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=gabrielyoon7&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+    
 </div>
 
+    
 ![footer](https://capsule-render.vercel.app/api?type=waving&&color=gradient&height=100&section=footer&fontSize=90)
 
 
