@@ -76,12 +76,12 @@
     <summary><h4> 2022 </h4></summary>
     
 [경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 7기 기술지원 (`21.12 ~ 22.02`)
-    
-[경기대 분산병렬컴퓨팅연구실 챗봇 및 뉴스 기반의 질병 예방 앱 : 헬스케어](https://github.com/KGU-DCS-LAB/health_app) (`22.02 ~ `)
 
-[경기대 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그 (개발중단)](https://github.com/KGU-DCS-LAB/myPlug) (`22.02 ~ 22.04`)
+[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그 (개발중단)](https://github.com/KGU-DCS-LAB/myPlug) (`22.02 ~ 22.04`)    
     
-[경기대학교 컴퓨터공학심화캡스톤 기록의달인](https://github.com/gabrielyoon7/GIDAL)
+[경기대학교 분산병렬컴퓨팅연구실 챗봇 및 뉴스 기반의 질병 예방 앱 : 헬스케어](https://github.com/KGU-DCS-LAB/health_app) (`22.02 ~ `)
+
+[경기대학교 컴퓨터공학심화캡스톤 기록의달인 : 차세대 일기 작성 애플리케이션](https://github.com/gabrielyoon7/GIDAL) (`22.03 ~ 22.06`)
     
 2022 하계 한국정보기술학회 대학생논문경진대회 은상 : 개인 맞춤형 질병 유추 챗봇 애플리케이션 설계 및 구현 (`22.06`)
     
