@@ -15,7 +15,7 @@
     
 [경기대학교 컴퓨터공학심화캡스톤 기록의달인](https://github.com/gabrielyoon7/GIDAL)
     
-[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그 (개발 중단)](https://github.com/KGU-DCS-LAB/myPlug)
+[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그 (진행중)](https://github.com/KGU-DCS-LAB/myPlug)
     
 [경기대학교 분산병렬컴퓨팅연구실 챗봇 및 뉴스 기반의 질병 예방 앱 : 헬스케어](https://github.com/KGU-DCS-LAB/health_app)
     
