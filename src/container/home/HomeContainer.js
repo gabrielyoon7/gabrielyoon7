@@ -16,7 +16,7 @@ const HomeContainer = () => {
                 <div className="col-md-6">
                     <Link className='text-decoration-none ' to="/profile">
                         <div className="h-100 p-5 text-white bg-dark rounded-3">
-                            <h2>Profile</h2>
+                            <h2>About Me</h2>
                             <p>인생실화를 거짓 없이 들려드립니다.</p>
                             <button className="btn btn-outline-light" type="button">고고씽 <i className="bi bi-arrow-right"></i></button>
                         </div>
