@@ -1,47 +1,36 @@
-import { Link } from "react-router-dom";
+
+import { Link } from 'react-router-dom';
 
 const HomeContainer = () => {
     return (
         <div>
             <div className="p-5 mb-4 bg-light rounded-3">
                 <div className="container-fluid py-5">
-                    <h1 className="display-5 fw-bold">Custom jumbotron</h1>
-                    <p className="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-                    <button className="btn btn-primary btn-lg" type="button">Example button</button>
+                    <h1 className="display-5 fw-bold">안녕하세요</h1>
+                    <p className="col-md-8 fs-4">신입 프론트엔드 개발자를 희망하는 윤주현입니다.</p>
+                    <button className="btn btn-primary btn-lg" type="button" onClick={() => { window.location.href = 'https://github.com/gabrielyoon7' }}>Github에서 보기</button>
                 </div>
             </div>
 
             <div className="row align-items-md-stretch">
                 <div className="col-md-6">
-                    <div className="h-100 p-5 text-white bg-dark rounded-3">
-                        <h2>Change the background</h2>
-                        <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
-                        <button className="btn btn-outline-light" type="button">Example button</button>
-                    </div>
+                    <Link className='text-decoration-none ' to="/profile">
+                        <div className="h-100 p-5 text-white bg-dark rounded-3">
+                            <h2>Profile</h2>
+                            <p>인생실화를 거짓 없이 들려드립니다.</p>
+                            <button className="btn btn-outline-light" type="button">고고씽 <i className="bi bi-arrow-right"></i></button>
+                        </div>
+                    </Link>
                 </div>
                 <div className="col-md-6">
-                    <div className="h-100 p-5 bg-light border rounded-3">
-                        <h2>Add borders</h2>
-                        <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
-                        <button className="btn btn-outline-secondary" type="button">Example button</button>
-                    </div>
+                    <Link className='text-decoration-none ' to="/career">
+                        <div className="h-100 p-5 text-dark bg-light border rounded-3">
+                            <h2>Career History</h2>
+                            <p>프론트엔드 개발자가 되기 위해 걸어온 길</p>
+                            <button className="btn btn-outline-secondary" type="button">고고씽 <i className="bi bi-arrow-right"></i></button>
+                        </div>
+                    </Link>
                 </div>
-            </div>
-
-            <div>
-                <Link to='signin'>로그인 페이지</Link>
-            </div>
-            <div>
-                <Link to='signup'>회원가입 페이지</Link>
-            </div>
-            <div>
-                <Link to='user'>프로필 페이지</Link>
-            </div>
-            <div>
-                <Link to='example'>DB 예제 페이지</Link>
-            </div>
-            <div>
-                <Link to='zz'>존재하지 않는 페이지</Link>
             </div>
         </div>
     )

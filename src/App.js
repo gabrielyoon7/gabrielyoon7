@@ -3,6 +3,8 @@ import './App.css';
 import HomeContainer from './container/home/HomeContainer';
 import { Link, Route, Routes } from 'react-router-dom';
 import DefaultLayout from './component/common/DefaultLayout';
+import CareerHistoryContainer from './container/history/CareerHistoryContainer';
+import ProfileContainter from './container/profile/ProfileContainter';
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
       <Route path="/" element={<DefaultLayout />}>
         {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
         <Route path="/" element={<HomeContainer />} />
+        <Route path="/career" element={<CareerHistoryContainer />} />
+        <Route path="/profile" element={<ProfileContainter />} />
         <Route
           path="*"
           element={

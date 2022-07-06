@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import Footer from "./Footer";
 import Header from "./Header";
 
 export default function DefaultLayout() {
@@ -10,6 +11,7 @@ export default function DefaultLayout() {
       <div className="container">
         <Outlet />
       </div>
+      <Footer/>
     </div>
   );
 }
