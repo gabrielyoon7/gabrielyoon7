@@ -1,0 +1,55 @@
+.bg-sky {
+    background-color: rgba(108, 171, 221);
+    color: white;
+}
+.bg-blue {
+    background-color: rgba(28, 44, 91);
+    color: white;
+}
+.bg-gold {
+    background-color: rgba(255, 198, 89);
+}
+.bg-darkgold {
+    background-color: rgba(212, 161, 42);
+    color: white;
+}
+.bg-red {
+    background-color: rgba(236, 51, 37);
+    color: white;
+}
+.btn-sky{
+    --bs-btn-color: #fff !important; 
+    --bs-btn-bg: #6CABDD !important;
+    --bs-btn-border-color: #fff !important;
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: #6caaddce !important;
+    --bs-btn-hover-border-color: #fff !important;
+    --bs-btn-focus-shadow-rgb: 49,132,253 !important;
+    --bs-btn-active-color: #fff !important;
+    --bs-btn-active-bg: #fff !important;
+    --bs-btn-active-border-color: #fff !important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+    --bs-btn-disabled-color: #fff !important;
+    --bs-btn-disabled-bg: #fff !important;
+    --bs-btn-disabled-border-color: #fff !important;
+}
+
+.btn-outline-sky {
+    --bs-btn-color: #fff !important; 
+    --bs-btn-border-color: #fff !important; 
+    --bs-btn-hover-color: #6CABDD !important; 
+    --bs-btn-hover-bg: #fff !important; 
+    --bs-btn-hover-border-color: #fff !important; 
+    --bs-btn-focus-shadow-rgb: 108,117,125 !important; 
+    --bs-btn-active-color: #fff !important; 
+    --bs-btn-active-bg: #6CABDD !important; 
+    --bs-btn-active-border-color: #fff !important; 
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important; 
+    --bs-btn-disabled-color: #6CABDD !important; 
+    --bs-btn-disabled-bg: transparent !important; 
+    --bs-gradient: none !important; 
+}
+
+.text-super-light{
+    color:#fff !important; 
+}
