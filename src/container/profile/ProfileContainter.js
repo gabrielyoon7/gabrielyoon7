@@ -1,6 +1,7 @@
 import "./profile.css";
 import me from '../../assets/img/me.jpg'
 
+
 export default () => {
     return (
         <>

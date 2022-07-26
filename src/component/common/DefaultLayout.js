@@ -8,10 +8,12 @@ export default function DefaultLayout() {
       <div className="mb-2">
         <Header />
       </div>
-      <div className="container mt-5 pt-4">
-        <Outlet />
+      <div>
+        <div className="container mt-5 pt-4">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer/>
     </div>
   );
 }
