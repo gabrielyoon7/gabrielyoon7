@@ -7,7 +7,7 @@ const Header = () => {
     const [isSignIn, setSignIn] = useState(false); //임시로 해놓음
     return (
         <>
-            <nav className="navbar navbar-expand-lg px-sm-5 fixed-top" style={{"backgroundColor": "#e3f2fd"}}>
+            <nav className="navbar navbar-expand-lg px-sm-5 fixed-top bg-light shadow-sm" >
                 <div className="container-fluid">
                     <Link to='/' className="navbar-brand" >Gabriel Ju Hyun, Yoon</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
