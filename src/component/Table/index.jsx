@@ -14,29 +14,12 @@ const Table = ({ data, rowsPerPage }) => {
         <thead className={styles.tableRowHeader}>
           <tr>
             {Object.keys(data[0]).map((el) => (<th key={Math.random()} className={styles.tableHeader}>{el}</th>))}
-            {/* <th className={styles.tableHeader}>학기</th>
-            <th className={styles.tableHeader}>학수코드</th>
-            <th className={styles.tableHeader}>교과목명</th>
-            <th className={styles.tableHeader}>이수구분</th>
-            <th className={styles.tableHeader}>인증구분</th>
-            <th className={styles.tableHeader}>학점</th>
-            <th className={styles.tableHeader}>설계학점</th>
-            <th className={styles.tableHeader}>등급</th>
-            <th className={styles.tableHeader}>전공</th> */}
           </tr>
         </thead>
         <tbody>
           {slice.map((el) => (
             <tr className={styles.tableRowItems} key={el.id}>
-              <td className={styles.tableCell}>{el.year}</td>
-              <td className={styles.tableCell}>{el.id}</td>
-              <td className={styles.tableCell}>{el.title}</td>
-              <td className={styles.tableCell}>{el.type1}</td>
-              <td className={styles.tableCell}>{el.type2}</td>
-              <td className={styles.tableCell}>{el.point}</td>
-              <td className={styles.tableCell}>{el.design_point}</td>
-              <td className={styles.tableCell}>{el.grade}</td>
-              <td className={styles.tableCell}>{el.major?"✅":""}</td>
+              {Object.keys(el).map((col) => (<td key={Math.random()} className={styles.tableCell}>{el[col]}</td>))}
             </tr>
           ))}
         </tbody>
