@@ -18,7 +18,7 @@ const Table = ({ data, rowsPerPage }) => {
         </thead>
         <tbody>
           {slice.map((el) => (
-            <tr className={styles.tableRowItems} key={el.id}>
+            <tr className={styles.tableRowItems} key={Math.random()}>
               {Object.keys(el).map((col) => (<td key={Math.random()} className={styles.tableCell}>{el[col]}</td>))}
             </tr>
           ))}

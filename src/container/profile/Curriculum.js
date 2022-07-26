@@ -6,7 +6,7 @@ export default () => {
     return (
         <>
             <h3>Curriculum</h3>
-            <Table data={curriculum} rowsPerPage={3} />
+            <Table data={curriculum} rowsPerPage={8} />
         </>
     )
 }
