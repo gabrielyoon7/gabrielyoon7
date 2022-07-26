@@ -13,7 +13,8 @@ const Table = ({ data, rowsPerPage }) => {
       <table className={styles.table}>
         <thead className={styles.tableRowHeader}>
           <tr>
-            <th className={styles.tableHeader}>학기</th>
+            {Object.keys(data[0]).map((el) => (<th key={Math.random()} className={styles.tableHeader}>{el}</th>))}
+            {/* <th className={styles.tableHeader}>학기</th>
             <th className={styles.tableHeader}>학수코드</th>
             <th className={styles.tableHeader}>교과목명</th>
             <th className={styles.tableHeader}>이수구분</th>
@@ -21,7 +22,7 @@ const Table = ({ data, rowsPerPage }) => {
             <th className={styles.tableHeader}>학점</th>
             <th className={styles.tableHeader}>설계학점</th>
             <th className={styles.tableHeader}>등급</th>
-            <th className={styles.tableHeader}>전공</th>
+            <th className={styles.tableHeader}>전공</th> */}
           </tr>
         </thead>
         <tbody>
