@@ -21,6 +21,7 @@ const Table = ({ data, rowsPerPage }) => {
             <th className={styles.tableHeader}>학점</th>
             <th className={styles.tableHeader}>설계학점</th>
             <th className={styles.tableHeader}>등급</th>
+            <th className={styles.tableHeader}>전공</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@ const Table = ({ data, rowsPerPage }) => {
               <td className={styles.tableCell}>{el.point}</td>
               <td className={styles.tableCell}>{el.design_point}</td>
               <td className={styles.tableCell}>{el.grade}</td>
+              <td className={styles.tableCell}>{el.major?"✅":""}</td>
             </tr>
           ))}
         </tbody>

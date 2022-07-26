@@ -1,6 +1,7 @@
 import "./profile.css";
 import me from '../../assets/img/me.jpg'
 import Curriculum from "./Curriculum";
+import TechStack from "./TechStack";
 
 export default () => {
 
@@ -26,14 +27,38 @@ export default () => {
                 </div>
                 <div className="col-md-8 my-2 d-flex align-items-stretch">
                     <div className="card p-5 w-100">
-                        <h3>개인정보</h3>
+                        {/* <h3>개인정보</h3> */}
                         <div>
-                            <ul>
-                                <li>생년월일</li>
-                                <li>ㅇㅇ</li>
-                                <li>ㅇㅇ</li>
-                                <li>ㅇㅇ</li>
-                            </ul>
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th colSpan="2">기본 정보</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>생년월일</td>
+                                        <td>1996. 03. 25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>학력</td>
+                                        <td>경기대학교 컴퓨터공학부<br /> (2017.3 ~ 2023.2)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>주소</td>
+                                        <td><span>경기도 하남시</span><span>미사강변호반써밋아파트</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>약력</td>
+                                        <td>
+                                            <ul>
+                                                <li>경기대 컴퓨터공학부 홈페이지 개발팀 팀장 (2020.10 ~ 2021.12)</li>
+                                                <li>경기대학교 분산병렬컴퓨팅연구실(2021.7 ~ )</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -41,12 +66,12 @@ export default () => {
             <div className="row">
                 <div className="col-12 my-2">
                     <div className="card p-5">
-                        <h3>Tech Stack</h3>
+                        <TechStack />
                     </div>
                 </div>
                 <div className="col-12 my-2">
                     <div className="card p-5">
-                        <Curriculum/>
+                        <Curriculum />
                     </div>
                 </div>
             </div>
