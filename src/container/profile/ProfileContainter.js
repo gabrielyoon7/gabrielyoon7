@@ -11,11 +11,11 @@ export default () => {
             <div className="row">
                 <div className="col-md-4 my-2 d-flex align-items-stretch">
                     <div className="card w-100">
-                        <div className="d-flex flex-column align-items-center text-center py-5">
+                        <div className="d-flex flex-column align-items-center text-center my-auto">
                             <img className="img-fluid rounded-4 mb-3" src={me} width={140}></img>
 
                             <h2 className="fw-normal">윤주현</h2>
-                            <p>자기소개</p>
+                            <p>계속 전진하겠습니다.</p>
                             <p>
                                 <a className="btn btn-outline-dark m-1" target="_blank" href="https://github.com/gabrielyoon7">Github</a>
                                 <a className="btn btn-outline-primary m-1" target="_blank" href="https://leirbag.tistory.com/">Tistory</a>
@@ -52,9 +52,17 @@ export default () => {
                                         <td>약력</td>
                                         <td>
                                             <ul>
+                                                <li>경기대학교 SW기초 튜터 (2020.9 ~ 2021.12)</li>
                                                 <li>경기대 컴퓨터공학부 홈페이지 개발팀 팀장 (2020.10 ~ 2021.12)</li>
-                                                <li>경기대학교 분산병렬컴퓨팅연구실(2021.7 ~ )</li>
+                                                <li>경기대학교 분산병렬컴퓨팅연구실 (2021.7 ~ )</li>
+                                                <li>경기대학교 SW상상기업 아보카도 팀장 (2021.10 ~ 2022.10)</li>
                                             </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>관심분야</td>
+                                        <td>
+                                            프론트엔드(1순위), 백엔드(2순위)
                                         </td>
                                     </tr>
                                 </tbody>

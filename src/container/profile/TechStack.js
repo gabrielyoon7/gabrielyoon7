@@ -17,6 +17,8 @@ export default () => {
         { type: "db", name: "MySQL", color: "primary" },
         { type: "db", name: "MariaDB", color: "info" },
         { type: "fe", name: "bootstrap", color: "light" },
+        { type: "etc", name: "Ubuntu", color: "danger" },
+        { type: "etc", name: "Tomcat", color: "warning" },
     ]
     return (
         <>
@@ -33,6 +35,10 @@ export default () => {
                 <div className="col-md-4 my-1">
                     <h5>DBMS</h5>
                     {tech.filter((t) => t.type === 'db').map((t) => <span key={t.name} className={"me-1 badge text-bg-" + t.color}>{t.name}</span>)}
+                </div>
+                <div className="col">
+                    <h5>Others</h5>
+                    {tech.filter((t) => t.type === 'etc').map((t) => <span key={t.name} className={"me-1 badge text-bg-" + t.color}>{t.name}</span>)}
                 </div>
             </div>
         </>
