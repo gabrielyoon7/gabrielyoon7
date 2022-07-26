@@ -13,7 +13,7 @@ const Table = ({ data, rowsPerPage }) => {
       <table className={styles.table}>
         <thead className={styles.tableRowHeader}>
           <tr>
-            <th className={styles.tableHeader}>년도 학기</th>
+            <th className={styles.tableHeader}>학기</th>
             <th className={styles.tableHeader}>학수코드</th>
             <th className={styles.tableHeader}>교과목명</th>
             <th className={styles.tableHeader}>이수구분</th>
