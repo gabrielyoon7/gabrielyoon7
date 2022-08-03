@@ -77,7 +77,7 @@
     
 [경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 7기 기술지원 (`21.12 ~ 22.02`)
 
-[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그 (개발중단)](https://github.com/KGU-DCS-LAB/myPlug) (`22.02 ~ 22.04`)    
+[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그](https://github.com/KGU-DCS-LAB/myPlug) (`22.02 ~ 22.04`)    
     
 [경기대학교 분산병렬컴퓨팅연구실 챗봇 및 뉴스 기반의 질병 예방 앱 : 헬스케어](https://github.com/KGU-DCS-LAB/health_app) (`22.02 ~ `)
 
