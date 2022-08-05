@@ -12,33 +12,44 @@ export default () => {
     let majorScoreCount = 0;
     let majorScoreSum = 0;
     let electiveScore = 0;
-    curriculum.map((c)=>{
-        allScore+=c.학점
-        if(c.등급!=='P'){
-            scoredScore+=c.학점;
+    curriculum.map((c) => {
+        allScore += c.학점
+        if (c.등급 !== 'P') {
+            scoredScore += c.학점;
             scoredScoreCount++;
-            scoredScoreSum+=gradeToScore(c.등급);
+            scoredScoreSum += gradeToScore(c.등급);
         }
-        if(c.전공==='✅'&&c.등급!=='P'){
-            majorScore+=c.학점;
+        if (c.전공 === '✅' && c.등급 !== 'P') {
+            majorScore += c.학점;
             majorScoreCount++;
-            majorScoreSum+=gradeToScore(c.등급);
+            majorScoreSum += gradeToScore(c.등급);
         }
 
     })
 
     return (
         <>
-            <div className="mb-3">
+            <div className="mb-3 overflow-scroll box" >
                 <h3>Curriculum</h3>
                 <Table data={curriculum} rowsPerPage={10} />
             </div>
-            <h3>전체 학점</h3>
-            <div>
-                취득학점 : {allScore} (평점산출학점 : {scoredScore}) → 평점평균 : {Math.round(scoredScoreSum/scoredScoreCount*100)/100}
+            <div className="my-2">
+                <h3>전체 학점</h3>
+                <div>
+                    취득학점 : {allScore} (평점산출학점 : {scoredScore})
+                </div>
+                <div>
+                    평점평균 : {Math.round(scoredScoreSum / scoredScoreCount * 100) / 100}
+                </div>
             </div>
-            <div>
-                전공산출학점 : {majorScore} (PNP제외) → 평점평균 : {Math.round(majorScoreSum/majorScoreCount*100)/100}
+            <div className="my-2">
+                <h3>전공 학점</h3>
+                <div>
+                    전공산출학점 : {majorScore} (PNP제외)
+                </div>
+                <div>
+                    평점평균 : {Math.round(majorScoreSum / majorScoreCount * 100) / 100}
+                </div>
             </div>
         </>
     )

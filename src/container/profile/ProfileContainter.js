@@ -9,8 +9,8 @@ export default () => {
     return (
         <>
             <div className="row">
-                <div className="col-md-4 my-2 d-flex align-items-stretch">
-                    <div className="card w-100">
+                <div className="col-xl-4 my-2 d-flex align-items-stretch">
+                    <div className="card w-100 rounded-4 border-primary py-5 p-xl-0">
                         <div className="d-flex flex-column align-items-center text-center my-auto">
                             <img className="img-fluid rounded-4 mb-3" src={me} width={140}></img>
 
@@ -25,8 +25,8 @@ export default () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-8 my-2 d-flex align-items-stretch">
-                    <div className="card p-5 w-100">
+                <div className="col-xl-8 my-2 d-flex align-items-stretch">
+                    <div className="card py-5 px-2 p-sm-5 w-100 rounded-4 border-primary">
                         {/* <h3>개인정보</h3> */}
                         <div>
                             <table className="table table-striped">
@@ -46,7 +46,7 @@ export default () => {
                                     </tr>
                                     <tr>
                                         <td>주소</td>
-                                        <td><span>경기도 하남시</span><span>미사강변호반써밋아파트</span></td>
+                                        <td><span>경기도 하남시 </span><span>미사강변호반써밋아파트</span></td>
                                     </tr>
                                     <tr>
                                         <td>약력</td>
@@ -60,9 +60,15 @@ export default () => {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>관심분야</td>
+                                        <td>관심포지션</td>
                                         <td>
                                             프론트엔드(1순위), 백엔드(2순위)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>관심분야</td>
+                                        <td>
+                                            웹개발, 앱개발
                                         </td>
                                     </tr>
                                 </tbody>
@@ -73,12 +79,12 @@ export default () => {
             </div>
             <div className="row">
                 <div className="col-12 my-2">
-                    <div className="card p-5">
+                    <div className="card py-5 px-2 p-sm-5 rounded-4 border-primary">
                         <TechStack />
                     </div>
                 </div>
                 <div className="col-12 my-2">
-                    <div className="card p-5">
+                    <div className="card py-5 px-2 p-sm-5 rounded-4 border-primary">
                         <Curriculum />
                     </div>
                 </div>

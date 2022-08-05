@@ -53,3 +53,7 @@
 .text-super-light{
     color:#fff !important; 
 }
+
+.box::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
