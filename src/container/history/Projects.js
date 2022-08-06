@@ -1,6 +1,7 @@
 import ProjectCard from "../../component/projects/ProjectCard"
 
 export default () => {
+    const projects = []
     return (
         <>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 align-items-stretch mb-5">
