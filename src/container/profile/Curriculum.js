@@ -29,8 +29,10 @@ export default () => {
 
     return (
         <>
-            <div className="mb-3 overflow-scroll box" >
+            <div className="mb-3" >
                 <h3>Curriculum</h3>
+            </div>
+            <div className="mb-3 overflow-scroll box" >
                 <Table data={curriculum} rowsPerPage={10} />
             </div>
             <div className="my-2">
