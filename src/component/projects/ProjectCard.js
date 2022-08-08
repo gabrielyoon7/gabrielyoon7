@@ -1,7 +1,7 @@
 export default (props) => {
     return (
         <div className="col">
-            <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#project-modal" >
+            <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#project-modal" onClick={()=>props.setSelected(props.project)}>
                 <div className="card p-3 rounded-4">
                     <div className="row">
                         <div className="col py-3">
