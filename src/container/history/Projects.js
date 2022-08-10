@@ -4,12 +4,18 @@ import React, { useEffect, useState } from 'react'
 import ReactDom from 'react-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import tech from "../../assets/data/tech"
 
 export default () => {
     const [selected, setSelected] = useState(null);
 
     const handleData = (data) => {
         setSelected(data);
+    }
+
+    const findTech = (t) => {
+        const idx = tech.findIndex((tech) => tech.value === t)
+        return tech[idx]
     }
 
     return (
@@ -29,7 +35,23 @@ export default () => {
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body py-0">
-                                    <ReactMarkdown children={require('../../assets/data/project/description/project'+selected.key).default} remarkPlugins={[remarkGfm]} />
+                                    <div className="card-body">
+                                        <span className="badge bg-blue mx-1">ㅇㅇ</span>
+                                        <span className="badge bg-blue mx-1">ㄹㄹ</span>
+                                        <div className=""><h1>ㅂㅂ</h1></div>
+                                        <div className=""><h5>ㅁㅁ</h5></div>
+                                        <div className=""><h6>ㅊㅊ</h6></div>
+                                        <div className=""><h6>ㅋㅋ</h6></div>
+                                        <hr />
+                                        <p className="card-text" style={{ "minHeight": "500px" }}>
+                                            <ReactMarkdown children={require('../../assets/data/project/description/project' + selected.key).default} remarkPlugins={[remarkGfm]} />
+                                        </p>
+                                        <hr />
+                                        <div>
+                                            {selected.tech_stack.map((t) => <span key={findTech(t).value} className="badge me-1" style={{ "backgroundColor": findTech(t).bgColor, "color": findTech(t).txtColor }}>{findTech(t).label}</span>)}
+                                        </div>
+
+                                    </div>
                                 </div>
                                 <div className="modal-footer border-top-0 d-flex justify-content-between">
                                     <button type="button" className="col btn btn-lg btn-outline-danger w-100 mx-1" data-bs-dismiss="modal">Close</button>
