@@ -14,7 +14,7 @@ export default () => {
 
     return (
         <>
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 align-items-stretch mb-5">
+            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch mb-5">
                 {projects.map((project) => <ProjectCard key={project.key} project={project} setSelected={setSelected} handleData={handleData} />)}
             </div>
             <div className="modal fade" id="project-modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -25,7 +25,7 @@ export default () => {
                             selected &&
                             <>
                                 <div className="modal-header border-bottom-0">
-                                    <h5 className="modal-title"></h5>
+                                    <h5 className="modal-title">프로젝트</h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body py-0">
