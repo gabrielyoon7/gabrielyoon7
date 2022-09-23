@@ -1,4 +1,4 @@
-import ProjectCard from "../../component/projects/ProjectCard"
+import ProjectCard from "../../components/projects/ProjectCard"
 import projects from "../../assets/data/project/projects"
 import React, { useEffect, useState } from 'react'
 import ReactDom from 'react-dom'

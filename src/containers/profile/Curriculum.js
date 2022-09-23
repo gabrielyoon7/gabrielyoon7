@@ -1,4 +1,4 @@
-import Table from "../../component/Table";
+import Table from "../../components/Table";
 import curriculum from "../../assets/data/curriculum";
 import Score from "./Score";
 
