@@ -7,17 +7,17 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Provider } from 'react-redux';
-import { store } from 'api/redux/store';
+// import { Provider } from 'react-redux';
+// import { store } from 'api/redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
+    {/* <Provider store={store}> */}
       <BrowserRouter basename='gabrielyoon7'>
         <App />
       </BrowserRouter>
-    </Provider>
+    {/* </Provider> */}
   </React.StrictMode>
 );
 
