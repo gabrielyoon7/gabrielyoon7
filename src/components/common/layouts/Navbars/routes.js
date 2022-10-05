@@ -46,7 +46,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 const routes = [
   {
     name: "About",
-    icon: <Icon>ㅋㅋ</Icon>,
+    icon: <GitHubIcon />,
     collapse: [
       {
         name: "Profile",
@@ -62,7 +62,7 @@ const routes = [
   },
   {
     name: "Projects",
-    icon: <Icon>ㅋㅋ</Icon>,
+    icon: <GitHubIcon />,
     columns: 1,
     rowsPerColumn: 2,
     collapse: [

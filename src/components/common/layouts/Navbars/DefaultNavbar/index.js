@@ -34,6 +34,8 @@ import MuiLink from "@mui/material/Link";
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 import { Dropdown } from "react-bootstrap";
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
 import DefaultNavbarMobile from "./DefaultNavbarMobile";
@@ -281,12 +283,13 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
               item.name
             )}
             {item.collapse && (
-              <Icon
-                fontSize="small"
-                sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
-              >
-                keyboard_arrow_right
-              </Icon>
+              <ArrowDropDownIcon/>
+              // <Icon
+              //   fontSize="small"
+              //   sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
+              // >
+              //   keyboard_arrow_right
+              // </Icon>
             )}
           </MKTypography>
         );
@@ -413,12 +416,13 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                     item.name
                   )}
                   {item.collapse && (
-                    <Icon
-                      fontSize="small"
-                      sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
-                    >
-                      keyboard_arrow_right
-                    </Icon>
+                    <ArrowDropDownIcon/>
+                    // <Icon
+                    //   fontSize="small"
+                    //   sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
+                    // >
+                    //   keyboard_arrow_right
+                    // </Icon>
                   )}
                 </MKTypography>
               );
