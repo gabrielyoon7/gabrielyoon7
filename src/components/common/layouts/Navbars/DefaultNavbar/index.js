@@ -35,6 +35,7 @@ import MuiLink from "@mui/material/Link";
 import breakpoints from "assets/theme/base/breakpoints";
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { Dropdown } from "react-bootstrap";
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
@@ -283,7 +284,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
               item.name
             )}
             {item.collapse && (
-              <ArrowDropDownIcon/>
+              <ArrowDropDownIcon />
               // <Icon
               //   fontSize="small"
               //   sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
@@ -416,7 +417,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                     item.name
                   )}
                   {item.collapse && (
-                    <ArrowDropDownIcon/>
+                    <ArrowDropDownIcon />
                     // <Icon
                     //   fontSize="small"
                     //   sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
@@ -596,7 +597,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             sx={{ cursor: "pointer" }}
             onClick={openMobileNavbar}
           >
-            <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
+            <MenuIcon />
+            {/* <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon> */}
           </MKBox>
         </MKBox>
         <MKBox
