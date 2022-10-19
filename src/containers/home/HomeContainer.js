@@ -1,40 +1,79 @@
 
-import { Link } from 'react-router-dom';
+import { Box, Card, CardActionArea, Stack, Typography } from '@mui/material';
+import HomeCard from 'components/common/home/HomeCard';
+import MKButton from 'components/common/mui-components/MKButton';
+import Grid from '@mui/material/Unstable_Grid2';
 
 const HomeContainer = () => {
-    return (
-        <div className=''>
-            <div className='text-decoration-none text-dark'>
-                <div className="p-5 mb-4 rounded-4 border-primary border bg-white">
-                    <div className="container-fluid py-5">
-                        <h1 className="display-5 fw-bold">안녕하세요</h1>
-                        <p className="col-md-8 fs-4">신입 웹 개발자를 희망하는 윤주현입니다.</p>
-                        <a className="btn btn-outline-dark btn-lg rounded-3" type="button" href='https://github.com/gabrielyoon7' target='_blank'>Github에서 보기</a>
-                    </div>
-                </div>
-            </div>
 
-            <div className="row align-items-md-stretch">
-                <div className="col-md-6 mb-4">
-                    <Link className='text-decoration-none ' to="/profile">
-                        <div className="h-100 p-5 text-dark border rounded-4 border-primary bg-white">
-                            <h2>About Me</h2>
-                            <p>저에 대해 소개합니다.</p>
-                            <button className="btn btn-outline-dark" type="button">확인하기 <i className="bi bi-arrow-right"></i></button>
-                        </div>
-                    </Link>
-                </div>
-                <div className="col-md-6 mb-4">
-                    <Link className='text-decoration-none ' to="/career">
-                        <div className="h-100 p-5 text-dark border rounded-4 border-primary bg-white">
-                            <h2>Career History</h2>
-                            <p>개발자가 되기 위해 걸어온 길</p>
-                            <button className="btn btn-outline-dark" type="button">확인하기 <i className="bi bi-arrow-right"></i></button>
-                        </div>
-                    </Link>
-                </div>
-            </div>
-        </div>
+    return (
+        <>
+            <Grid container spacing={2}>
+                <Grid xs={12}>
+                    <HomeCard
+                        children={
+                            <>
+                                <Typography variant='h1'>
+                                    안녕하세요
+                                </Typography>
+                                <Typography my={3}>
+                                    신입 웹 개발자를 희망하는 윤주현입니다.
+                                </Typography>
+                                <MKButton
+                                    variant='outlined'
+                                    color='dark'
+                                    onClick={() => window.open('https://github.com/gabrielyoon7')}
+                                >
+                                    Github에서 보기
+                                </MKButton>
+                            </>
+                        }
+                    />
+                </Grid>
+                <Grid xs={12} lg={6}>
+                    <HomeCard
+                        to='/profile'
+                        children={
+                            <>
+                                <Typography variant='h2'>
+                                    About Me
+                                </Typography>
+                                <Typography my={3}>
+                                    저에 대해 소개합니다.
+                                </Typography>
+                                <MKButton
+                                    variant='outlined'
+                                    color='dark'
+                                >
+                                    확인하기
+                                </MKButton>
+                            </>
+                        }
+                    />
+                </Grid>
+                <Grid xs={12} lg={6}>
+                    <HomeCard
+                        to='/career'
+                        children={
+                            <>
+                                <Typography variant='h2'>
+                                    Career History
+                                </Typography>
+                                <Typography my={3}>
+                                    개발자가 되기 위해 걸어온 길
+                                </Typography>
+                                <MKButton
+                                    variant='outlined'
+                                    color='dark'
+                                >
+                                    확인하기
+                                </MKButton>
+                            </>
+                        }
+                    />
+                </Grid>
+            </Grid>
+        </>
     )
 }
 
