@@ -2,17 +2,55 @@ import "./profile.css";
 import me from '../../assets/img/me.jpg'
 import Curriculum from "./Curriculum";
 import TechStack from "./TechStack";
+import HomeCard from "components/common/home/HomeCard";
+import { Box, Stack, Typography } from "@mui/material";
+import MKButton from "components/common/mui-components/MKButton";
 
 export default () => {
 
 
     return (
         <>
+            <HomeCard
+                children={
+                    <>
+                        <Box align="center">
+
+                            <img className="img-fluid rounded-4 mb-3" src={me} width={140}></img>
+                            <Typography variant="h3">윤주현</Typography>
+                            <Typography>계속 전진하겠습니다.</Typography>
+                            <Stack direction={"row"} spacing={1} sx={{justifyContent:"center"}}>
+                                <MKButton
+                                 variant="outlined"
+                                  color="dark"
+                                  onClick={()=>window.open('https://github.com/gabrielyoon7')}
+                                  >
+                                    Github
+                                </MKButton>
+                                <MKButton 
+                                variant="outlined"
+                                 color="info"
+                                 onClick={()=>window.open('https://leirbag.tistory.com/')}
+                                 >
+                                    Tistory
+                                </MKButton>
+                                <MKButton 
+                                variant="outlined" 
+                                color="error"
+                                onClick={()=>window.open('https://www.instagram.com/gabriel._.yn/')}
+                                >
+                                    Instagram
+                                </MKButton>
+                            </Stack>
+                        </Box>
+                    </>
+                }
+            />
             <div className="row">
                 <div className="col-xl-4 my-2 d-flex align-items-stretch">
                     <div className="card w-100 rounded-4 border-primary py-5 p-xl-0">
                         <div className="d-flex flex-column align-items-center text-center my-auto">
-                            <img className="img-fluid rounded-4 mb-3" src={me} width={140}></img>
+                            {/* <img className="img-fluid rounded-4 mb-3" src={me} width={140}></img>
 
                             <h2 className="fw-normal">윤주현</h2>
                             <p>계속 전진하겠습니다.</p>
@@ -20,7 +58,7 @@ export default () => {
                                 <a className="btn btn-outline-dark m-1" target="_blank" href="https://github.com/gabrielyoon7">Github</a>
                                 <a className="btn btn-outline-primary m-1" target="_blank" href="https://leirbag.tistory.com/">Tistory</a>
                                 <a className="btn btn-outline-danger m-1" target="_blank" href="https://www.instagram.com/gabriel._.yn/">Instagram</a>
-                            </p>
+                            </p> */}
 
                         </div>
                     </div>
