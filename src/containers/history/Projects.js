@@ -5,12 +5,16 @@ import ReactDom from 'react-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import tech from "../../assets/data/tech"
+import ModalStaticBackdrop from "components/common/home/ModalStaticBackdrop"
+import ProjectViewModal from "components/projects/ProjectViewModal"
 
 export default () => {
-    const [selected, setSelected] = useState(null);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [projectModalOpen, setProjectModalOpen] = useState(false);
 
     const handleData = (data) => {
-        setSelected(data);
+        setSelectedProject(data);
+        setProjectModalOpen(true);
     }
 
     const findTech = (t) => {
@@ -21,10 +25,24 @@ export default () => {
     return (
         <>
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch mb-5">
-                {projects.map((project) => <ProjectCard key={project.key} project={project} setSelected={setSelected} handleData={handleData} />)}
+                {
+                    projects.map((project) => <ProjectCard
+                        key={project.key}
+                        project={project}
+                        handleData={handleData}
+                    />)
+                }
             </div>
-            <div className="modal fade" id="project-modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                {/* 기사 보여주는 모달 */}
+            <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={projectModalOpen}
+                component={<ProjectViewModal
+                    open={setProjectModalOpen}
+                    project={selectedProject}
+                />}
+            />
+            {/* <div className="modal fade" id="project-modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div className="modal-content super-rounded shadow">
                         {
@@ -61,7 +79,7 @@ export default () => {
                         }
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
