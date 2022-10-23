@@ -12,7 +12,7 @@ export default () => {
     return (
         <>
             <Typography variant="h3">Tech Stack</Typography>
-            <Grid container spacing={1}>
+            <Grid container spacing={1} alignItems="stretch">
                 <Grid item xs={12} xl={4}>
                     <HomeCard
                         actionArea

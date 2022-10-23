@@ -1,10 +1,11 @@
 
 const tech = [
     { type:"fe", label: "React", value: "react", bgColor:"#004080", txtColor:'#FFFFFF'},
-    { type:"fe", label: "React Natvie", value: "react-native", bgColor:'#004080', txtColor:'#FFFFFF'},
-    { type:"fe", label: "Redux", value: "redux", bgColor:"#8000ff", txtColor:'#FFFFFF'},
-    { type:"fe", label: "Native Base", value: "native-base", bgColor:"#0080c0", txtColor:'#FFFFFF'},
+    { type:"fe", label: "Material UI", value: "material-ui", bgColor:"#0080c0", txtColor:'#FFFFFF'},
     { type:"fe", label: "Bootstrap", value: "bootstrap", bgColor:"#8000ff", txtColor:'#FFFFFF'},
+    { type:"fe", label: "React Natvie", value: "react-native", bgColor:'#004080', txtColor:'#FFFFFF'},
+    { type:"fe", label: "Native Base", value: "native-base", bgColor:"#0080c0", txtColor:'#FFFFFF'},
+    { type:"fe", label: "Redux", value: "redux", bgColor:"#8000ff", txtColor:'#FFFFFF'},
     { type:"be", label: "Node.js", value: "node-js", bgColor:'#2F9D27', txtColor:'#FFFFFF'},
     { type:"db", label: "Mongo DB", value: "mongo-db", bgColor:'#2F9D27', txtColor:'#FFFFFF'},
     { type:"db", label: "MySQL", value: "mysql", bgColor:"#0080c0", txtColor:'#FFFFFF'},

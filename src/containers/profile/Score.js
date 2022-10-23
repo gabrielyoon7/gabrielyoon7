@@ -1,3 +1,4 @@
+import { Grid, Typography } from "@mui/material";
 import curriculum from "../../assets/data/curriculum";
 
 export default () => {
@@ -27,26 +28,30 @@ export default () => {
 
     return (
         <>
-            <div className="row">
-                <div className="my-2 col-md-6">
-                    <h3>전체 학점</h3>
-                    <div>
+            <Grid container>
+                <Grid item xs={12} md={6}>
+                    <Typography variant="h4">
+                        전체 학점
+                    </Typography>
+                    <Typography>
                         취득학점 : {allScore} (평점산출학점 : {scoredScore})
-                    </div>
-                    <div>
+                    </Typography>
+                    <Typography>
                         평점평균 : {Math.round(scoredScoreSum / scoredScoreCount * 100) / 100}
-                    </div>
-                </div>
-                <div className="my-2 col-md-6">
-                    <h3>전공 학점</h3>
-                    <div>
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Typography variant="h4">
+                        전공 학점
+                    </Typography>
+                    <Typography>
                         전공산출학점 : {majorScore} (PNP제외)
-                    </div>
-                    <div>
+                    </Typography>
+                    <Typography>
                         평점평균 : {Math.round(majorScoreSum / majorScoreCount * 100) / 100}
-                    </div>
-                </div>
-            </div>
+                    </Typography>
+                </Grid>
+            </Grid>
         </>
     )
 }

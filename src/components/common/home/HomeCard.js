@@ -11,7 +11,15 @@ export default ({ children, to, actionArea }) => {
             {
                 actionArea
                     ?
-                    <CardActionArea>
+                    <CardActionArea
+                        sx={{
+                            height: '100%',
+                            width: '100%',
+                            alignItems: 'flex-start',
+                            flexGrow: 1,
+                            flexDirection: 'column',
+                        }}
+                    >
                         <Box p={5}>
                             {children}
                         </Box>

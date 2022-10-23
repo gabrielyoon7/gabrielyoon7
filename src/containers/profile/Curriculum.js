@@ -1,20 +1,23 @@
 import Table from "../../components/Table";
 import curriculum from "../../assets/data/curriculum";
 import Score from "./Score";
+import { Grid, Typography } from "@mui/material";
 
 export default () => {
 
     return (
         <>
-            <div className="mb-3" >
-                <h3>Curriculum</h3>
-            </div>
-            <div className="mb-3 overflow-scroll box" >
-                <Table data={curriculum} rowsPerPage={10} />
-            </div>
-            <div className="mb-3" >
-                <Score/>
-            </div>
+            <Typography variant="h3">
+                Curriculum
+            </Typography>
+            <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <Table data={curriculum} rowsPerPage={10} />
+                </Grid>
+                <Grid item xs={12}>
+                    <Score />
+                </Grid>
+            </Grid>
         </>
     )
 }
