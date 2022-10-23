@@ -29,7 +29,21 @@ export default (props) => {
 
                         <Typography>{project.short_description}</Typography>
                         <div>
-                            {project.tech_stack.map((t) => <span key={findTech(t).value} className="badge me-1" style={{ "backgroundColor": findTech(t).bgColor, "color": findTech(t).txtColor }}>{findTech(t).label}</span>)}
+                            {project.tech_stack.slice(0, 3).map(
+                                (t) =>
+                                    <span
+                                        key={findTech(t).value}
+                                        className="badge me-1"
+                                        style={{ "backgroundColor": findTech(t).bgColor, "color": findTech(t).txtColor }}>
+                                        {findTech(t).label}
+                                    </span>
+                            )}
+                            <span
+                                key={"..."}
+                                className="badge me-1"
+                                style={{ "backgroundColor": '#eae3e3', "color": "gray" }}>
+                                ... more
+                            </span>
                         </div>
                     </Box>
                 </CardActionArea>

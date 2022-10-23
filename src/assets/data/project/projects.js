@@ -8,7 +8,7 @@ export default [
         short_description:"학부 신설 전공 홈페이지 작업",
         url:"http://ai.kyonggi.ac.kr",
         repository:"private",
-        tech_stack:['jsp', 'javascript', 'bootstrap', 'css', 'html', 'java', 'mysql', 'tomcat', 'ubuntu'],
+        tech_stack:['tomcat', 'jsp', 'css', 'javascript', 'html', 'java', 'mysql', 'ubuntu'],
     },
     {
         key:2,
