@@ -17,6 +17,9 @@ export default () => {
                 // sx={{alignItems: 'stretch',}}
                 alignItems="stretch"
             >
+                <Grid item xs={12}>
+                    <Typography variant="h3">기본정보</Typography>
+                </Grid>
                 <Grid item xs={12} xl={4}>
                     <HomeCard
                         children={
@@ -54,7 +57,7 @@ export default () => {
                         }
                     />
                 </Grid>
-                <Grid item xs={12} xl={8}  alignItems="center">
+                <Grid item xs={12} xl={8} alignItems="center">
                     <HomeCard
                         children={
                             <>
@@ -63,7 +66,7 @@ export default () => {
                                         <thead>
                                             <tr>
                                                 <th colSpan="2">
-                                                    <Typography variant="h4">기본정보</Typography>
+                                                    <Typography variant="h4"></Typography>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -112,13 +115,12 @@ export default () => {
 
                 </Grid>
                 <Grid item xs={12}>
-                    <HomeCard
-                        children={
-                            <>
-                                <TechStack />
-                            </>
-                        }
-                    />
+                    <TechStack />
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="h3">
+                        Curriculum
+                    </Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <HomeCard
