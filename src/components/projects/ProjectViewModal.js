@@ -75,7 +75,7 @@ export default ({ open, project }) => {
                                 {project.url === 'null'
                                     ?
                                     <Tooltip title='등록된 URL이 없습니다.'>
-                                        <MKButton variant='contained' color='error'>비공개</MKButton>
+                                        <MKButton variant='contained' color='error'>없음</MKButton>
                                     </Tooltip>
                                     :
                                     <Tooltip title='새 창으로 열기'>
