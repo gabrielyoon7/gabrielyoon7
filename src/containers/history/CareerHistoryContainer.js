@@ -12,15 +12,16 @@ export default () => {
                     </Typography>
                     <Projects />
                 </Grid>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
+                    <Typography variant="h3">
+                        Timeline
+                    </Typography>
                     <HomeCard
                         children={<>
-                            <Typography variant="h3">
-                                Timeline
-                            </Typography>
+                            ㅇㅇ
                         </>}
                     />
-                </Grid>
+                </Grid> */}
             </Grid>
         </>
     )

@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm'
 import tech from "../../assets/data/tech"
 import ModalStaticBackdrop from "components/common/home/ModalStaticBackdrop"
 import ProjectViewModal from "components/projects/ProjectViewModal"
+import { Grid } from "@mui/material"
 
 export default () => {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -19,7 +20,11 @@ export default () => {
 
     return (
         <>
-            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch mb-5">
+            <Grid
+                container
+                spacing={1}
+                alignItems="stretch"
+            >
                 {
                     projects.map((project) => <ProjectCard
                         key={project.key}
@@ -27,15 +32,17 @@ export default () => {
                         handleData={handleData}
                     />)
                 }
-            </div>
+            </Grid>
             <ModalStaticBackdrop
                 keepMounted
                 width="lg"
                 open={projectModalOpen}
-                component={<ProjectViewModal
-                    open={setProjectModalOpen}
-                    project={selectedProject}
-                />}
+                component={
+                    <ProjectViewModal
+                        open={setProjectModalOpen}
+                        project={selectedProject}
+                    />
+                }
             />
         </>
     )
