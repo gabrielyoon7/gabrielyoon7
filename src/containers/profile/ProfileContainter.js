@@ -14,7 +14,6 @@ export default () => {
             <Grid
                 container
                 spacing={1}
-                // sx={{alignItems: 'stretch',}}
                 alignItems="stretch"
             >
                 <Grid item xs={12}>

@@ -9,9 +9,10 @@ const HomeContainer = () => {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid xs={12}>
-                    <HomeCard
-                        children={
+                <Grid xs={12} xxl={4}>
+                <Box p={5}>
+                    {/* <HomeCard
+                        children={ */}
                             <>
                                 <Typography variant='h1'>
                                     안녕하세요
@@ -20,17 +21,18 @@ const HomeContainer = () => {
                                     신입 웹 개발자를 희망하는 윤주현입니다.
                                 </Typography>
                                 <MKButton
-                                    variant='outlined'
+                                    variant='contained'
                                     color='dark'
                                     onClick={() => window.open('https://github.com/gabrielyoon7')}
                                 >
                                     Github에서 보기
                                 </MKButton>
                             </>
-                        }
-                    />
+                        {/* }
+                    /> */}
+                    </Box>
                 </Grid>
-                <Grid xs={12} lg={6}>
+                <Grid xs={12} lg={6} xxl={4}>
                     <HomeCard
                         to='/profile'
                         actionArea
@@ -52,7 +54,7 @@ const HomeContainer = () => {
                         }
                     />
                 </Grid>
-                <Grid xs={12} lg={6}>
+                <Grid xs={12} lg={6} xxl={4}>
                     <HomeCard
                         to='/career'
                         actionArea

@@ -7,14 +7,10 @@ export default () => {
         <>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <HomeCard
-                        children={<>
-                            <Typography variant="h3">
-                                Projects
-                            </Typography>
-                            <Projects />
-                        </>}
-                    />
+                    <Typography variant="h3">
+                        Projects
+                    </Typography>
+                    <Projects />
                 </Grid>
                 <Grid item xs={12}>
                     <HomeCard
