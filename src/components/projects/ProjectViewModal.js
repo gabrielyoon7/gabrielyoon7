@@ -1,4 +1,4 @@
-import { Box, DialogContent, DialogTitle, Divider, IconButton, Stack, Typography } from "@mui/material"
+import { Box, DialogContent, DialogTitle, Divider, IconButton, Stack, Tooltip, Typography } from "@mui/material"
 import MKButton from "components/common/mui-components/MKButton"
 import ClearIcon from '@mui/icons-material/Clear';
 import tech from "assets/data/tech";
@@ -46,41 +46,71 @@ export default ({ open, project }) => {
                             <Typography>
                                 {project.period_start} ~ {project.period_end}
                             </Typography>
+                            <Divider />
                             <Typography variant="h5">
                                 그룹명
                             </Typography>
                             <Typography>
                                 {project.team}
                             </Typography>
+                            <Divider />
                             <Typography variant="h5">
                                 프로젝트명
                             </Typography>
                             <Typography>
                                 {project.title}
                             </Typography>
+                            <Divider />
                             <Typography variant="h5">
                                 요약
                             </Typography>
                             <Typography>
                                 {project.short_description}
                             </Typography>
+                            <Divider />
                             <Typography variant="h5">
                                 URL
                             </Typography>
                             <Typography>
-                                {project.url}
+                                {project.url === 'null'
+                                    ?
+                                    <Tooltip title='등록된 URL이 없습니다.'>
+                                        <MKButton variant='contained' color='error'>비공개</MKButton>
+                                    </Tooltip>
+                                    :
+                                    <Tooltip title='새 창으로 열기'>
+                                        <MKButton variant='contained' color='success' onClick={() => window.open(project.url)}>바로가기</MKButton>
+                                    </Tooltip>
+                                }
                             </Typography>
+                            <Divider />
                             <Typography variant="h5">
                                 Github Repository
                             </Typography>
                             <Typography>
-                                {project.repository}
+                                {project.repository === 'private'
+                                    ?
+                                    <Tooltip title='보안 문제로 인해 비공개인 저장소 입니다.'>
+                                        <MKButton variant='contained' color='error'>비공개</MKButton>
+                                    </Tooltip>
+                                    :
+                                    <Tooltip title='새 창으로 열기'>
+                                        <MKButton variant='contained' color='success' onClick={() => window.open(project.repository)}>바로가기</MKButton>
+                                    </Tooltip>
+                                }
                             </Typography>
-                            <Divider/>
-                            <Typography>
+                            <Divider />
+                            <Typography variant="h5">
+                                상세 내용
+                            </Typography>
+                            <Typography sx={{
+                                "& img": {
+                                    maxWidth: "100%",
+                                }
+                            }}>
                                 <ReactMarkdown children={require('../../assets/data/project/description/project' + project.key).default} remarkPlugins={[remarkGfm]} />
                             </Typography>
-                            <Divider/>
+                            <Divider />
                             <Typography variant="h5">
                                 Tech Stack
                             </Typography>
@@ -89,7 +119,7 @@ export default ({ open, project }) => {
                             </Typography>
                         </Stack>
                     </DialogContent>
-                    <MKButton color="success" fullWidth>ㅇㅇ</MKButton>
+                    <MKButton color="success" fullWidth onClick={() => open(false)}>확인</MKButton>
                 </Box>
             }
         </>
