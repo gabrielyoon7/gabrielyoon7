@@ -33,6 +33,7 @@ const HomeContainer = () => {
                 <Grid xs={12} lg={6}>
                     <HomeCard
                         to='/profile'
+                        actionArea
                         children={
                             <>
                                 <Typography variant='h2'>
@@ -54,6 +55,7 @@ const HomeContainer = () => {
                 <Grid xs={12} lg={6}>
                     <HomeCard
                         to='/career'
+                        actionArea
                         children={
                             <>
                                 <Typography variant='h2'>
