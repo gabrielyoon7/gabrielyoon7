@@ -45,73 +45,18 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 const routes = [
   {
-    name: "About",
+    name: "Menu",
     icon: <GitHubIcon />,
     collapse: [
       {
         name: "Profile",
-        description: "ㅇㅇ",
+        description: "프로필",
         route: "/profile",
       },
       {
         name: "History",
-        description: "ㅋㅋ",
+        description: "히스토리",
         route: "/career",
-      },
-    ],
-  },
-  {
-    name: "Projects",
-    icon: <GitHubIcon />,
-    columns: 1,
-    rowsPerColumn: 2,
-    collapse: [
-      {
-        name: "CS-HOME",
-        collapse: [
-          {
-            name: "main theme",
-            route: "/presentation",
-          },
-          {
-            name: "workspace theme",
-            route: "/workspace/630b7190409e908dbc8a1633",
-          },
-        ],
-      },
-      {
-        name: "KCU-DCS-LAB",
-        collapse: [
-          {
-            name: "레퍼런스",
-            route: "/example",
-          },
-          {
-            name: "멀티 셀렉트",
-            route: "/example/multiSelectExample",
-          },
-          {
-            name: "파일 업로드",
-            route: "/example/fileUpload",
-          },
-          {
-            name: "리덕스",
-            route: "/example/redux",
-          },
-        ],
-      },
-      {
-        name: "Etc",
-        collapse: [
-          {
-            name: "활동포인트",
-            route: "/example/bestworker",
-          },
-          {
-            name: "데이터베이스 조회",
-            route: "/example/database",
-          },
-        ],
       },
     ],
   },

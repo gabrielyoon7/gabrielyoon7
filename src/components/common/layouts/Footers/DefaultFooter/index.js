@@ -33,10 +33,10 @@ function DefaultFooter({ content }) {
     <MKBox component="footer">
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={3} sx={{ ml: "auto", mb: 3 }}>
+          {/* <Grid item xs={12} md={3} sx={{ ml: "auto", mb: 3 }}>
             <MKBox>
               <Link to={brand.route}>
-                <MKBox component="img" src={brand.image} alt={brand.name} maxWidth="2rem" mb={2} />
+                <MKBox component="img" src="https://avatars.githubusercontent.com/u/69189073?v=4" alt={brand.name} maxWidth="2rem" mb={2} />
               </Link>
               <MKTypography variant="h6">{brand.name}</MKTypography>
             </MKBox>
@@ -57,8 +57,8 @@ function DefaultFooter({ content }) {
                 </MKTypography>
               ))}
             </MKBox>
-          </Grid>
-          {menus.map(({ name: title, items }) => (
+          </Grid> */}
+          {/* {menus.map(({ name: title, items }) => (
             <Grid key={title} item xs={6} md={2} sx={{ mb: 3 }}>
               <MKTypography
                 display="block"
@@ -99,7 +99,7 @@ function DefaultFooter({ content }) {
                 ))}
               </MKBox>
             </Grid>
-          ))}
+          ))} */}
           <Grid item xs={12} sx={{ textAlign: "center", my: 3 }}>
             {copyright}
           </Grid>

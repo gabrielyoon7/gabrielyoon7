@@ -19,8 +19,9 @@ const tech = [
     { type:"fe", label: "CSS", value: "css", bgColor:"#0080ff", txtColor:'#FFFFFF'},
     { type:"fe", label: "HTML", value: "html", bgColor:"#ff8000", txtColor:'#FFFFFF'},
     { type:"fe", label: "Expo", value: "expo", bgColor:"#000000", txtColor:'#FFFFFF'},
-    { type:"etc", label: "Tomcat", value: "tomcat", bgColor:"#000000", txtColor:'#FFFFFF'},
-    { type:"etc", label: "Ubuntu", value: "ubuntu", bgColor:"#000000", txtColor:'#FFFFFF'},
+    { type:"etc", label: "Tomcat", value: "tomcat", bgColor:"#FEB301", txtColor:'#FFFFFF'},
+    { type:"etc", label: "Ubuntu", value: "ubuntu", bgColor:"#E95420", txtColor:'#FFFFFF'},
+    { type:"etc", label: "Markdown", value: "markdown", bgColor:"#000000", txtColor:'#FFFFFF'},
     { label: "??", value: "??", bgColor:"", txtColor:'#FFFFFF', disabled: true },
 ]
 
