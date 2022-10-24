@@ -17,7 +17,7 @@ export default () => {
 
     const handleCard = (type) => {
         setTechStackModalOpen(true);
-        setSelectedTechType(tech.filter((t) => t.type === type))
+        setSelectedTechType(tech);
     }
 
     return (
