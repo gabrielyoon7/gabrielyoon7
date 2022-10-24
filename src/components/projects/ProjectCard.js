@@ -23,11 +23,11 @@ export default (props) => {
                             },
                         }}
                     >
-                        <Typography variant="h6">{project.period_start} - {project.period_end}</Typography>
-                        <Typography variant="h5">{project.team}</Typography>
+                        <Typography variant="caption">{project.period_start} - {project.period_end}</Typography>
+                        <Typography variant="h6">{project.team}</Typography>
                         <Typography variant="h4">{project.title}</Typography>
 
-                        <Typography>{project.short_description}</Typography>
+                        <Typography variant="subtitle2">{project.short_description}</Typography>
                         <div>
                             {project.tech_stack.slice(0, 3).map(
                                 (t) =>

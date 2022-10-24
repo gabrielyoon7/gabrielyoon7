@@ -103,13 +103,14 @@ export default ({ open, project }) => {
                             <Typography variant="h5">
                                 상세 내용
                             </Typography>
-                            <Typography sx={{
-                                "& img": {
-                                    maxWidth: "100%",
-                                }
-                            }}>
+                            <Box
+                                sx={{
+                                    "& img": {
+                                        maxWidth: "100%",
+                                    }
+                                }}>
                                 <ReactMarkdown children={require('../../assets/data/project/description/project' + project.key).default} remarkPlugins={[remarkGfm]} />
-                            </Typography>
+                            </Box>
                             <Divider />
                             <Typography variant="h5">
                                 Tech Stack

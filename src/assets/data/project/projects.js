@@ -27,10 +27,10 @@ export default [
         period_end:"2022.06",
         team:"캡스톤 : 기록의 달인",
         title:"일기장 애플리케이션",
-        short_description:"인생을 기록해주는 차세대 일기 작성 애플리케이션",
+        short_description:"캡스톤 프로젝트로 진행한 인생을 기록해주는 차세대 일기 작성 애플리케이션",
         url:"https://www.youtube.com/watch?v=aWmifIxTD5U",
         repository:"https://github.com/gabrielyoon7/GIDAL",
-        tech_stack:['react-native','native-base','node-js','mongo-db','react','bootstrap','javascript','express-js','expo'],
+        tech_stack:['react-native','node-js','javascript','mongo-db','react','bootstrap','native-base','express-js','expo'],
     },
     {
         key:4,
@@ -41,7 +41,7 @@ export default [
         short_description:"전기차 충전소 실시간 조회 및 추천 애플리케이션 개발",
         url:"null",
         repository:"https://github.com/KGU-DCS-LAB/myPlug",
-        tech_stack:['react-native','node-js','mongo-db','native-base','javascript','express-js','java'],
+        tech_stack:['mongo-db','react-native','redux','node-js','native-base','javascript','express-js','java'],
     },
     {
         key:5,
@@ -52,6 +52,6 @@ export default [
         short_description:"팀 프로젝트를 통한 개인 포트폴리오 관리 및 채용 연계 플랫폼",
         url:"https://kgu-team-avocado.github.io/avocado-hero-web/",
         repository:"https://github.com/KGU-Team-Avocado/avocado-hero-web",
-        tech_stack:['react','node-js','mongo-db','material-ui','javascript','express-js'],
+        tech_stack:['react','material-ui','redux','node-js','mongo-db','javascript','express-js'],
     },
 ]
