@@ -43,7 +43,10 @@ export default ({ open, tech }) => {
                             <>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Box><span key={t.value} className="badge me-1" style={{ "backgroundColor": t.bgColor, "color": t.txtColor }}>{t.label}</span></Box>
-                                    <Box><Rating name="half-rating-read" defaultValue={t.stars} precision={0.5} readOnly /></Box>
+                                    <Stack direction={"row"} spacing={1}>
+                                        <Rating name="half-rating-read" defaultValue={t.stars} precision={0.5} readOnly />
+                                        <Box>{t.stars.toFixed(1)}</Box>
+                                    </Stack>
                                 </Box>
                                 <Divider />
                             </>
