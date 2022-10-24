@@ -7,7 +7,7 @@ export default ({ children, to, actionArea, onClick }) => {
         <Card
             sx={{ height: '100%', width: '100%' }}
             onClick={
-                () => {to && navigate(to); onClick&&onClick();}
+                () => { to && navigate(to); onClick && onClick(); }
             }
         >
             {
@@ -22,12 +22,30 @@ export default ({ children, to, actionArea, onClick }) => {
                             flexDirection: 'column',
                         }}
                     >
-                        <Box p={5}>
+                        <Box sx={{
+                            p: {
+                                xs: 2,
+                                sm: 5,
+                                md: 5,
+                                lg: 5,
+                                xl: 5,
+                                xxl: 5
+                            },
+                        }}>
                             {children}
                         </Box>
                     </CardActionArea>
                     :
-                    <Box p={5}>
+                    <Box sx={{
+                        p: {
+                            xs: 2,
+                            sm: 5,
+                            md: 5,
+                            lg: 5,
+                            xl: 5,
+                            xxl: 5
+                        },
+                    }}>
                         {children}
                     </Box>
             }
