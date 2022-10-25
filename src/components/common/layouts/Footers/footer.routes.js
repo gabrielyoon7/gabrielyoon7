@@ -101,6 +101,11 @@ export default {
           테마에 사용된 MK 컴포넌트만 재활용하고, 나머지 대부분의 요소는 <a href="https://mui.com/" target="_blank">Material UI</a>를 기반으로 제작했습니다.
         </MKTypography>
       </Box>
+      <Box>
+        <MKTypography variant="button" fontWeight="regular">
+          디자인을 제외한 대부분의 시스템은 직접 제작하였고, 해당 내용은 이 <a href='https://github.com/gabrielyoon7/gabrielyoon7'>레포지토리</a>에서 확인이 가능합니다.
+        </MKTypography>
+      </Box>
     </>
   ),
 };

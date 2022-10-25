@@ -7,6 +7,7 @@ import homeRoutes from "api/routes/homeRoutes";
 import MKBox from "components/common/mui-components/MKBox";
 import MKTypography from "components/common/mui-components/MKTypography";
 
+import styles from "./HomeTitle.css";
 
 export default () => {
     const router = useLocation();
@@ -14,10 +15,12 @@ export default () => {
     return (
         <>
             <Box
-                minHeight="75vh"
+                minHeight="60vh"
                 width="100%"
+                className="titleColor"
                 sx={{
-                    backgroundImage: `url(${bgImage})`,
+                    // backgroundImage: `url(${bgImage})`,
+                    // backgroundColor:'#212529',
                     backgroundSize: "cover",
                     backgroundPosition: "top",
                     display: "grid",

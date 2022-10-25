@@ -1,0 +1,4 @@
+.titleColor {
+    background: rgb(15,0,57);
+    background: radial-gradient(circle, rgba(15,0,57,0.595975079113924) 0%, rgba(0,15,33,1) 64%);
+}
