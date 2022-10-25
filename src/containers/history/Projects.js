@@ -26,11 +26,15 @@ export default () => {
                 alignItems="stretch"
             >
                 {
-                    projects.map((project) => <ProjectCard
-                        key={project.key}
-                        project={project}
-                        handleData={handleData}
-                    />)
+                    projects.map((project) =>
+                        <Grid item xs={12} lg={6} xxl={4}>
+                            <ProjectCard
+                                key={project.key}
+                                project={project}
+                                handleData={handleData}
+                            />
+                        </Grid>
+                    )
                 }
             </Grid>
             <ModalStaticBackdrop
