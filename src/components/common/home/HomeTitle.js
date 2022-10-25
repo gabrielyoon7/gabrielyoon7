@@ -1,15 +1,16 @@
-import { Box, Container, Grid, Stack } from "@mui/material"
+import { Box, Container, Stack } from "@mui/material"
 import { useLocation } from "react-router-dom";
 
 // Images
-import bgImage from "assets/img/bgImage.jpg";
+// import bgImage from "assets/img/bgImage.jpg";
 import homeRoutes from "api/routes/homeRoutes";
-import MKBox from "components/common/mui-components/MKBox";
+// import MKBox from "components/common/mui-components/MKBox";
 import MKTypography from "components/common/mui-components/MKTypography";
 
 import styles from "./HomeTitle.css";
+import React from "react";
 
-export default () => {
+const HomeTitle = () => {
     const router = useLocation();
     const routeInfo = homeRoutes.find((item) => item.path === router.pathname);
     return (
@@ -47,3 +48,5 @@ export default () => {
         </>
     )
 }
+
+export default React.memo(HomeTitle);
