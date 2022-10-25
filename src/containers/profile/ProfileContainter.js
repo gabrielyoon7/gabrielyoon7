@@ -9,6 +9,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import ResponsiveCard from "components/common/home/ResponsiveCard";
+import LifeTimeline from "./timeline/LifeTimeline";
 
 export default () => {
 
@@ -137,21 +138,18 @@ export default () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant="h3">
-                        About Me
+                        걸어온 길
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <ResponsiveCard>
-                        <Typography>• 경기대학교 SW기초 튜터 (2020.9 ~ 2021.12)</Typography>
-                        <Typography>• 경기대 컴퓨터공학부 홈페이지 개발팀 팀장 (2020.10 ~ 2021.12)</Typography>
-                        <Typography>• 2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상 (학과 홈페이지 사물함 신청 서비스) (`21.06`)</Typography>
-                        <Typography>• 경기대학교 분산병렬컴퓨팅연구실 학부 연구생 (2021.7 ~ )</Typography>
-                        <Typography>• 경기대학교 SW상상기업 아보카도 팀장 (2021.10 ~ 2022.10)</Typography>
+                        <LifeTimeline/>
+                        {/* <Typography>• 2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상 (학과 홈페이지 사물함 신청 서비스) (`21.06`)</Typography>
                         <Typography>• 2021 경기대학교 진성애교양대학 감성SW교육센터 공로상 (2021.12)</Typography>
                         <Typography>• 2021-2 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 장려상 (학과 홈페이지 졸업 요건 분석 서비스) (2021.12)</Typography>
                         <Typography>• 2022년 1회 정보처리기사 (2022.06)</Typography>
                         <Typography>• 2022 하계 한국정보기술학회 대학생논문경진대회 은상 : 개인 맞춤형 질병 유추 챗봇 애플리케이션 설계 및 구현 (2022.06)</Typography>
-                        <Typography>• 2022-1 경기대학교 BARUN 문제해결 프로젝트 (닥터스트레인지 팀) 은상 (개인 맞춤형 질병 정보 제공 및 유추 시스템 개발) (2022.06)</Typography>
+                        <Typography>• 2022-1 경기대학교 BARUN 문제해결 프로젝트 (닥터스트레인지 팀) 은상 (개인 맞춤형 질병 정보 제공 및 유추 시스템 개발) (2022.06)</Typography> */}
                     </ResponsiveCard>
                 </Grid>
             </Grid>
