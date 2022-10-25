@@ -1,4 +1,4 @@
-import { Container, Grid, Stack } from "@mui/material"
+import { Box, Container, Grid, Stack } from "@mui/material"
 import { useLocation } from "react-router-dom";
 
 // Images
@@ -13,7 +13,7 @@ export default () => {
     const routeInfo = homeRoutes.find((item) => item.path === router.pathname);
     return (
         <>
-            <MKBox
+            <Box
                 minHeight="75vh"
                 width="100%"
                 sx={{
@@ -40,7 +40,7 @@ export default () => {
                         </MKTypography>
                     </Stack>
                 </Container>
-            </MKBox>
+            </Box>
         </>
     )
 }
