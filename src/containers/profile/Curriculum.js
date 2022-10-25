@@ -1,7 +1,7 @@
 import Table from "../../components/Table";
 import curriculum from "../../assets/data/curriculum";
 import Score from "./Score";
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 export default () => {
 
@@ -12,7 +12,14 @@ export default () => {
                     <Typography variant="h4">
                         수강 강좌
                     </Typography>
-                    <Table data={curriculum} rowsPerPage={10} />
+                    <Box
+                        sx={{
+                            width: '100%',
+                            overflowX: "auto"
+                        }}
+                    >
+                        <Table data={curriculum} rowsPerPage={10} />
+                    </Box>
                 </Grid>
                 <Grid item xs={12}>
                     <Score />
