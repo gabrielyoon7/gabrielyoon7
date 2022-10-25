@@ -8,6 +8,9 @@
 [![Blog Badge](http://img.shields.io/badge/-Blog-green?style=flat-square&link=https://leirbag.tistory.com/)](https://leirbag.tistory.com/)
     
 
+<h2><a href='https://gabrielyoon7.github.io/gabrielyoon7/'>공식홈페이지에서 보기!!</a></h2>
+
+
 <h3>💻 Best Repository (Public Only) 💻</h3>
 
  	
