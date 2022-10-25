@@ -1,7 +1,8 @@
 import { Box, Card, CardActionArea } from "@mui/material"
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default ({ children, to, actionArea, onClick }) => {
+const ResponsiveCard = ({ children, to, actionArea, onClick }) => {
     const navigate = useNavigate();
     return (
         <Card
@@ -52,3 +53,5 @@ export default ({ children, to, actionArea, onClick }) => {
         </Card>
     )
 }
+
+export default React.memo(ResponsiveCard);
