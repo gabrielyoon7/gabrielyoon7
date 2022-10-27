@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
-import curriculum from "../../assets/data/curriculum";
+import ResponsiveCard from "components/common/home/ResponsiveCard";
+import curriculum from "../../../assets/data/curriculum";
 
 export default () => {
 
@@ -11,6 +12,7 @@ export default () => {
     let majorScoreCount = 0;
     let majorScoreSum = 0;
     let electiveScore = 0;
+
     curriculum.map((c) => {
         allScore += c.학점
         if (c.등급 !== 'P') {
@@ -28,8 +30,8 @@ export default () => {
 
     return (
         <>
-            <Grid container>
-                <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6}>
+                <ResponsiveCard>
                     <Typography variant="h4">
                         전체 학점
                     </Typography>
@@ -39,8 +41,10 @@ export default () => {
                     <Typography>
                         평점평균 : {Math.round(scoredScoreSum / scoredScoreCount * 100) / 100}
                     </Typography>
-                </Grid>
-                <Grid item xs={12} md={6}>
+                </ResponsiveCard>
+            </Grid>
+            <Grid item xs={12} md={6}>
+                <ResponsiveCard>
                     <Typography variant="h4">
                         전공 학점
                     </Typography>
@@ -50,7 +54,7 @@ export default () => {
                     <Typography>
                         평점평균 : {Math.round(majorScoreSum / majorScoreCount * 100) / 100}
                     </Typography>
-                </Grid>
+                </ResponsiveCard>
             </Grid>
         </>
     )

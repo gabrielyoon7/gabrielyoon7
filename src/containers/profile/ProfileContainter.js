@@ -1,6 +1,5 @@
 import "./profile.css";
 import me from '../../assets/img/me.jpg'
-import Curriculum from "./Curriculum";
 import TechStack from "./TechStack";
 import HomeCard from "components/common/home/HomeCard";
 import { Box, Grid, Stack, Tooltip, Typography } from "@mui/material";
@@ -11,6 +10,7 @@ import RssFeedIcon from '@mui/icons-material/RssFeed';
 import ResponsiveCard from "components/common/home/ResponsiveCard";
 import LifeTimeline from "./timeline/LifeTimeline";
 import Etc from "./etc/Etc";
+import Curriculum from "./curriculum/Curriculum";
 
 export default () => {
 
@@ -133,9 +133,7 @@ export default () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <ResponsiveCard>
-                        <Curriculum />
-                    </ResponsiveCard>
+                    <Curriculum />
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant="h3">
@@ -144,7 +142,7 @@ export default () => {
                 </Grid>
                 <Grid item xs={12}>
                     <ResponsiveCard>
-                        <LifeTimeline/>
+                        <LifeTimeline />
                     </ResponsiveCard>
                 </Grid>
                 <Grid item xs={12}>
@@ -153,7 +151,7 @@ export default () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Etc/>
+                    <Etc />
                 </Grid>
             </Grid>
         </>
