@@ -8,7 +8,7 @@
 [![Blog Badge](http://img.shields.io/badge/-Blog-green?style=flat-square&link=https://leirbag.tistory.com/)](https://leirbag.tistory.com/)
     
 
-<h3><a href='https://gabrielyoon7.github.io/gabrielyoon7/'>포트폴리오 홈페이지에서 보기</a></h3>
+<h3><a href='https://gabrielyoon7.github.io/gabrielyoon7/'>포트폴리오 홈페이지에서 보기 (Click)</a></h3>
 
 <details>
     <summary><h4> 자세히 보기 </h4></summary>
