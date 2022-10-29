@@ -8,8 +8,10 @@
 [![Blog Badge](http://img.shields.io/badge/-Blog-green?style=flat-square&link=https://leirbag.tistory.com/)](https://leirbag.tistory.com/)
     
 
-<h2><a href='https://gabrielyoon7.github.io/gabrielyoon7/'>공식홈페이지에서 보기!!</a></h2>
+<h3><a href='https://gabrielyoon7.github.io/gabrielyoon7/'>포트폴리오 홈페이지에서 보기</a></h3>
 
+<details>
+    <summary><h4> 자세히 보기 </h4></summary>
 
 <h3>💻 Best Repository (Public Only) 💻</h3>
 
@@ -19,8 +21,6 @@
 [경기대학교 컴퓨터공학심화캡스톤 기록의달인](https://github.com/gabrielyoon7/GIDAL)
     
 [경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그 (진행중)](https://github.com/KGU-DCS-LAB/myPlug)
-    
-[경기대학교 분산병렬컴퓨팅연구실 챗봇 및 뉴스 기반의 질병 예방 앱 : 헬스케어](https://github.com/KGU-DCS-LAB/health_app)
     
 [심심해서 만든 지뢰찾기 게임](https://github.com/gabrielyoon7/Minesweeper-by-Python3)
     
@@ -99,7 +99,7 @@
 </details>   
 
     
-    
+</details>
     
     
 <h3>💻 Tech Stack 💻</h3>
@@ -111,6 +111,11 @@
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white) ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+
+![Material-UI](https://img.shields.io/badge/material%20ui-%230081CB.svg?style=for-the-badge&logo=material-ui&logoColor=white) ![Native-Base](https://img.shields.io/badge/native%20base-%230081CB.svg?style=for-the-badge&logo=material-ui&logoColor=white)
+
+
+
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) 
 
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white) ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
