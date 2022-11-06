@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, Grid, Typography } from "@mui/material"
+import { Box, Card, CardActionArea, Typography } from "@mui/material"
 import tech from "../../assets/data/tech"
 
 const ProjectCard = (props) => {

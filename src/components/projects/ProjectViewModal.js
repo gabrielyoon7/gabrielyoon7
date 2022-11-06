@@ -27,7 +27,7 @@ const ProjectViewModal = ({ open, project }) => {
                 >
                     <DialogTitle id="scroll-dialog-title">
                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <Typography variant="h4" variant="h3">
+                            <Typography variant="h4">
                                 프로젝트
                             </Typography>
                             <IconButton
