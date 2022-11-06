@@ -4,7 +4,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import tech from "assets/data/tech";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm';
-export default ({ open, project }) => {
+const ProjectViewModal = ({ open, project }) => {
     const findTech = (t) => {
         const idx = tech.findIndex((tech) => tech.value === t)
         return tech[idx]
@@ -107,9 +107,11 @@ export default ({ open, project }) => {
                                 sx={{
                                     "& img": {
                                         maxWidth: "100%",
-                                    }
+                                    },
                                 }}>
-                                <ReactMarkdown children={require('../../assets/data/project/description/project' + project.key).default} remarkPlugins={[remarkGfm]} />
+                                    <Typography color="#000000">
+                                    <ReactMarkdown children={require('../../assets/data/project/description/project' + project.key).default} remarkPlugins={[remarkGfm]} />
+                                    </Typography>
                             </Box>
                             <Divider />
                             <Typography variant="h5">
@@ -126,3 +128,6 @@ export default ({ open, project }) => {
         </>
     )
 }
+
+
+export default ProjectViewModal;

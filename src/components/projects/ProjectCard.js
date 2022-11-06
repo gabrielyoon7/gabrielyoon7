@@ -1,7 +1,7 @@
 import { Box, Card, CardActionArea, Grid, Typography } from "@mui/material"
 import tech from "../../assets/data/tech"
 
-export default (props) => {
+const ProjectCard = (props) => {
     const findTech = (t) => {
         const idx = tech.findIndex((tech) => tech.value === t)
         return tech[idx]
@@ -52,3 +52,4 @@ export default (props) => {
         </Card>
     )
 }
+export default ProjectCard;
