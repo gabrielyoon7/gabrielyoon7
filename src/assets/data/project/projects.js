@@ -18,7 +18,7 @@ export default [
         title:"경기대학교 SWAIG 홈페이지 제작",
         short_description:"교내 소프트웨어중심대학 신규 프로그램 공식 홈페이지 제작",
         url:"http://swaig.kyonggi.ac.kr:8080",
-        repository:"https://github.com/KGU-CS-HOME/webp2021",
+        repository:"https://github.com/gabrielyoon7/webp2021",
         tech_stack:['jsp', 'javascript', 'bootstrap', 'css', 'html', 'java', 'mysql', 'tomcat', 'ubuntu','jquery'],
     },
     {
