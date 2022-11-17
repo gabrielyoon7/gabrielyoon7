@@ -23,6 +23,6 @@ const tech = [
     { type: "etc", label: "Ubuntu", value: "ubuntu", bgColor: "#E95420", txtColor: '#FFFFFF', stars: 3 },
     { type: "etc", label: "Markdown", value: "markdown", bgColor: "#000000", txtColor: '#FFFFFF', stars: 4 },
     // { label: "??", value: "??", bgColor:"", txtColor:'#FFFFFF', disabled: true },
-]
+];
 
 export default tech;

@@ -1,11 +1,11 @@
-import { Box, Card, CardActionArea, Typography } from "@mui/material"
-import tech from "../../assets/data/tech"
+import { Box, Card, CardActionArea, Typography } from "@mui/material";
+import tech from "../../assets/data/tech";
 
 const ProjectCard = (props) => {
     const findTech = (t) => {
-        const idx = tech.findIndex((tech) => tech.value === t)
-        return tech[idx]
-    }
+        const idx = tech.findIndex((tech) => tech.value === t);
+        return tech[idx];
+    };
     const project = props.project;
     return (
         <Card
@@ -50,6 +50,6 @@ const ProjectCard = (props) => {
                 </Box>
             </CardActionArea>
         </Card>
-    )
-}
+    );
+};
 export default ProjectCard;

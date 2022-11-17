@@ -1,24 +1,23 @@
-import { Box, Grid, Rating, Stack, Tooltip, Typography } from "@mui/material"
-import HomeCard from "components/common/home/HomeCard"
-import ModalStaticBackdrop from "components/common/home/ModalStaticBackdrop"
-import TechStackModal from "components/profile/TechStackModal"
-import { useState } from "react"
-import tech from "../../assets/data/tech"
-
-export default () => {
+import { Box, Grid, Rating, Stack, Tooltip, Typography } from "@mui/material";
+import HomeCard from "components/common/home/HomeCard";
+import ModalStaticBackdrop from "components/common/home/ModalStaticBackdrop";
+import TechStackModal from "components/profile/TechStackModal";
+import { useState } from "react";
+import tech from "../../assets/data/tech";
+const TechStack = () => {
     const findTech = (t) => {
-        const idx = tech.findIndex((tech) => tech.value === t.value)
-        return tech[idx]
-    }
+        const idx = tech.findIndex((tech) => tech.value === t.value);
+        return tech[idx];
+    };
     // console.log(tech)
 
     const [techStackModalOpen, setTechStackModalOpen] = useState(false);
     const [selectedTechType, setSelectedTechType] = useState([]);
 
-    const handleCard = (type) => {
+    const handleCard = () => {
         setTechStackModalOpen(true);
         setSelectedTechType(tech);
-    }
+    };
 
     const TechTooltip = ({ t }) => {
         return (
@@ -30,8 +29,8 @@ export default () => {
             }>
                 <span key={t.value} className="badge me-1" style={{ "backgroundColor": findTech(t).bgColor, "color": findTech(t).txtColor }}>{findTech(t).label}</span>
             </Tooltip>
-        )
-    }
+        );
+    };
 
     return (
         <>
@@ -42,7 +41,7 @@ export default () => {
                         <Typography variant="h5">
                             Front-End
                         </Typography>
-                        {tech.filter((t) => t.type === 'fe').map((t) => <TechTooltip t={t} />)}
+                        {tech.filter((t) => t.type === 'fe').map((t) => <TechTooltip t={t} key={t.value}/>)}
 
                     </HomeCard>
                 </Grid>
@@ -51,7 +50,7 @@ export default () => {
                         <Typography variant="h5">
                             Back-End
                         </Typography>
-                        {tech.filter((t) => t.type === 'be').map((t) => <TechTooltip t={t} />)}
+                        {tech.filter((t) => t.type === 'be').map((t) => <TechTooltip t={t} key={t.value}/>)}
 
                     </HomeCard>
                 </Grid>
@@ -60,7 +59,7 @@ export default () => {
                         <Typography variant="h5">
                             DBMS
                         </Typography>
-                        {tech.filter((t) => t.type === 'db').map((t) => <TechTooltip t={t} />)}
+                        {tech.filter((t) => t.type === 'db').map((t) => <TechTooltip t={t} key={t.value}/>)}
                     </HomeCard>
                 </Grid>
                 <Grid item xs={12}>
@@ -68,7 +67,7 @@ export default () => {
                         <Typography variant="h5">
                             Others
                         </Typography>
-                        {tech.filter((t) => t.type === 'etc').map((t) => <TechTooltip t={t} />)}
+                        {tech.filter((t) => t.type === 'etc').map((t) => <TechTooltip t={t} key={t.value}/>)}
                     </HomeCard>
                 </Grid>
             </Grid>
@@ -84,5 +83,8 @@ export default () => {
                 }
             />
         </>
-    )
-}
+    );
+};
+
+
+export default TechStack;

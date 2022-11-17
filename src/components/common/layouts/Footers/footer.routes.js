@@ -1,8 +1,8 @@
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+// import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 
@@ -93,12 +93,12 @@ export default {
       </Box>
       <Box>
         <MKTypography variant="button" fontWeight="regular">
-          이 테마는 Creative Tim에서 제작한 <a href="https://www.creative-tim.com/product/material-kit-react" target="_blank">Material Kit 2 React : FREE REACTJS & MUI KIT</a>를 제 입맛대로 뜯어 고쳐 만든 프로젝트 입니다.
+          이 테마는 Creative Tim에서 제작한 <a href="https://www.creative-tim.com/product/material-kit-react" target="_blank" rel="noreferrer">Material Kit 2 React : FREE REACTJS & MUI KIT</a>를 제 입맛대로 뜯어 고쳐 만든 프로젝트 입니다.
         </MKTypography>
       </Box>
       <Box>
         <MKTypography variant="button" fontWeight="regular">
-          테마에 사용된 MK 컴포넌트만 재활용하고, 나머지 대부분의 요소는 <a href="https://mui.com/" target="_blank">Material UI</a>를 기반으로 제작했습니다.
+          테마에 사용된 MK 컴포넌트만 재활용하고, 나머지 대부분의 요소는 <a href="https://mui.com/" target="_blank" rel="noreferrer">Material UI</a>를 기반으로 제작했습니다.
         </MKTypography>
       </Box>
       <Box>

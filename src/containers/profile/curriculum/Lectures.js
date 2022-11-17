@@ -1,8 +1,7 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material";
 import Table from "../../../components/Table";
 import curriculum from "../../../assets/data/curriculum";
-
-export default () => {
+const Lectures  = () => {
     return (
         <>
             <Typography variant="h4">
@@ -19,5 +18,8 @@ export default () => {
                 </Box>
             </Box>
         </>
-    )
-}
+    );
+};
+
+
+export default Lectures;

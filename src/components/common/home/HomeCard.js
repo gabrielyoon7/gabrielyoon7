@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea } from "@mui/material"
+import { Box, Card, CardActionArea } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ const HomeCard = ({ children, to, actionArea, onClick }) => {
                     </Box>
             }
         </Card>
-    )
-}
+    );
+};
 
 export default React.memo(HomeCard);

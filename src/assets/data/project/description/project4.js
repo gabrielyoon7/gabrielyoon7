@@ -81,5 +81,5 @@ const long_description = `
 ![Web Screenshot](project_img/4/data.gif)
 
 
-`
+`;
 export default long_description;

@@ -1,8 +1,8 @@
-import { Grid, Typography } from "@mui/material"
-import etc from "assets/data/etc"
-import ResponsiveCard from "components/common/home/ResponsiveCard"
+import { Grid, Typography } from "@mui/material";
+import etc from "assets/data/etc";
+import ResponsiveCard from "components/common/home/ResponsiveCard";
 
-export default () => {
+const Etc = () => {
     return (
         <>
             <Grid
@@ -11,7 +11,7 @@ export default () => {
                 alignItems="stretch"
             >
                 {etc.map((e) =>
-                    <Grid item xs={12} lg={6} xl={4}>
+                    <Grid item xs={12} lg={6} xl={4} key={e.title}>
                         <ResponsiveCard>
                             <Typography variant="caption">
                                 {e.time}
@@ -28,5 +28,7 @@ export default () => {
 
             </Grid>
         </>
-    )
-}
+    );
+};
+
+export default Etc;

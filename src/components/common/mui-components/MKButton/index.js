@@ -19,20 +19,20 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import MKButtonRoot from "./MKButtonRoot";
 
-const MKButton = forwardRef(
-  ({ color, variant, size, circular, iconOnly, children, ...rest }, ref) => (
-    <MKButtonRoot
-      {...rest}
-      ref={ref}
-      color="primary"
-      variant={variant === "gradient" ? "contained" : variant}
-      size={size}
-      ownerState={{ color, variant, size, circular, iconOnly }}
-    >
-      {children}
-    </MKButtonRoot>
-  )
+const mkButtonRootComponent =   ({ color, variant, size, circular, iconOnly, children, ...rest }, ref) => (
+  <MKButtonRoot
+    {...rest}
+    ref={ref}
+    color="primary"
+    variant={variant === "gradient" ? "contained" : variant}
+    size={size}
+    ownerState={{ color, variant, size, circular, iconOnly }}
+  >
+    {children}
+  </MKButtonRoot>
 );
+
+const MKButton = forwardRef(mkButtonRootComponent);
 
 // Setting default values for the props of MKButton
 MKButton.defaultProps = {

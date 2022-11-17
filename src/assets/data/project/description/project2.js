@@ -9,5 +9,5 @@ const long_description = `
 
 (현재 이 홈페이지는 아직 융합전공 제도가 시작되지 않은 관계로 2022년 하반기부터 본격적으로 운영을 할 계획으로, 8월부터 데이터 입력 및 홍보에 진행 할 것으로 알려져있습니다.)
 
-`
+`;
 export default long_description;

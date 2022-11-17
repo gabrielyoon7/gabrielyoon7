@@ -1,8 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import ResponsiveCard from "components/common/home/ResponsiveCard";
 import curriculum from "../../../assets/data/curriculum";
-
-export default () => {
+const Score = () => {
 
     let allScore = 0;
     let scoredScore = 0;
@@ -11,10 +10,10 @@ export default () => {
     let majorScore = 0;
     let majorScoreCount = 0;
     let majorScoreSum = 0;
-    let electiveScore = 0;
+    // let electiveScore = 0;
 
     curriculum.map((c) => {
-        allScore += c.학점
+        allScore += c.학점;
         if (c.등급 !== 'P') {
             scoredScore += c.학점;
             scoredScoreCount++;
@@ -26,7 +25,7 @@ export default () => {
             majorScoreSum += gradeToScore(c.등급);
         }
 
-    })
+    });
 
     return (
         <>
@@ -57,28 +56,25 @@ export default () => {
                 </ResponsiveCard>
             </Grid>
         </>
-    )
-}
+    );
+};
 
 const gradeToScore = (grade) => {
     switch (grade) {
         case "A+":
             return 4.5;
-            break;
         case "A":
             return 4.0;
-            break;
         case "B+":
             return 3.5;
-            break;
         case "B":
             return 3.0;
-            break;
         case "C+":
             return 2.5;
-            break;
         default:
-            return 9999999999999999;
-            break;
+            return 9999999999999;
     }
-}
+};
+
+
+export default Score;

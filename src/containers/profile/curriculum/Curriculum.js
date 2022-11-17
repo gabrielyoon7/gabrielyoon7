@@ -1,9 +1,9 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import Score from "./Score";
 import ResponsiveCard from "components/common/home/ResponsiveCard";
 import Lectures from "./Lectures";
 
-export default () => {
+const Curriculum = () => {
 
     return (
         <>
@@ -16,6 +16,7 @@ export default () => {
                 <Score />
             </Grid>
         </>
-    )
-}
+    );
+};
 
+export default Curriculum;

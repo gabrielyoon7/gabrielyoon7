@@ -18,28 +18,27 @@ import { forwardRef } from "react";
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 import MKTypographyRoot from "./MKTypographyRoot";
-
-const MKTypography = forwardRef(
-  (
-    { color, fontWeight, textTransform, verticalAlign, textGradient, opacity, children, ...rest },
-    ref
-  ) => (
-    <MKTypographyRoot
-      {...rest}
-      ref={ref}
-      ownerState={{
-        color,
-        textTransform,
-        verticalAlign,
-        fontWeight,
-        opacity,
-        textGradient,
-      }}
-    >
-      {children}
-    </MKTypographyRoot>
-  )
+const mkTypographyRootComponent =   (
+  { color, fontWeight, textTransform, verticalAlign, textGradient, opacity, children, ...rest },
+  ref
+) => (
+  <MKTypographyRoot
+    {...rest}
+    ref={ref}
+    ownerState={{
+      color,
+      textTransform,
+      verticalAlign,
+      fontWeight,
+      opacity,
+      textGradient,
+    }}
+  >
+    {children}
+  </MKTypographyRoot>
 );
+
+const MKTypography = forwardRef(mkTypographyRootComponent);
 
 // Setting default values for the props of MKTypography
 MKTypography.defaultProps = {

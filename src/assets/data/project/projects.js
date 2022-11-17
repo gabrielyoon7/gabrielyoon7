@@ -54,4 +54,4 @@ export default [
         repository:"https://github.com/KGU-Team-Avocado/avocado-hero-web",
         tech_stack:['react','material-ui','redux','node-js','mongo-db','javascript','express-js'],
     },
-]
+];
