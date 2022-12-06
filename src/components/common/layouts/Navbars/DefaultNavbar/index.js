@@ -37,17 +37,15 @@ import breakpoints from "assets/theme/base/breakpoints";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { Dropdown } from "react-bootstrap";
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
 import DefaultNavbarMobile from "./DefaultNavbarMobile";
 import MKTypography from "components/common/mui-components/MKTypography";
 import MKBox from "components/common/mui-components/MKBox";
 // import MKBox from "component/common/mui-components/MKBox";
 
-function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
+function DefaultNavbar({ brand, routes, transparent, light, sticky, relative, center }) {
+  // function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
 
-  const [isSignIn, setSignIn] = useState(false); //임시로 해놓음
-  const [userInfo, setUserInfo] = useState(null);
   const sessionStorage = window.sessionStorage;
 
   useEffect(() => {
@@ -56,12 +54,6 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
       setSignIn(true);
     }
   }, []);
-
-  const logout = () => {
-    setSignIn(!isSignIn);
-    sessionStorage.clear();
-    window.location.href = '/'
-  };
 
 
   const [dropdown, setDropdown] = useState("");

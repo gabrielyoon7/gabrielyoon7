@@ -1,6 +1,6 @@
 import { Card, CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "assets/theme";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import HomeTitle from "../home/HomeTitle";
 import MKBox from "../mui-components/MKBox";
 import DefaultFooter from "./Footers/DefaultFooter";

@@ -1,10 +1,7 @@
-import { Box, DialogContent, DialogTitle, Divider, IconButton, Rating, Stack, Tooltip, Typography } from "@mui/material"
-import MKButton from "components/common/mui-components/MKButton"
+import { Box, DialogContent, DialogTitle, Divider, IconButton, Rating, Stack, Typography } from "@mui/material";
+import MKButton from "components/common/mui-components/MKButton";
 import ClearIcon from '@mui/icons-material/Clear';
-import tech from "assets/data/tech";
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm';
-export default ({ open, tech }) => {
+const TechStackModal = ({ open, tech }) => {
     return (
         <>
             {
@@ -23,7 +20,7 @@ export default ({ open, tech }) => {
                 >
                     <DialogTitle id="scroll-dialog-title">
                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <Typography variant="h4" variant="h3">
+                            <Typography variant="h4">
                                 Tech Stack
                             </Typography>
                             <IconButton
@@ -56,5 +53,7 @@ export default ({ open, tech }) => {
                 </Box>
             }
         </>
-    )
-}
+    );
+};
+
+export default TechStackModal;

@@ -1,13 +1,10 @@
 
 import RadarIcon from '@mui/icons-material/Radar';
-import LaptopMacIcon from '@mui/icons-material/LaptopMac';
 import SchoolIcon from '@mui/icons-material/School';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import WebIcon from '@mui/icons-material/Web';
 import ScienceIcon from '@mui/icons-material/Science';
 import GroupsIcon from '@mui/icons-material/Groups';
 import LensBlurIcon from '@mui/icons-material/LensBlur';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 const life = [
     { 
@@ -90,6 +87,6 @@ const life = [
         variant: undefined,
         icon:<LensBlurIcon/>,
     },
-]
+];
 
 export default life;

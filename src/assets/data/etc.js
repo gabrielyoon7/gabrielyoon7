@@ -30,6 +30,6 @@ const etc = [
         title:'2022-1 경기대학교 BARUN 문제해결 프로젝트',
         description:'은상  (팀명 : 닥터스트레인지 / 주제 : 개인 맞춤형 질병 정보 제공 및 유추 시스템 개발)'
     },
-]
+];
 
 export default etc;

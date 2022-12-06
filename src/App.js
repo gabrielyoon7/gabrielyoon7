@@ -1,9 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import HomeContainer from './containers/home/HomeContainer';
-import { Link, Route, Routes } from 'react-router-dom';
-import CareerHistoryContainer from './containers/history/CareerHistoryContainer';
-import ProfileContainter from './containers/profile/ProfileContainter';
+import { Route, Routes } from 'react-router-dom';
 import homeRoutes from 'api/routes/homeRoutes';
 import DefaultLayout from 'components/common/layouts/DefaultLayout';
 

@@ -1,8 +1,7 @@
-import { Grid, Typography } from "@mui/material"
-import HomeCard from "components/common/home/HomeCard"
-import Projects from "./Projects"
+import { Grid, Typography } from "@mui/material";
+import Projects from "./Projects";
 
-export default () => {
+const CareerHistoryContainer = () => {
     return (
         <>
             <Grid container spacing={2}>
@@ -24,5 +23,7 @@ export default () => {
                 </Grid> */}
             </Grid>
         </>
-    )
-}
+    );
+};
+
+export default CareerHistoryContainer;

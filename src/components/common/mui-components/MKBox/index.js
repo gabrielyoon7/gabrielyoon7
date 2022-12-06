@@ -19,15 +19,16 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import MKBoxRoot from "./MKBoxRoot";
 
-const MKBox = forwardRef(
-  ({ variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow, ...rest }, ref) => (
-    <MKBoxRoot
-      {...rest}
-      ref={ref}
-      ownerState={{ variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow }}
-    />
-  )
+const mkBoxRootComponent = ({ variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow, ...rest }, ref) => (
+  <MKBoxRoot
+    {...rest}
+    ref={ref}
+    ownerState={{ variant, bgColor, color, opacity, borderRadius, shadow, coloredShadow }}
+  />
 );
+
+
+const MKBox = forwardRef(mkBoxRootComponent);
 
 // Setting default values for the props of MKBox
 MKBox.defaultProps = {

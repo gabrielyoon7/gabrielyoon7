@@ -1,14 +1,14 @@
-import { Box, DialogContent, DialogTitle, Divider, IconButton, Stack, Tooltip, Typography } from "@mui/material"
-import MKButton from "components/common/mui-components/MKButton"
+import { Box, DialogContent, DialogTitle, Divider, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import MKButton from "components/common/mui-components/MKButton";
 import ClearIcon from '@mui/icons-material/Clear';
 import tech from "assets/data/tech";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 const ProjectViewModal = ({ open, project }) => {
     const findTech = (t) => {
-        const idx = tech.findIndex((tech) => tech.value === t)
-        return tech[idx]
-    }
+        const idx = tech.findIndex((tech) => tech.value === t);
+        return tech[idx];
+    };
     return (
         <>
             {
@@ -110,7 +110,9 @@ const ProjectViewModal = ({ open, project }) => {
                                     },
                                 }}>
                                     <Typography color="#000000">
-                                    <ReactMarkdown children={require('../../assets/data/project/description/project' + project.key).default} remarkPlugins={[remarkGfm]} />
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                        {require('../../assets/data/project/description/project' + project.key).default}
+                                    </ReactMarkdown>
                                     </Typography>
                             </Box>
                             <Divider />
@@ -126,8 +128,8 @@ const ProjectViewModal = ({ open, project }) => {
                 </Box>
             }
         </>
-    )
-}
+    );
+};
 
 
 export default ProjectViewModal;

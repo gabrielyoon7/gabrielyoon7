@@ -16,5 +16,5 @@ const long_description = `
 ![App Screenshot](project_img/3/web_read.gif)
 ![App Screenshot](project_img/3/web_write.gif)
 
-`
+`;
 export default long_description;

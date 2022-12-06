@@ -12,15 +12,15 @@ const TableFooter = ({ range, setPage, page, slice }) => {
 
   let temp = range;
   if (range.length > 6) {
-    let start = parseInt(page) - 3
-    let end = parseInt(page) + 3
+    let start = parseInt(page) - 3;
+    let end = parseInt(page) + 3;
     if (start <= 0) {
-      start = 0
+      start = 0;
     }
     if (end >= range.length) {
-      end = range.length
+      end = range.length;
     }
-    temp = temp.slice(start, end)
+    temp = temp.slice(start, end);
   }
 
   return (

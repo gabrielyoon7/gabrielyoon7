@@ -1,6 +1,5 @@
 
 import * as React from 'react';
-import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
@@ -11,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 
 
-export default (
+export default function TimelineCard (
   {
     period_start,
     period_end,
@@ -21,7 +20,7 @@ export default (
     color,
     variant,
     icon
-  }) => {
+  }) {
 
   return (
     <TimelineItem>
@@ -49,5 +48,5 @@ export default (
         </Box>
       </TimelineContent>
     </TimelineItem>
-  )
+  );
 }

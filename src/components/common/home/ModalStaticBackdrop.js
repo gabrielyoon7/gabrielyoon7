@@ -1,5 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
-import PropTypes from 'prop-types';
+import { Dialog } from "@mui/material";
 
 export default function ModalStaticBackdrop(props) {
   const { width, component, open, ...other } = props;

@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from "@mui/material"
+import { Box, Container, Stack } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 // Images
@@ -7,7 +7,7 @@ import homeRoutes from "api/routes/homeRoutes";
 // import MKBox from "components/common/mui-components/MKBox";
 import MKTypography from "components/common/mui-components/MKTypography";
 
-import styles from "./HomeTitle.css";
+import "./HomeTitle.css";
 import React from "react";
 
 const HomeTitle = () => {
@@ -46,7 +46,7 @@ const HomeTitle = () => {
                 </Container>
             </Box>
         </>
-    )
-}
+    );
+};
 
 export default React.memo(HomeTitle);

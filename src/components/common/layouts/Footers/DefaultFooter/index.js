@@ -13,8 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// react-router-dom components
-import { Link } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -23,12 +21,11 @@ import PropTypes from "prop-types";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import MKBox from "components/common/mui-components/MKBox";
-import MKTypography from "components/common/mui-components/MKTypography";
 
 
 function DefaultFooter({ content }) {
-  const { brand, socials, menus, copyright } = content;
-
+  // const { brand, socials, menus, copyright } = content;
+  const { copyright } = content;
   return (
     <MKBox component="footer">
       <Container>
