@@ -12,7 +12,7 @@ import LifeTimeline from "./timeline/LifeTimeline";
 import Etc from "./etc/Etc";
 import Curriculum from "./curriculum/Curriculum";
 
-export default () => {
+export default function ProfileContainer () {
 
 
     return (
@@ -109,7 +109,7 @@ export default () => {
                                     <tr>
                                         <td>관심분야</td>
                                         <td>
-                                            웹개발, 앱개발
+                                            웹개발
                                         </td>
                                     </tr>
                                     <tr>
