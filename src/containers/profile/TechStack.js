@@ -1,8 +1,8 @@
 import { Grid, Typography } from "@mui/material";
 import HomeCard from "components/common/home/HomeCard";
-import ModalStaticBackdrop from "components/common/home/ModalStaticBackdrop";
-import TechStackModal from "components/profile/TechStackModal";
-import { useState } from "react";
+// import ModalStaticBackdrop from "components/common/home/ModalStaticBackdrop";
+// import TechStackModal from "components/profile/TechStackModal";
+// import { useState } from "react";
 import tech from "../../assets/data/tech";
 
 export default function TechStack () {
@@ -12,7 +12,7 @@ export default function TechStack () {
     };
     // console.log(tech)
 
-    const [techStackModalOpen, setTechStackModalOpen] = useState(false);
+    // const [techStackModalOpen, setTechStackModalOpen] = useState(false);
     // const [selectedTechType, setSelectedTechType] = useState([]);
 
     // const handleCard = () => {
@@ -72,7 +72,7 @@ export default function TechStack () {
                     </HomeCard>
                 </Grid>
             </Grid>
-            <ModalStaticBackdrop
+            {/* <ModalStaticBackdrop
                 keepMounted
                 width="lg"
                 open={techStackModalOpen}
@@ -82,7 +82,7 @@ export default function TechStack () {
                         tech={selectedTechType}
                     />
                 }
-            />
+            /> */}
         </>
     );
 }
