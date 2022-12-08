@@ -40,7 +40,7 @@
     
 `2020.09 ~ 12`<br/>2020-2 경기대학교 감성SW교육센터 SW기초교과 튜터 / Python 
     
-`2020.10 ~ 2021.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 ([CS-HOME](https://github.com/KGU-CS-HOME)) 5기 `팀장` 
+`2020.10 ~ 2021.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 개발팀 ([CS-HOME](https://github.com/KGU-CS-HOME)) 5기 `팀장` 
 
 `2020.12 ~ 2021.02`<br/>[경기대학교 인공지능전공 홈페이지](http://ai.kyonggi.ac.kr) 제작 및 서비스 (CS-HOME)
 
@@ -51,7 +51,7 @@
 
 `2021.03 ~ 12`<br/>2021 경기대학교 감성SW교육센터 SW기초교과 튜터 `대표` / Python<br/>· 2021 진성애교양대학 감성SW교육센터 공로상(`2021.12`)
 
-`2021.03 ~ 12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 ([CS-HOME](https://github.com/KGU-CS-HOME)) 6기 `팀장` 
+`2021.03 ~ 12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 개발팀 ([CS-HOME](https://github.com/KGU-CS-HOME)) 6기 `팀장` 
     
 `2021.03 ~ 06`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 사물함 신청 서비스 프로젝트 진행 (CS-HOME)<br/>· 2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상
 
