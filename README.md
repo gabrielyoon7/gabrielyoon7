@@ -38,68 +38,50 @@
 <details>
     <summary><h4> 2020 </h4></summary>
     
-2020-2 경기대학교 감성SW교육센터 SW기초교과 튜터 / Python (`20.09 ~ 20.12`)
+`20.09 ~ 20.12`<br/>2020-2 경기대학교 감성SW교육센터 SW기초교과 튜터 / Python 
     
-[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 5기 `팀장` (`20.10 ~ 21.02`)
+`20.10 ~ 21.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 5기 `팀장` 
 </details>    
     
 <details>
     <summary><h4> 2021 </h4></summary>
     
-2021-1 경기대학교 감성SW교육센터 SW기초교과 튜터 `대표` / Python (`21.03 ~ 21.06`)
+`21.03 ~ 21.12`<br/>2021 경기대학교 감성SW교육센터 SW기초교과 튜터 `대표` / Python
     
-[경기대학교 인공지능전공 홈페이지](http://ai.kyonggi.ac.kr) 제작 및 서비스 (CS-HOME)  (`21.01 ~ 21.02`)
+`21.01 ~ 21.02`<br/>[경기대학교 인공지능전공 홈페이지](http://ai.kyonggi.ac.kr) 제작 및 서비스 (CS-HOME)
 
-[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 6기 `팀장` (`21.03 ~ 21.12`)
+`21.03 ~ 21.12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 6기 `팀장` 
     
-[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 사물함 신청 서비스 프로젝트 진행 (CS-HOME) (`21.03 ~ 21.06`)
+`21.03 ~ 21.06`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 사물함 신청 서비스 프로젝트 진행 (CS-HOME)
     
-2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상 (학과 홈페이지 사물함 신청 서비스) (`21.06`)
+`21.06`<br/>2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상 (학과 홈페이지 사물함 신청 서비스) 
 
-[경기대학교 소프트웨어중심대학 SWAIG 홈페이지](http://swaig.kyonggi.ac.kr:8080) 제작 및 서비스 (CS-HOME) (`21.06 ~ 21.08`)
+`21.06 ~ 21.08`<br/>[경기대학교 소프트웨어중심대학 SWAIG 홈페이지](http://swaig.kyonggi.ac.kr:8080) 제작 및 서비스 (CS-HOME) 
 
-경기대학교 AI컴퓨터공학부 분산병렬컴퓨팅연구실 학부연구생 (`21.07~`)
+`21.07~`<br/>경기대학교 AI컴퓨터공학부 분산병렬컴퓨팅연구실 학부연구생 
 
-2021-2 경기대학교 감성SW교육센터 SW기초교과 튜터 `대표` / Python (`21.09 ~ 21.12`)
-
-<!-- 경기대학교 AI컴퓨터공학부 객체지향프로그래밍 튜터 / Java (`21.09 ~ 21.12`) -->
-
-[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 졸업 요건 분석 서비스 프로젝트 진행 (CS-HOME) (`21.09 ~ 21.12`)
+`21.09 ~ 21.12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 졸업 요건 분석 서비스 프로젝트 진행 (CS-HOME) 
     
-2021-2 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 장려상 (학과 홈페이지 졸업 요건 분석 서비스) (`21.12`)
+`21.12`<br/>2021-2 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 장려상 (학과 홈페이지 졸업 요건 분석 서비스) 
 
-<!-- 2021-2 경기대학교 SW상상기업 (아보카도 팀) 장려상 : 중소기업/소상공인을 위한 웹 제작 플랫폼 (`21.10 ~ 21.11`) -->
-    
-<!-- 2021 추계 한국정보기술학회 대학생논문경진대회 동상 : 자기 주도적 여행 계획수립을 위한 추천 시스템 설계 (`21.11`) -->
-
-2021 경기대학교 진성애교양대학 감성SW교육센터 공로상 (`21.12`)
+`21.12`<br/>2021 경기대학교 진성애교양대학 감성SW교육센터 공로상 
 </details>    
 
 
 <details>
     <summary><h4> 2022 </h4></summary>
     
-[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 7기 기술지원 (`21.12 ~ 22.02`)
+`21.12 ~ 22.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 7기 기술지원
 
-[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그](https://github.com/KGU-DCS-LAB/myPlug) (`22.02 ~ 22.10`)    
-    
-<!-- [경기대학교 분산병렬컴퓨팅연구실 챗봇 및 뉴스 기반의 질병 예방 앱 : 헬스케어](https://github.com/KGU-DCS-LAB/health_app) (`22.02 ~ `) -->
+`22.02 ~ 22.10`<br/>[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그](https://github.com/KGU-DCS-LAB/myPlug)  
 
-[경기대학교 컴퓨터공학심화캡스톤 기록의달인 : 차세대 일기 작성 애플리케이션](https://github.com/gabrielyoon7/GIDAL) (`22.03 ~ 22.06`)
+`22.03 ~ 22.06`<br/>[경기대학교 컴퓨터공학심화캡스톤 기록의달인 : 차세대 일기 작성 애플리케이션](https://github.com/gabrielyoon7/GIDAL) 
     
-<!-- 2022 하계 한국정보기술학회 대학생논문경진대회 은상 : 개인 맞춤형 질병 유추 챗봇 애플리케이션 설계 및 구현 (`22.06`) -->
-    
-<!-- 2022-1 경기대학교 BARUN 문제해결 프로젝트 (닥터스트레인지 팀) 은상 (개인 맞춤형 질병 정보 제공 및 유추 시스템 개발) (`22.06`) -->
-    
-<!-- 2022 하계 한국정보기술학회 대학생논문경진대회 동상 : 차세대 일기 작성 애플리케이션 설계 (`22.06`) -->
-        
-<!-- 2022 하계 한국정보기술학회 대학생논문경진대회 동상 : 빅데이터 크롤링을 활용한 맞춤형 건강 뉴스 앱 (`22.06`) -->
-    
-2022년 제 1회 정보처리기사 합격 (`22.06`)
+`22.06`<br/>2022년 제 1회 정보처리기사 합격 
 
-2022 추계 한국정보기술학회 대학생논문경진대회 동상 : 전기자동차 충전소 사용 통계 정보의 사용자 친화적 질의가 가능한 다능한 앱 (`22.12`)
+`22.12`<br/>2022 추계 한국정보기술학회 대학생논문경진대회 동상 : 전기자동차 충전소 사용 통계 정보의 사용자 친화적 질의가 가능한 다능한 앱
 
-2022 추계 한국정보기술학회 대학생논문경진대회 은상 : 실시간 전기자동차 충전소 사용 로그 수집 시스템 (`22.12`)
+`22.12`<br/>2022 추계 한국정보기술학회 대학생논문경진대회 은상 : 실시간 전기자동차 충전소 사용 로그 수집 시스템 
 
 
 </details>   
@@ -129,7 +111,7 @@
     
 <h3>💻 Github Stat 💻</h3>
     
-![](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=gabrielyoon7&theme=github) ![](https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=gabrielyoon7&theme=github) ![](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=gabrielyoon7&theme=github&utcOffset=8) [![gabrielyoon7's GitHub stats](https://github-readme-stats.vercel.app/api?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats) [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=gabrielyoon7&layout=compact&hide=c,less,scss)](https://github.com/anuraghazra/github-readme-stats)
+![](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=gabrielyoon7&theme=github) ![](https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=gabrielyoon7&theme=github) ![](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=gabrielyoon7&theme=github&utcOffset=8) [![gabrielyoon7's GitHub stats](https://github-readme-stats.vercel.app/api?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats)
 
 </div>
 
