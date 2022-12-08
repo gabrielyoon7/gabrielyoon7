@@ -49,19 +49,19 @@
 <details>
     <summary><h4> 2021 </h4></summary>
 
-`2021.03 ~ 12`<br/>2021 경기대학교 감성SW교육센터 SW기초교과 튜터 `대표` / Python<br/>2021 경기대학교 진성애교양대학 감성SW교육센터 공로상(`2021.12`)
+`2021.03 ~ 12`<br/>2021 경기대학교 감성SW교육센터 SW기초교과 튜터 `대표` / Python<br/>· 2021 경기대학교 진성애교양대학 감성SW교육센터 공로상(`2021.12`)
 
-`2021.03 ~ 12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 6기 `팀장` 
+`2021.03 ~ 12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 ([CS-HOME](https://github.com/KGU-CS-HOME)) 6기 `팀장` 
     
-`2021.03 ~ 06`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 사물함 신청 서비스 프로젝트 진행 (CS-HOME)<br/>· 2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상
+`2021.03 ~ 06`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 사물함 신청 서비스 프로젝트 진행 ([CS-HOME](https://github.com/KGU-CS-HOME))<br/>· 2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상
 
-`2021.06 ~ 08`<br/>[경기대학교 소프트웨어중심대학 SWAIG 홈페이지](http://swaig.kyonggi.ac.kr:8080) 제작 및 서비스 (CS-HOME)
+`2021.06 ~ 08`<br/>[경기대학교 소프트웨어중심대학 SWAIG 홈페이지](http://swaig.kyonggi.ac.kr:8080) 제작 및 서비스 ([CS-HOME](https://github.com/KGU-CS-HOME))
 
 `2021.07 ~ `<br/>경기대학교 AI컴퓨터공학부 분산병렬컴퓨팅연구실 학부연구생 
 
-`2021.09 ~ 12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 졸업 요건 분석 서비스 프로젝트 진행 (CS-HOME) <br/>· 2021-2 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 장려상
+`2021.09 ~ 12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 졸업 요건 분석 서비스 프로젝트 진행 ([CS-HOME](https://github.com/KGU-CS-HOME)) <br/>· 2021-2 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 장려상
 
-`2021.12 ~ 2022.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 7기 기술지원
+`2021.12 ~ 2022.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 ([CS-HOME](https://github.com/KGU-CS-HOME)) 7기 기술지원
 
 </details>
 
