@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Chip, Grid, Typography } from "@mui/material";
 import etc from "assets/data/etc";
 import ResponsiveCard from "components/common/home/ResponsiveCard";
 
@@ -13,10 +13,14 @@ const Etc = () => {
                 {etc.map((e) =>
                     <Grid item xs={12} lg={6} xl={4} key={e.title}>
                         <ResponsiveCard>
-                            <Typography variant="caption">
-                                {e.time}
+                            <Chip label={e.time} />
+                            <Typography variant="overline">
+                                {e.team}
+                            </Typography>                            
+                            <Typography variant="subtitle1">
+                                {e.award}
                             </Typography>
-                            <Typography variant="h5">
+                            <Typography variant="h5" noWrap>
                                 {e.title}
                             </Typography>
                             <Typography variant="inherit">

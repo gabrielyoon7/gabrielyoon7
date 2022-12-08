@@ -89,7 +89,7 @@ export default function ProfileContainer () {
                                     </tr>
                                     <tr>
                                         <td>주소</td>
-                                        <td><span>경기도 하남시 </span><span>미사강변호반써밋아파트</span></td>
+                                        <td><span>경기도 하남시 </span><span>미사강변도시</span></td>
                                     </tr>
                                     {/* <tr>
                                                 <td>약력</td>
@@ -108,7 +108,7 @@ export default function ProfileContainer () {
                                     <tr>
                                         <td>관심분야</td>
                                         <td>
-                                            웹개발
+                                            웹 개발
                                         </td>
                                     </tr>
                                     <tr>
