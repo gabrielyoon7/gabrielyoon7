@@ -122,11 +122,11 @@
     
 <h3>💻 Github Stat 💻</h3>
     
-![](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=gabrielyoon7&theme=nord_bright)
+![](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=gabrielyoon7&theme=github)
 
-![](https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=gabrielyoon7&theme=nord_bright)
+![](https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=gabrielyoon7&theme=github)
 
-![](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=gabrielyoon7&theme=nord_bright&utcOffset=8)
+![](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=gabrielyoon7&theme=github&utcOffset=8)
 
 [![gabrielyoon7's GitHub stats](https://github-readme-stats.vercel.app/api?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats)    
 
