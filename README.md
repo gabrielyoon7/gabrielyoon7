@@ -2,7 +2,7 @@
 
 <div align = "center">
     <h3>Gabriel Ju Hyun, Yoon</h3>
-    <h2>윤주현</h2>
+    <h3>윤주현</h3>
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgabrielyoon7&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gabrielyoon7@gmail.com)](mailto:gabrielyoon7@gmail.com)
 [![Blog Badge](http://img.shields.io/badge/-Blog-green?style=flat-square&link=https://leirbag.tistory.com/)](https://leirbag.tistory.com/)
@@ -18,13 +18,13 @@
  	
 [경기대학교 소프트웨어중심대학 SWAIG 홈페이지 (Official)](https://github.com/gabrielyoon7/webp2021)
     
-[경기대학교 컴퓨터공학심화캡스톤 기록의달인](https://github.com/gabrielyoon7/GIDAL)
+경기대학교 컴퓨터공학심화캡스톤 [기록의달인](https://github.com/gabrielyoon7/GIDAL)
     
-[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그](https://github.com/KGU-DCS-LAB/myPlug)
-    
-[경기대학교 2022-2 SW상상기업 팀 아보카도 프로젝트 : 그룹 활동 지원 서비스 및 채용 연계 플랫폼](https://github.com/KGU-Team-Avocado/avocado-hero-web)
+경기대학교 분산병렬컴퓨팅연구실 [전기차 충전소 추천앱 : 나만의 플러그](https://github.com/KGU-DCS-LAB/myPlug)
 
-[심심해서 만든 지뢰찾기 게임](https://github.com/gabrielyoon7/Minesweeper-by-Python3)
+경기대학교 2022-2 SW상상기업 팀 아보카도 프로젝트 : [그룹 활동 지원 서비스 및 채용 연계 플랫폼](https://github.com/KGU-Team-Avocado/avocado-hero-web)
+
+~~[심심해서 만든 지뢰찾기 게임](https://github.com/gabrielyoon7/Minesweeper-by-Python3)~~
     
 
     
@@ -41,48 +41,40 @@
 `20.09 ~ 20.12`<br/>2020-2 경기대학교 감성SW교육센터 SW기초교과 튜터 / Python 
     
 `20.10 ~ 21.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 5기 `팀장` 
-</details>    
+
+`20.12 ~ 21.02`<br/>[경기대학교 인공지능전공 홈페이지](http://ai.kyonggi.ac.kr) 제작 및 서비스 (CS-HOME)
+
+</details>
     
 <details>
     <summary><h4> 2021 </h4></summary>
-    
+
 `21.03 ~ 21.12`<br/>2021 경기대학교 감성SW교육센터 SW기초교과 튜터 `대표` / Python
-    
-`21.01 ~ 21.02`<br/>[경기대학교 인공지능전공 홈페이지](http://ai.kyonggi.ac.kr) 제작 및 서비스 (CS-HOME)
 
 `21.03 ~ 21.12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 6기 `팀장` 
     
-`21.03 ~ 21.06`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 사물함 신청 서비스 프로젝트 진행 (CS-HOME)
-    
-`21.06`<br/>2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상 (학과 홈페이지 사물함 신청 서비스) 
+`21.03 ~ 21.06`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 사물함 신청 서비스 프로젝트 진행 (CS-HOME)<br/>- 2021-1 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 우수상
 
-`21.06 ~ 21.08`<br/>[경기대학교 소프트웨어중심대학 SWAIG 홈페이지](http://swaig.kyonggi.ac.kr:8080) 제작 및 서비스 (CS-HOME) 
+`21.06 ~ 21.08`<br/>[경기대학교 소프트웨어중심대학 SWAIG 홈페이지](http://swaig.kyonggi.ac.kr:8080) 제작 및 서비스 (CS-HOME)
 
 `21.07~`<br/>경기대학교 AI컴퓨터공학부 분산병렬컴퓨팅연구실 학부연구생 
 
-`21.09 ~ 21.12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 졸업 요건 분석 서비스 프로젝트 진행 (CS-HOME) 
-    
-`21.12`<br/>2021-2 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 장려상 (학과 홈페이지 졸업 요건 분석 서비스) 
+`21.09 ~ 21.12`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://ai.kyonggi.ac.kr) 졸업 요건 분석 서비스 프로젝트 진행 (CS-HOME) <br/>- 2021-2 경기대학교 BARUN 문제해결 프로젝트 (세.나.페 팀) 장려상
 
 `21.12`<br/>2021 경기대학교 진성애교양대학 감성SW교육센터 공로상 
-</details>    
+</details>
 
 
 <details>
     <summary><h4> 2022 </h4></summary>
-    
+
 `21.12 ~ 22.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 7기 기술지원
 
-`22.02 ~ 22.10`<br/>[경기대학교 분산병렬컴퓨팅연구실 전기차 충전소 추천앱 : 나만의 플러그](https://github.com/KGU-DCS-LAB/myPlug)  
-
-`22.03 ~ 22.06`<br/>[경기대학교 컴퓨터공학심화캡스톤 기록의달인 : 차세대 일기 작성 애플리케이션](https://github.com/gabrielyoon7/GIDAL) 
+`22.03 ~ 22.06`<br/>경기대학교 컴퓨터공학심화캡스톤 [기록의달인 : 차세대 일기 작성 애플리케이션](https://github.com/gabrielyoon7/GIDAL) 
     
+`22.03 ~ 22.11`<br/>경기대학교 분산병렬컴퓨팅연구실 [전기차 충전소 추천앱 : 나만의 플러그](https://github.com/KGU-DCS-LAB/myPlug)<br/>- 2022 추계 한국정보기술학회 대학생논문경진대회 `은상`
+
 `22.06`<br/>2022년 제 1회 정보처리기사 합격 
-
-`22.12`<br/>2022 추계 한국정보기술학회 대학생논문경진대회 동상 : 전기자동차 충전소 사용 통계 정보의 사용자 친화적 질의가 가능한 다능한 앱
-
-`22.12`<br/>2022 추계 한국정보기술학회 대학생논문경진대회 은상 : 실시간 전기자동차 충전소 사용 로그 수집 시스템 
-
 
 </details>   
 
