@@ -3,7 +3,7 @@ const etc = [
     {
         time: '2021.06',
         title: '2021-1 경기대학교 BARUN 문제해결 프로젝트',
-        team: '세.나.페',
+        team: null,
         award: '우수상',
         description: '학과 홈페이지 사물함 신청 서비스 개발'
     },
@@ -17,7 +17,7 @@ const etc = [
     {
         time: '2021.12',
         title: '2021-2 경기대학교 BARUN 문제해결 프로젝트',
-        team: '세.나.페',
+        team: null,
         award: '장려상',
         description: '학과 홈페이지 졸업 요건 분석 서비스 개발'
     },
@@ -25,8 +25,8 @@ const etc = [
         time: '2022.06',
         title: '2022년 1회 정보처리기사',
         team: null,
-        award: '합격',
-        description: ''
+        award: '',
+        description: '합격'
     },
     {
         time: '2022.12',
