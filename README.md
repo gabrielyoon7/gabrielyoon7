@@ -124,12 +124,9 @@
     
 ![](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=gabrielyoon7&theme=vue)
 
-<!-- [![gabrielyoon7's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats) -->
-
 [![gabrielyoon7's GitHub stats](https://github-readme-stats.vercel.app/api?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats)    
-<!--     [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=gabrielyoon7)](https://github.com/anuraghazra/github-readme-stats) -->
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=gabrielyoon7&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=gabrielyoon7&layout=compact&hide=c,less,scss)](https://github.com/anuraghazra/github-readme-stats)
     <div>
     <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="30" height="30"/>
     <img src="https://cultofthepartyparrot.com/flags/hd/indiaparrot.gif" width="30" height="30"/>
