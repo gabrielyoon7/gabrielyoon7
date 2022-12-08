@@ -40,9 +40,9 @@
     
 `2020.09 ~ 12`<br/>2020-2 경기대학교 감성SW교육센터 SW기초교과 튜터 / Python 
     
-`2020.10 ~ 2021.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 (CS-HOME) 5기 `팀장` 
+`2020.10 ~ 2021.02`<br/>[경기대학교 컴퓨터공학부 홈페이지](http://cs.kyonggi.ac.kr) 관리 프로젝트 ([CS-HOME](https://github.com/KGU-CS-HOME)) 5기 `팀장` 
 
-`2020.12 ~ 2021.02`<br/>[경기대학교 인공지능전공 홈페이지](http://ai.kyonggi.ac.kr) 제작 및 서비스 (CS-HOME)
+`2020.12 ~ 2021.02`<br/>[경기대학교 인공지능전공 홈페이지](http://ai.kyonggi.ac.kr) 제작 및 서비스 ([CS-HOME](https://github.com/KGU-CS-HOME))
 
 </details>
     
