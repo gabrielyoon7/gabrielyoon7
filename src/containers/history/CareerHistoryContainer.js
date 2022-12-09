@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Projects from "./Projects";
 
 const CareerHistoryContainer = () => {
@@ -6,21 +6,13 @@ const CareerHistoryContainer = () => {
         <>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography variant="h3">
-                        Projects
-                    </Typography>
+                    <Box mb={2}>
+                        <Typography variant="h3">
+                            Projects
+                        </Typography>
+                    </Box>
                     <Projects />
                 </Grid>
-                {/* <Grid item xs={12}>
-                    <Typography variant="h3">
-                        Timeline
-                    </Typography>
-                    <HomeCard
-                        children={<>
-                            ㅇㅇ
-                        </>}
-                    />
-                </Grid> */}
             </Grid>
         </>
     );

@@ -6,8 +6,8 @@ const homeRoutes = [
     {
         path: '/',
         element: <HomeContainer/>,
-        name:'안녕하세요',
-        description:'윤주현의 포트폴리오 입니다.'
+        name:'윤주현의 포트폴리오',
+        description:'확인해주셔서 감사합니다.'
     },
     {
         path: '/career',
