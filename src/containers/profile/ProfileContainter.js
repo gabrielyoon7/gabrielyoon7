@@ -12,7 +12,7 @@ import LifeTimeline from "./timeline/LifeTimeline";
 import Etc from "./etc/Etc";
 import Curriculum from "./curriculum/Curriculum";
 
-export default function ProfileContainer () {
+export default function ProfileContainer() {
 
 
     return (
@@ -29,38 +29,41 @@ export default function ProfileContainer () {
                     <HomeCard>
                         <>
                             <Box align="center">
-
-                                <img className="img-fluid rounded-4 mb-3" src={me} width={140}></img>
-                                <Typography variant="h3">윤주현</Typography>
-                                <Typography>계속 전진하겠습니다.</Typography>
-                                <Stack direction={"row"} spacing={1} sx={{ justifyContent: "center" }}>
-                                    <Tooltip title='새 창에서 열기'>
-                                        <MKButton
-                                            variant="outlined"
-                                            color="dark"
-                                            onClick={() => window.open('https://github.com/gabrielyoon7')}
-                                        >
-                                            <GitHubIcon /> Github
-                                        </MKButton>
-                                    </Tooltip>
-                                    <Tooltip title='새 창에서 열기'>
-                                        <MKButton
-                                            variant="outlined"
-                                            color="info"
-                                            onClick={() => window.open('https://leirbag.tistory.com/')}
-                                        >
-                                            <RssFeedIcon />Tistory
-                                        </MKButton>
-                                    </Tooltip>
-                                    <Tooltip title='새 창에서 열기'>
-                                        <MKButton
-                                            variant="outlined"
-                                            color="error"
-                                            onClick={() => window.open('https://www.instagram.com/gabriel._.yn/')}
-                                        >
-                                            <InstagramIcon /> Instagram
-                                        </MKButton>
-                                    </Tooltip>
+                                <Stack spacing={1} justifyContent="center">
+                                    <Box>
+                                        <img className="img-fluid rounded-4 mb-3" src={me} width={140}></img>
+                                    </Box>
+                                    <Typography variant="h3">윤주현</Typography>
+                                    <Typography>새로운 기술은 언제나 환영합니다.</Typography>
+                                    <Stack direction={"row"} spacing={1} sx={{ justifyContent: "center" }}>
+                                        <Tooltip title='새 창에서 열기'>
+                                            <MKButton
+                                                variant="outlined"
+                                                color="dark"
+                                                onClick={() => window.open('https://github.com/gabrielyoon7')}
+                                            >
+                                                <GitHubIcon />Github
+                                            </MKButton>
+                                        </Tooltip>
+                                        <Tooltip title='새 창에서 열기'>
+                                            <MKButton
+                                                variant="outlined"
+                                                color="info"
+                                                onClick={() => window.open('https://leirbag.tistory.com/')}
+                                            >
+                                                <RssFeedIcon />Tistory
+                                            </MKButton>
+                                        </Tooltip>
+                                        <Tooltip title='새 창에서 열기'>
+                                            <MKButton
+                                                variant="outlined"
+                                                color="error"
+                                                onClick={() => window.open('https://www.instagram.com/gabriel._.yn/')}
+                                            >
+                                                <InstagramIcon /> Instagram
+                                            </MKButton>
+                                        </Tooltip>
+                                    </Stack>
                                 </Stack>
                             </Box>
                         </>

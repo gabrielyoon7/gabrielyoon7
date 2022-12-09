@@ -1,6 +1,7 @@
-import { Box, Chip, Grid, Stack, Typography } from "@mui/material";
+import { Box, Chip, Grid, Stack, Tooltip, Typography } from "@mui/material";
 import etc from "assets/data/etc";
 import ResponsiveCard from "components/common/home/ResponsiveCard";
+import MKButton from "components/common/mui-components/MKButton";
 
 const Etc = () => {
     return (
@@ -11,7 +12,7 @@ const Etc = () => {
                 alignItems="stretch"
             >
                 {etc.map((e) =>
-                    <Grid item xs={12} lg={6}  key={e.title}>
+                    <Grid item xs={12} lg={6} key={e.title}>
                         <ResponsiveCard>
                             <Stack spacing={1}>
                                 <Stack direction={"row"} justifyContent={"space-between"}>
@@ -28,6 +29,19 @@ const Etc = () => {
                                 <Typography variant="subtitle2" noWrap>
                                     {e.description}
                                 </Typography>
+                                {e.link && <>
+                                    <Stack direction={"row"}>
+                                        <Tooltip title='새 창에서 열기'>
+                                            <MKButton
+                                                variant="outlined"
+                                                color="info"
+                                                onClick={() => window.open(e.link)}
+                                            >
+                                                확인하기
+                                            </MKButton>
+                                        </Tooltip>
+                                    </Stack>
+                                </>}
                             </Stack>
                         </ResponsiveCard>
                     </Grid>
