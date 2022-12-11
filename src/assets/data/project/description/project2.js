@@ -1,5 +1,5 @@
 const long_description = `
-## ■▮ 경기대학교 SWAIG 홈페이지 제작 ▮■
+## ■▮ 경기대학교 SWAIG 홈페이지 제작 (팀장) ▮■
 ---
 
 ![App Screenshot](project_img/2/8.png)
