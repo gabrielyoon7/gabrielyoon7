@@ -46,7 +46,7 @@ export default [
     {
         key:5,
         period_start:"2022.06",
-        period_end:"진행중",
+        period_end:"2022.11",
         team:"상상기업 아보카도",
         title:"히어로",
         short_description:"팀 프로젝트를 통한 개인 포트폴리오 관리 및 채용 연계 플랫폼",
