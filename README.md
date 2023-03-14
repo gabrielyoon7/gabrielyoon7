@@ -1,1 +1,2 @@
-
+- [인스타그램](https://www.instagram.com/gabriel._.yn/)
+- [개인 블로그](https://leirbag.tistory.com/)
