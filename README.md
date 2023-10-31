@@ -1,9 +1,13 @@
 - 경기대학교 컴퓨터공학부 (2017.03 ~ 2023.02)
   - [졸업 학점 4.08/4.5](./assets/grade.pdf)
-- 2022년 제1회 정보처리기사 (2022.06)
+- 2022년 제1회 [정보처리기사](./assets/qnet.pdf) (2022.06)
 - 경기대학교 AI컴퓨터공학부 홈페이지 개발팀 팀장 (2020.10 ~ 2022.02)
+  - [홈페이지](http://cs.kyonggi.ac.kr/)
+  - [GitHub Organization](https://github.com/KGU-CS-HOME)
 - 경기대학교 AI컴퓨터공학부 분산병렬컴퓨팅산학협력연구실 학부연구생 (2021.07 ~ 2022.12)
+  - [Github Repository](https://github.com/KGU-DCS-LAB/myPlug)
 - 우아한테크코스 프론트엔드 5기 (2023.02 ~ )
+  - [기록](https://github.com/gabrielyoon7/woowacourse-archive)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrielyoon7/gabrielyoon7/output/github-contribution-grid-snake-dark.svg">
