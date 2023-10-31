@@ -1,3 +1,8 @@
+## 윤주현
+
+- [blog](https://leirbag.tistory.com)
+- [gmail](mailto://gabrielyoon7@gmail.com)
+
 ### 학력
 경기대학교 컴퓨터공학부 (2017.03 ~ 2023.02)
 - [졸업 학점 4.08 / 4.5](./assets/grade.pdf)
