@@ -34,10 +34,20 @@
 
 
 ### 수상 및 자격증 
-- 2022년 제1회 [정보처리기사](./assets/qnet.pdf) (2022.06)
-- [경기대학교 소프트웨어중심대학 공로상](./assets/tutor.png)
-- [2021학년도 2학기 BARUN 문제 해결 프로젝트 장려상](./assets/barun-2021-2.png)
-- [2021학년도 1학기 BARUN 문제 해결 프로젝트 우수상](./assets/barun-2021-1.png)
+<details>
+    <summary>자격증</summary>
+
+2022년 제1회 [정보처리기사](./assets/qnet.pdf) (2022.06)
+</details>
+
+<details>
+    <summary>수상</summary>
+
+- [2021년도 경기대학교 소프트웨어중심대학 공로상](./assets/tutor.png) : SW튜터링 팀장 활동 관련 (2020-2, 2021-1, 2021-2)
+- [2021학년도 2학기 BARUN 문제 해결 프로젝트 장려상](./assets/barun-2021-2.png) : 학과홈페이지 졸업요건진단시스템 기능 구현
+- [2021학년도 1학기 BARUN 문제 해결 프로젝트 우수상](./assets/barun-2021-1.png) : 학과홈페이지 사물함 신청 기능 구현
+</details>
+
 
 
 <picture>
