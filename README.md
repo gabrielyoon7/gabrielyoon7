@@ -13,7 +13,7 @@
 
 - [활동 기록](https://github.com/gabrielyoon7/woowacourse-archive)
 - 팀 프로젝트: 실시간 전기자동차 충전소 지도 및 사용 통계 조회 서비스
-  - [홈페이지](https://carffe.in/)
+  - [서비스 홈페이지](https://carffe.in/) (운영중)
   - [GitHub Repository](https://github.com/woowacourse-teams/2023-car-ffeine)
   - React, TypeScript, Styled Components, TanStack Query, Google Maps API
 </details>
@@ -29,10 +29,11 @@
 <details>
     <summary>경기대학교 AI컴퓨터공학부 홈페이지 개발팀 팀장 (2020.10 ~ 2022.02)</summary>
 
-- [학과 홈페이지](http://cs.kyonggi.ac.kr/) (운영중)
+- [학과 공식 홈페이지](http://cs.kyonggi.ac.kr/) (운영중)
   - Repository는 보안 문제로 인해 비공개입니다.
 - 소프트웨어중심대학 SWAIG 프로젝트 (운영중)
   - [GitHub Repository](https://github.com/gabrielyoon7/webp2021)
+- JSP, MySQL, Tomcat, jQuery, bootstrap
 - [GitHub Organization](https://github.com/KGU-CS-HOME)
 </details>
 
