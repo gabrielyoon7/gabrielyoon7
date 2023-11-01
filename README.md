@@ -31,7 +31,7 @@
 
 - [학과 공식 홈페이지](http://cs.kyonggi.ac.kr/) (운영중)
   - Repository는 보안 문제로 인해 비공개입니다.
-- 소프트웨어중심대학 SWAIG 프로젝트 (운영중)
+- 소프트웨어중심대학 SWAIG 프로젝트 (운영중단)
   - [GitHub Repository](https://github.com/gabrielyoon7/webp2021)
 - JSP, MySQL, Tomcat, jQuery, bootstrap
 - [GitHub Organization](https://github.com/KGU-CS-HOME)
