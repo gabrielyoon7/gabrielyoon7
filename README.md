@@ -20,7 +20,7 @@
 </details>
 
 <details>
-    <summary>경기대학교 AI컴퓨터공학부 분산병렬컴퓨팅산학협력연구실 학부연구생 (2021.07 ~ 2022.12)</summary>
+    <summary>한국정보기술학회 2022 대학생논문경진대회 참가 (2022.12)</summary>
 
 - 전기차 충전소 조회 애플리케이션 (배포하지 않음)
   - [Github Repository](https://github.com/KGU-DCS-LAB/myPlug)
