@@ -14,16 +14,17 @@
 - [활동 기록](https://github.com/gabrielyoon7/woowacourse-archive)
 - 팀 프로젝트: 실시간 전기자동차 충전소 지도 및 사용 통계 조회 서비스
   - [서비스 홈페이지](https://carffe.in/) (운영중)
+  - [팀 기술블로그](https://car-ffeine.github.io/archive)
   - [GitHub Repository](https://github.com/woowacourse-teams/2023-car-ffeine)
-  - React, TypeScript, Styled Components, TanStack Query, Google Maps API
+  - `React`, `TypeScript`, `styled-components`, `TanStack Query`, `Google Maps API`
 </details>
 
 <details>
     <summary>경기대학교 AI컴퓨터공학부 분산병렬컴퓨팅산학협력연구실 학부연구생 (2021.07 ~ 2022.12)</summary>
 
-- 전기차 충전소 조회 애플리케이션
+- 전기차 충전소 조회 애플리케이션 (배포하지 않음)
   - [Github Repository](https://github.com/KGU-DCS-LAB/myPlug)
-  - Expo, React Native, Redux, Native Base, Node.js, Express.js, MongoDB
+  - `React Native` (`Expo`), `Redux`, `Native Base`, `Node.js`, `Express.js`, `MongoDB`, `mongoose.js`
 </details>
 
 <details>
@@ -33,7 +34,7 @@
   - Repository는 보안 문제로 인해 비공개입니다.
 - 소프트웨어중심대학 SWAIG 프로젝트 (운영중단)
   - [GitHub Repository](https://github.com/gabrielyoon7/webp2021)
-- JSP, MySQL, Tomcat, jQuery, bootstrap
+- `JSP`, `MySQL`/`MariaDB`, `DBUtils`, `Tomcat`, `jQuery`, `ajax`, `bootstrap`
 - [GitHub Organization](https://github.com/KGU-CS-HOME)
 </details>
 
