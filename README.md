@@ -1,17 +1,19 @@
 ## 윤주현
 
-- [blog](https://leirbag.tistory.com)
-- [gmail](mailto://gabrielyoon7@gmail.com)
+
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgabrielyoon7&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gabrielyoon7@gmail.com)](mailto:gabrielyoon7@gmail.com)
+[![Blog Badge](http://img.shields.io/badge/Tistory-Blog-green?style=flat-square&link=https://leirbag.tistory.com/)](https://leirbag.tistory.com/)
 
 ### 학력
-경기대학교 컴퓨터공학부 (2017.03 ~ 2023.02)
-- [졸업 학점 4.08 / 4.5](./assets/grade.pdf)
+경기대학교 컴퓨터공학부 졸업 (2017.03 ~ 2023.02)
+
+[학점 4.08 / 4.5](./assets/grade.pdf)
 
 ### 활동 이력
 <details>
     <summary>우아한테크코스 프론트엔드 5기 (2023.02 ~ )</summary>
 
-- [활동 기록](https://github.com/gabrielyoon7/woowacourse-archive)
+- [우테코 활동 기록](https://github.com/gabrielyoon7/woowacourse-archive)
 - 팀 프로젝트: 실시간 전기자동차 충전소 지도 및 사용 통계 조회 서비스
   - 개발 기간 : 2023.06 ~ 2023.10
   - [서비스 홈페이지](https://carffe.in/) (운영중)
@@ -66,10 +68,7 @@
 
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrielyoon7/gabrielyoon7/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrielyoon7/gabrielyoon7/output/github-contribution-grid-snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/gabrielyoon7/gabrielyoon7/output/github-contribution-grid-snake.svg">
   <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/gabrielyoon7/gabrielyoon7/output/github-contribution-grid-snake.svg">
 </picture>
-
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgabrielyoon7&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gabrielyoon7@gmail.com)](mailto:gabrielyoon7@gmail.com)
-[![Blog Badge](http://img.shields.io/badge/-Blog-green?style=flat-square&link=https://leirbag.tistory.com/)](https://leirbag.tistory.com/)
