@@ -13,6 +13,7 @@
 
 - [활동 기록](https://github.com/gabrielyoon7/woowacourse-archive)
 - 팀 프로젝트: 실시간 전기자동차 충전소 지도 및 사용 통계 조회 서비스
+  - 개발 기간 : 2023.06 ~ 2023.10
   - [서비스 홈페이지](https://carffe.in/) (운영중)
   - [팀 기술블로그](https://car-ffeine.github.io/archive)
   - [GitHub Repository](https://github.com/woowacourse-teams/2023-car-ffeine)
@@ -23,6 +24,7 @@
     <summary>한국정보기술학회 2022 대학생논문경진대회 참가 (2022.12)</summary>
 
 - 전기차 충전소 조회 애플리케이션 (배포하지 않음)
+  - 개발 기간 : 2022.06 ~ 2022.09
   - [Github Repository](https://github.com/KGU-DCS-LAB/myPlug)
   - `React Native` (`Expo`), `Redux`, `Native Base`, `Node.js`, `Express.js`, `MongoDB`, `mongoose.js`
 </details>
@@ -37,7 +39,6 @@
 - `JSP`, `MySQL`/`MariaDB`, `DBUtils`, `Tomcat`, `jQuery`, `ajax`, `bootstrap`
 - [GitHub Organization](https://github.com/KGU-CS-HOME)
 </details>
-
 
 
 ### 수상 및 자격증 
