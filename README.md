@@ -1,8 +1,9 @@
 ## 윤주현
 
-
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgabrielyoon7&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) [![Gmail Badge](https://img.shields.io/badge/Gmail-d14836?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gabrielyoon7@gmail.com)](mailto:gabrielyoon7@gmail.com)
 [![Blog Badge](http://img.shields.io/badge/Tistory-Blog-green?style=flat-square&link=https://leirbag.tistory.com/)](https://leirbag.tistory.com/)
+
+[이력서(notion)](https://shared-sphere-0c9.notion.site/Frontend-Developer-3bdfb52fb0f64336b4100b5cfced75c0)
 
 ### 학력
 경기대학교 컴퓨터공학부 졸업 (2017.03 ~ 2023.02)
