@@ -10,6 +10,10 @@
 
 [학점 4.08 / 4.5](./assets/grade.pdf)
 
+### 기술
+
+React, TypeScript, TanStack Query, Google Maps API, webpack, vite, Storybook, styled-components, bootstrap, MUI, jest, react-testing-library, cypress, GitHub Actions
+
 ### 활동 이력
 <details>
     <summary>우아한테크코스 프론트엔드 5기 (2023.02 ~ )</summary>
