@@ -6,9 +6,9 @@
 [이력서(notion)](https://shared-sphere-0c9.notion.site/Frontend-Developer-3bdfb52fb0f64336b4100b5cfced75c0)
 
 ### 학력
-경기대학교 컴퓨터공학부 졸업 (2017.03 ~ 2023.02)
-
-[학점 4.08 / 4.5](./assets/official_grade.pdf) - 백분율 95.33 - 전공 평점 4.17
+- 경기대학교 컴퓨터공학부 졸업 (2017.03 ~ 2023.02)
+  - [학점 4.08 / 4.5](./assets/grade.pdf) (백분율 95.33)
+  - 전공 평점 4.17
 
 ### 기술
 
@@ -24,7 +24,7 @@ React, TypeScript, TanStack Query, Google Maps API, webpack, vite, Storybook, st
   - [서비스 홈페이지](https://carffe.in/) (운영중)
   - [팀 기술블로그](https://car-ffeine.github.io/archive)
   - [GitHub Repository](https://github.com/woowacourse-teams/2023-car-ffeine)
-  - `React`, `TypeScript`, `styled-components`, `TanStack Query`, `Google Maps API`
+  - `React`, `TypeScript`, `styled-components`, `TanStack Query`, `Google Maps API`, `AWS CloudFront & S3`, `webpack`, `react-testing-library`
 </details>
 
 <details>
