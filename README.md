@@ -12,7 +12,7 @@
 
 ### 기술
 
-React, TypeScript, TanStack Query, Google Maps API, webpack, vite, Storybook, styled-components, bootstrap, MUI, jest, react-testing-library, cypress, GitHub Actions
+React, TypeScript, TanStack Query, RTK, recoil, Google Maps API, webpack, vite, Storybook, styled-components, bootstrap, MUI, jest, react-testing-library, cypress, GitHub Actions
 
 ### 활동 이력
 <details>
