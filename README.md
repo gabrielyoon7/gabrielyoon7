@@ -1,10 +1,13 @@
 ## 윤주현
-[이력서(notion)](https://shared-sphere-0c9.notion.site/Frontend-Developer-3bdfb52fb0f64336b4100b5cfced75c0)
+- [이력서](https://shared-sphere-0c9.notion.site/Frontend-Developer-3bdfb52fb0f64336b4100b5cfced75c0)
 
 ### 약력 
 - Toss Bank Frontend Developer (2024.01 ~ )
 - 우아한테크코스 5기 Frontend (2023.02 ~ 2023.11, 수료)
 - 경기대학교 컴퓨터공학부 17학번 (2017.03 ~ 2023.02, [졸업](./assets/grade.pdf))
+
+### 기타
+- 2022년 제1회 [정보처리기사](./assets/qnet.pdf) (2022.06)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gabrielyoon7/gabrielyoon7/output/github-contribution-grid-snake-dark.svg">
