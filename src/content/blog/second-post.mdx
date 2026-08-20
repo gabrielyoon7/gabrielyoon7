@@ -1,0 +1,76 @@
+---
+title: "React useState 이해하기"
+description: "MDX 안에서 실제 동작하는 React Interactive Demo를 사용하는 방법을 소개합니다."
+pubDate: 2026-08-17
+updatedDate: 2026-08-18
+tags:
+  - React
+  - TypeScript
+---
+
+import Callout from '../../components/astro/callout.astro';
+import InteractiveDemo from '../../components/react/interactive-demo.tsx';
+
+## useState란
+
+React에서 컴포넌트의 **로컬 상태**를 관리하는 가장 기본적인 Hook입니다.
+함수형 컴포넌트가 렌더링 사이에 값을 기억할 수 있게 해줍니다.
+
+```tsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button type="button" onClick={() => setCount((c) => c + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```
+
+## Interactive Demo
+
+아래 데모는 MDX 글 안에서 **실제 React 컴포넌트**가 hydration되어 동작합니다.
+`client:visible` directive를 사용해 뷰포트에 들어올 때만 JavaScript를 로드합니다.
+
+<Callout type="tip">
+가능하면 `client:visible` 또는 `client:idle`을 사용하고, 페이지 로드 직후 반드시 필요한 경우에만 `client:load`를 사용하세요.
+</Callout>
+
+<InteractiveDemo client:visible />
+
+## MDX에서 React 컴포넌트 사용하기
+
+MDX 파일 상단에서 React 컴포넌트를 import하고, hydration directive와 함께 사용합니다.
+
+```mdx
+import InteractiveDemo from '../../components/react/interactive-demo.tsx';
+
+<InteractiveDemo client:visible />
+```
+
+## TypeScript와 함께
+
+상태의 타입을 명시하면 더 안전한 컴포넌트를 작성할 수 있습니다.
+
+```typescript
+type DemoState = {
+  count: number;
+  name: string;
+};
+
+function useDemoState(initial: DemoState) {
+  const [state, setState] = useState<DemoState>(initial);
+  return [state, setState] as const;
+}
+```
+
+## 정리
+
+- Astro는 블로그의 정적 콘텐츠와 라우팅을 담당합니다.
+- React는 인터랙티브 데모처럼 **브라우저에서 동작이 필요한 UI**에만 사용합니다.
+- MDX를 통해 Markdown과 React/TSX를 자연스럽게 혼합할 수 있습니다.
+
+앞으로 `use-effect-demo`, `code-playground` 같은 컴포넌트를 `src/components/react/`에 추가하면 같은 방식으로 글에 삽입할 수 있습니다.

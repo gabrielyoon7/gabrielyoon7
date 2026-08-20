@@ -1,0 +1,76 @@
+---
+title: "블로그를 시작하며"
+description: "Astro + React + MDX로 개발자 기술 블로그를 구성한 첫 번째 글입니다."
+pubDate: 2026-08-18
+tags:
+  - Astro
+  - Blog
+---
+
+import Callout from '../../components/astro/callout.astro';
+import Figure from '../../components/astro/figure.astro';
+import architectureImg from '../../assets/blog/first-post/architecture.png';
+import diagramImg from '../../assets/blog/first-post/diagram.svg';
+
+## 왜 Astro인가
+
+React/TypeScript 개발자에게 블로그를 선택할 때 가장 중요한 기준은 **콘텐츠 작성 경험**과 **성능**입니다.
+
+일반 Markdown 블로그는 정적 글에는 충분하지만, TSX 코드와 실제 동작하는 React 예제를 함께 넣기는 어렵습니다. 반면 Next.js 같은 SPA 프레임워크는 블로그 전체를 JavaScript로 hydration하는 비용이 큽니다.
+
+<Callout type="info">
+Astro는 페이지 대부분을 정적으로 렌더링하고, React 컴포넌트는 필요한 곳에만 hydration합니다.
+</Callout>
+
+## 아키텍처 개요
+
+이 블로그의 구조는 다음과 같습니다.
+
+<Figure src={architectureImg} alt="블로그 아키텍처 다이어그램" caption="Astro, MDX, React의 역할 분리" />
+
+```typescript
+// content.config.ts — frontmatter 타입 검증
+import { defineCollection, z } from 'astro:content';
+
+const blog = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()),
+  }),
+});
+```
+
+## 코드 블록
+
+개발자 블로그에서 코드 가독성은 필수입니다. 이 블로그는 syntax highlighting, 언어 표시, 복사 버튼을 지원합니다.
+
+```tsx
+interface PostMeta {
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+}
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('ko-KR');
+}
+```
+
+```bash
+pnpm install
+pnpm dev
+pnpm build
+```
+
+## 이미지
+
+글별로 `src/assets/blog/` 아래에 이미지를 관리합니다. SVG도 지원합니다.
+
+<Figure src={diagramImg} alt="블로그 구성 요소 다이어그램" caption="정적 콘텐츠와 인터랙티브 데모의 분리" width={800} />
+
+## 앞으로
+
+다음 글에서는 MDX 안에서 실제 React 컴포넌트를 사용하는 방법을 다룹니다.

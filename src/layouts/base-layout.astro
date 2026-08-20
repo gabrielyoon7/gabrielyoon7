@@ -1,0 +1,190 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogType?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'React/TypeScript 개발자의 기술 블로그',
+  canonicalUrl,
+  ogType = 'website',
+  ogImage,
+} = Astro.props;
+
+const siteTitle = title === 'Home' ? 'Dev Blog' : `${title} | Dev Blog`;
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).href;
+const defaultOgImage = new URL('/favicon.svg', Astro.site).href;
+const image = ogImage ?? defaultOgImage;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href={`${import.meta.env.BASE_URL}rss.xml`} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:site_name" content="Dev Blog" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <title>{siteTitle}</title>
+
+    <!-- Theme: prevent flash -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        }
+      })();
+    </script>
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot name="header" />
+    <main>
+      <slot />
+    </main>
+    <slot name="footer" />
+
+    <!-- Code block enhancements -->
+    <script>
+      function enhanceCodeBlocks() {
+        document.querySelectorAll('.prose pre').forEach((pre) => {
+          if (pre.closest('.code-block-wrapper')) return;
+
+          const code = pre.querySelector('code');
+          if (!code) return;
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-block-wrapper';
+
+          const header = document.createElement('div');
+          header.className = 'code-block-header';
+
+          const lang = document.createElement('span');
+          lang.className = 'code-block-lang';
+          const className = code.className || '';
+          const match = className.match(/language-(\w+)/);
+          lang.textContent = match ? match[1] : 'code';
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'code-copy-btn';
+          copyBtn.type = 'button';
+          copyBtn.textContent = 'Copy';
+          copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
+          copyBtn.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(code.textContent || '');
+              copyBtn.textContent = 'Copied!';
+              copyBtn.classList.add('copied');
+              setTimeout(() => {
+                copyBtn.textContent = 'Copy';
+                copyBtn.classList.remove('copied');
+              }, 2000);
+            } catch {
+              copyBtn.textContent = 'Failed';
+            }
+          });
+
+          header.appendChild(lang);
+          header.appendChild(copyBtn);
+
+          pre.parentNode?.insertBefore(wrapper, pre);
+          wrapper.appendChild(header);
+          wrapper.appendChild(pre);
+        });
+      }
+
+      function initLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('lightbox-close');
+        if (!lightbox || !lightboxImg) return;
+
+        document.querySelectorAll('[data-lightbox]').forEach((img) => {
+          img.addEventListener('click', () => {
+            const src = img.getAttribute('data-lightbox') || img.getAttribute('src');
+            const alt = img.getAttribute('alt') || '';
+            if (src) {
+              lightboxImg.setAttribute('src', src);
+              lightboxImg.setAttribute('alt', alt);
+              lightbox.classList.add('is-open');
+              lightbox.setAttribute('aria-hidden', 'false');
+            }
+          });
+        });
+
+        function closeLightbox() {
+          lightbox.classList.remove('is-open');
+          lightbox.setAttribute('aria-hidden', 'true');
+          lightboxImg.removeAttribute('src');
+        }
+
+        closeBtn?.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeLightbox();
+        });
+      }
+
+      function initTocActive() {
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        const headings = document.querySelectorAll('.prose h2[id], .prose h3[id]');
+        if (!tocLinks.length || !headings.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                tocLinks.forEach((link) => {
+                  link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+                });
+              }
+            });
+          },
+          { rootMargin: '-80px 0px -70% 0px', threshold: 0 }
+        );
+
+        headings.forEach((h) => observer.observe(h));
+      }
+
+      enhanceCodeBlocks();
+      initLightbox();
+      initTocActive();
+    </script>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+      <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close image preview">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>
