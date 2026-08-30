@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
   );
 
   return rss({
-    title: 'Dev Blog',
+    title: 'Ju Hyun, Yoon',
     description: 'React/TypeScript 프론트엔드 개발자의 기술 블로그',
     site: context.site!,
     items: posts.map((post) => {
