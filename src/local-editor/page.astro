@@ -1,0 +1,17 @@
+---
+import Editor from './writer';
+---
+<!doctype html>
+<html lang="ko">
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><meta name="robots" content="noindex" /><title>로컬 글 작성</title></head>
+  <body><Editor client:only="react" base={import.meta.env.BASE_URL} /></body>
+  <script>
+    // Content saves trigger Astro full reloads. Scope those reloads away from
+    // this editing document; preview tabs retain their normal live updates.
+    if (import.meta.hot) {
+      import.meta.hot.on('vite:beforeFullReload', (payload) => {
+        payload.path = '/__local-editor-preview-only.html';
+      });
+    }
+  </script>
+</html>

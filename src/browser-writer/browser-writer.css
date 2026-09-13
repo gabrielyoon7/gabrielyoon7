@@ -1,0 +1,340 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #273449;
+  background: #f6f7fb;
+  color-scheme: light;
+}
+body {
+  margin: 0;
+}
+.pocket,
+.pocket * {
+  box-sizing: border-box;
+}
+.pocket {
+  min-height: 100dvh;
+}
+.pocket a {
+  color: #476494;
+  text-decoration: none;
+}
+.pocket button,
+.pocket input,
+.pocket select,
+.pocket textarea {
+  font: inherit;
+}
+.pocket button {
+  min-height: 44px;
+  border: 1px solid #dce2ed;
+  border-radius: 10px;
+  background: white;
+  color: #304563;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.pocket button:hover {
+  background: #eff3fa;
+}
+.pocket button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.pocket button.pocket-primary {
+  background: #3759bb;
+  color: white;
+  border-color: #3759bb;
+  font-weight: 650;
+}
+.pocket :is(input:not([type="checkbox"]), textarea, select) {
+  width: 100%;
+  min-width: 0;
+  font-size: 16px;
+  color: #273449;
+  background: white;
+  border: 1px solid #dce2ed;
+  border-radius: 8px;
+  padding: 12px;
+}
+.pocket :is(button, input, textarea, select):focus-visible {
+  outline: 3px solid #94b2f4;
+  outline-offset: 2px;
+}
+.pocket textarea {
+  resize: vertical;
+  line-height: 1.7;
+}
+.pocket-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px max(20px, calc((100vw - 860px) / 2));
+  border-bottom: 1px solid #e6eaf1;
+  background: white;
+  font-size: 13px;
+}
+.pocket-header > span:not(.pocket-badge) {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  font-weight: 650;
+}
+.pocket-badge {
+  margin-left: auto;
+  color: #54735f;
+  background: #edf5ed;
+  padding: 6px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.pocket-main {
+  width: min(860px, 100%);
+  padding: 32px 20px calc(110px + env(safe-area-inset-bottom));
+  margin: auto;
+}
+.pocket-intro h1 {
+  font-size: clamp(28px, 5vw, 36px);
+  letter-spacing: -0.06em;
+  margin: 8px 0;
+}
+.pocket-intro > p:last-child {
+  color: #778298;
+  font-size: 14px;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+.pocket-eyebrow {
+  color: #5870a1;
+  font-size: 12px;
+  margin: 0;
+}
+.pocket-library {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+}
+.pocket-library label {
+  min-width: 0;
+  flex: 1;
+  font-size: 12px;
+  display: grid;
+  gap: 7px;
+}
+.pocket-library > button {
+  flex-shrink: 0;
+}
+.pocket-status {
+  color: #6e7c90;
+  font-size: 12px;
+  margin: 12px 0 18px;
+  min-height: 18px;
+}
+.pocket-error {
+  color: #a13c2f;
+  background: #fff0ec;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.pocket-card {
+  background: white;
+  border: 1px solid #e4e8f0;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  padding: 22px;
+  min-width: 0;
+}
+.pocket-card h2 {
+  font-size: 15px;
+  margin: 0 0 12px;
+}
+.pocket-metadata label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+.pocket-metadata > label > input {
+  border: 0;
+  border-bottom: 1px solid #e6eaf1;
+  border-radius: 0;
+  padding: 10px 0 18px;
+  font-size: 22px;
+  font-weight: 650;
+}
+.pocket-metadata details {
+  margin-top: 18px;
+}
+.pocket-metadata summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: #63728a;
+  min-height: 32px;
+}
+.pocket-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-top: 12px;
+}
+.pocket-fields > :first-child,
+.pocket-fields > .pocket-check,
+.pocket-fields > p {
+  grid-column: 1/-1;
+}
+.pocket-fields .pocket-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pocket-check input {
+  width: 20px;
+  height: 20px;
+  accent-color: #3759bb;
+}
+.pocket-body {
+  padding: 0;
+  overflow: hidden;
+}
+.pocket-body-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+}
+.pocket-body-heading h2 {
+  margin: 0;
+}
+.pocket-body-heading button {
+  font-size: 12px;
+}
+.pocket .mdxeditor [role="toolbar"] {
+  flex-wrap: wrap;
+  border-radius: 0;
+  padding: 8px;
+  gap: 4px;
+}
+.pocket .mdxeditor [role="toolbar"] button {
+  min-width: 36px;
+  min-height: 40px;
+  padding: 5px;
+}
+.pocket-prose {
+  min-height: 360px;
+  padding: 20px 24px 40px;
+  line-height: 1.9;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.pocket-prose :is(img, video) {
+  max-width: 100%;
+}
+.pocket-prose pre {
+  overflow-x: auto;
+}
+.pocket .pocket-source {
+  border: 0;
+  border-top: 1px solid #e4e8f0;
+  border-radius: 0;
+  min-height: 400px;
+  font-family: ui-monospace, monospace;
+}
+.pocket-export p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #6e7c90;
+}
+.pocket-filename {
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f6f7fb;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.pocket-export-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pocket-export-buttons button {
+  font-size: 12px;
+}
+.pocket-transfer {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: 13px;
+}
+.pocket-transfer textarea {
+  font-family: ui-monospace, monospace;
+}
+.pocket-help {
+  color: #768398;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 12px 0;
+}
+.pocket-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px max(20px, calc((100vw - 820px) / 2))
+    calc(12px + env(safe-area-inset-bottom));
+  background: #ffffffed;
+  backdrop-filter: blur(12px);
+  border-top: 1px solid #e4e8f0;
+}
+.pocket-bottom > span {
+  color: #6e7c90;
+  font-size: 12px;
+}
+.pocket-bottom button {
+  min-width: 170px;
+}
+.pocket-empty {
+  padding: 44px 22px;
+  text-align: center;
+}
+.pocket-empty p {
+  color: #6e7c90;
+  font-size: 13px;
+  line-height: 1.8;
+}
+@media (max-width: 480px) {
+  .pocket-header {
+    padding: 16px;
+    gap: 12px;
+  }
+  .pocket-header > span:not(.pocket-badge) {
+    display: none;
+  }
+  .pocket-main {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .pocket-card {
+    padding: 18px;
+  }
+  .pocket-body {
+    padding: 0;
+  }
+  .pocket-fields {
+    grid-template-columns: 1fr;
+  }
+  .pocket-prose {
+    padding: 18px 16px 32px;
+  }
+  .pocket-bottom {
+    gap: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
