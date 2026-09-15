@@ -6,6 +6,7 @@
   "packageManager": "pnpm@10.28.2",
   "scripts": {
     "new": "node scripts/new-post.mjs",
+    "clear": "node scripts/reset-history.mjs --push",
     "history:reset": "node scripts/reset-history.mjs",
     "dev": "astro dev",
     "build": "astro build",
