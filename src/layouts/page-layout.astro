@@ -1,0 +1,32 @@
+---
+import BaseLayout from './base-layout.astro';
+import Header from '../components/astro/header.astro';
+import Footer from '../components/astro/footer.astro';
+import ThemeToggle from '../components/astro/theme-toggle.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogType?: string;
+  ogImage?: string;
+}
+
+const { title, description, canonicalUrl, ogType, ogImage } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  ogType={ogType}
+  ogImage={ogImage}
+>
+  <Header slot="header">
+    <ThemeToggle slot="actions" />
+  </Header>
+  <div class="container">
+    <slot />
+  </div>
+  <Footer slot="footer" />
+</BaseLayout>

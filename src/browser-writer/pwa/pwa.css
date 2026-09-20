@@ -1,0 +1,30 @@
+.pocket-pwa {
+  border: 1px solid #dce6df;
+  background: #f0f6f1;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 0 0 22px;
+  font-size: 12px;
+  color: #45654c;
+  line-height: 1.7;
+}
+.pocket-pwa-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.pocket-pwa-row button {
+  flex-shrink: 0;
+  font-size: 12px;
+}
+.pocket-pwa details {
+  margin-top: 8px;
+}
+.pocket-pwa summary {
+  cursor: pointer;
+  padding: 6px 0;
+}
+.pocket-pwa p {
+  margin: 8px 0;
+}

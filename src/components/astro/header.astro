@@ -1,0 +1,38 @@
+---
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+
+function isActive(href: string): boolean {
+  const normalizedHref = href.endsWith('/') ? href : `${href}/`;
+  const normalizedPath = currentPath.endsWith('/') ? currentPath : `${currentPath}/`;
+  if (href === base || href === `${base}`) {
+    return normalizedPath === base || normalizedPath === `${base}index/`;
+  }
+  return normalizedPath.startsWith(normalizedHref);
+}
+
+const navItems = [
+  { href: base, label: 'Home' },
+  { href: `${base}blog/`, label: 'Blog' },
+  { href: `${base}tags/`, label: 'Tags' },
+  { href: `${base}about/`, label: 'About' },
+];
+if (import.meta.env.DEV) navItems.push({ href: `${base}editor/`, label: '글 작성' });
+---
+
+<header class="site-header">
+  <div class="container-wide header-inner">
+    <nav class="site-nav" aria-label="Main navigation">
+      {
+        navItems.map((item) => (
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="header-actions">
+      <slot name="actions" />
+    </div>
+  </div>
+</header>

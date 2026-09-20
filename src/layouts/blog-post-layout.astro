@@ -1,0 +1,115 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './base-layout.astro';
+import Header from '../components/astro/header.astro';
+import Footer from '../components/astro/footer.astro';
+import ThemeToggle from '../components/astro/theme-toggle.astro';
+import TableOfContents from '../components/astro/table-of-contents.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  headings: import('astro').MarkdownHeading[];
+  prevPost?: CollectionEntry<'blog'>;
+  nextPost?: CollectionEntry<'blog'>;
+}
+
+const { post, headings, prevPost, nextPost } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const slug = post.id.replace(/\.mdx?$/, '');
+const canonicalUrl = new URL(`${base}blog/${slug}/`, Astro.site).href;
+
+const pubDate = post.data.pubDate.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  canonicalUrl={canonicalUrl}
+  ogType="article"
+>
+  <Header slot="header">
+    <ThemeToggle slot="actions" />
+  </Header>
+
+  <div class="container-wide">
+    <article class="post-layout">
+      <div class="post-content-wrapper">
+        <header class="post-header">
+          <h1>{post.data.title}</h1>
+          <p class="post-description">{post.data.description}</p>
+          <div class="post-meta">
+            <time datetime={post.data.pubDate.toISOString()}>Published: {pubDate}</time>
+            {
+              updatedDate && (
+                <time datetime={post.data.updatedDate!.toISOString()}>Updated: {updatedDate}</time>
+              )
+            }
+          </div>
+          {
+            post.data.tags.length > 0 && (
+              <ul class="tag-list" aria-label="Tags">
+                {post.data.tags.map((tag) => (
+                  <li>
+                    <a class="tag" href={`${base}tags/${encodeURIComponent(tag.toLowerCase())}/`}>
+                      {tag}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </header>
+
+        <div class="toc-mobile">
+          <TableOfContents headings={headings} />
+        </div>
+
+        <div class="prose">
+          <slot />
+        </div>
+
+        <nav class="post-nav" aria-label="Post navigation">
+          {
+            prevPost ? (
+              <a class="post-nav-link prev" href={`${base}blog/${prevPost.id.replace(/\.mdx?$/, '')}/`}>
+                <span class="post-nav-label">Previous</span>
+                {prevPost.data.title}
+              </a>
+            ) : (
+              <div />
+            )
+          }
+          {
+            nextPost ? (
+              <a
+                class="post-nav-link next"
+                href={`${base}blog/${nextPost.id.replace(/\.mdx?$/, '')}/`}
+              >
+                <span class="post-nav-label">Next</span>
+                {nextPost.data.title}
+              </a>
+            ) : (
+              <div />
+            )
+          }
+        </nav>
+      </div>
+
+      <aside class="toc-sidebar">
+        <TableOfContents headings={headings} />
+      </aside>
+    </article>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>

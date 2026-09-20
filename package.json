@@ -1,0 +1,38 @@
+{
+  "name": "gabrielyoon7-blog",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.28.2",
+  "scripts": {
+    "new": "node scripts/new-post.mjs",
+    "clear": "node scripts/reset-history.mjs --push",
+    "history:reset": "node scripts/reset-history.mjs",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.0.1",
+    "@astrojs/react": "^6.0.5",
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@mdxeditor/editor": "^4.2.4",
+    "astro": "^7.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sharp": "^0.34.2",
+    "tslib": "^2.8.1",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
