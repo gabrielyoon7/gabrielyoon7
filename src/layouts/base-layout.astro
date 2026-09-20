@@ -67,6 +67,15 @@ const image = ogImage ?? defaultOgImage;
     </main>
     <slot name="footer" />
 
+    {import.meta.env.PROD && (
+      <script
+        is:inline
+        data-goatcounter="https://gabrielyoon7.goatcounter.com/count"
+        async
+        src="https://gc.zgo.at/count.js"
+      ></script>
+    )}
+
     <!-- Code block enhancements -->
     <script>
       function enhanceCodeBlocks() {

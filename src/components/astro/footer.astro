@@ -7,6 +7,11 @@ const year = new Date().getFullYear();
   <div class="container footer-inner">
     <p>&copy; {year} Ju Hyun, Yoon.</p>
     <div class="footer-links">
+      <span title="사이트 조회 수 · 집계 반영까지 시간이 걸릴 수 있습니다">
+        오늘 <span id="visitor-count-today" aria-live="polite">—</span>
+        <span aria-hidden="true"> / </span>
+        전체 <span id="visitor-count-total" aria-live="polite">—</span>
+      </span>
       <a href={`${base}rss.xml`}>RSS</a>
       <a
         href="https://github.com/gabrielyoon7"
@@ -16,3 +21,35 @@ const year = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<script>
+  async function loadVisitorCount(id: string, url: string) {
+    const counter = document.getElementById(id);
+    if (!counter) return;
+
+    try {
+      const response = await fetch(url, {
+        credentials: 'omit',
+        signal: AbortSignal.timeout(8000),
+      });
+      if (!response.ok) return;
+      const data = await response.json();
+      if (typeof data.count === 'string' || typeof data.count === 'number') {
+        counter.textContent = String(data.count);
+      }
+    } catch {
+      // Keep the placeholder when public counts are disabled or unavailable.
+    }
+  }
+
+  const endpoint = 'https://gabrielyoon7.goatcounter.com/counter/TOTAL.json';
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date());
+
+  loadVisitorCount('visitor-count-today', `${endpoint}?start=${encodeURIComponent(today)}`);
+  loadVisitorCount('visitor-count-total', endpoint);
+</script>
