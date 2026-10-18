@@ -6,6 +6,7 @@ import {
   rename,
   lstat,
   realpath,
+  unlink,
 } from "node:fs/promises";
 import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
@@ -33,7 +34,7 @@ export function decode(text) {
   };
 }
 export function createStore(directory) {
-  // Serialize saves so two tabs cannot both pass the revision check.
+  // Serialize mutations so two tabs cannot both pass the revision check.
   let pending = Promise.resolve();
   const serialize = (work) => {
     const result = pending.then(work);
@@ -112,6 +113,16 @@ export function createStore(directory) {
             if (e.code !== "EEXIST") throw e;
           }
         }
+      });
+    },
+    remove(id, input) {
+      return serialize(async () => {
+        const file = await target(id);
+        const current = decode(await readFile(file, "utf8"));
+        if (current.revision !== input.revision)
+          throw new EditorError(409, "파일이 다른 곳에서 변경되었습니다. 글을 다시 연 뒤 삭제해 주세요.");
+        await unlink(file);
+        return { id };
       });
     },
     save(id, input) {

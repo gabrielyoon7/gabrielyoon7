@@ -17,7 +17,7 @@ export async function handleEditorRequest(request, clientAddress, store) {
     if (request.method === 'GET') {
       return json(url.searchParams.has('id') ? await store.get(url.searchParams.get('id')) : await store.list());
     }
-    if (!['POST', 'PUT'].includes(request.method)) throw new EditorError(405, '지원하지 않는 요청입니다.');
+    if (!['POST', 'PUT', 'DELETE'].includes(request.method)) throw new EditorError(405, '지원하지 않는 요청입니다.');
     if (!request.headers.get('content-type')?.startsWith('application/json')) throw new EditorError(415, 'JSON 요청만 지원합니다.');
     const reader = request.body?.getReader();
     const chunks = [];
@@ -40,6 +40,7 @@ export async function handleEditorRequest(request, clientAddress, store) {
     try { input = JSON.parse(Buffer.concat(chunks).toString('utf8')); }
     catch { throw new EditorError(400, '잘못된 JSON 요청입니다.'); }
     if (!input || typeof input !== 'object') throw new EditorError(400, '잘못된 요청입니다.');
+    if (request.method === 'DELETE') return json(await store.remove(input.id, input));
     return json(request.method === 'POST' ? await store.create(input.title) : await store.save(input.id, input));
   } catch (error) {
     const status = error.status || (error.code === 'ENOENT' ? 404 : 500);

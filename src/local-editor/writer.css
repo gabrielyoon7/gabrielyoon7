@@ -154,6 +154,13 @@ main {
   flex: 1;
   overflow-wrap: anywhere;
 }
+.delete-post {
+  color: #a32929;
+  border-color: #e8bcbc;
+}
+.delete-post:hover:not(:disabled) {
+  background: #fff0f0;
+}
 fieldset {
   border: 1px solid #e1e5ec;
   border-radius: 10px;

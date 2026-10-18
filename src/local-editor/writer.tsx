@@ -46,6 +46,7 @@ export default function Writer({ base }: { base: string }) {
   const current = useRef<Post | null>(null);
   const saved = useRef("");
   const saving = useRef<Promise<boolean> | null>(null);
+  const deleting = useRef(false);
   const [status, setStatus] = useState("글을 선택하거나 새 글을 만드세요.");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -73,6 +74,7 @@ export default function Writer({ base }: { base: string }) {
     refresh().catch((e) => setError(e.message));
   }, []);
   function change(next: Post) {
+    if (deleting.current) return;
     current.current = next;
     setPost(next);
     setStatus("저장되지 않은 변경사항");
@@ -85,10 +87,11 @@ export default function Writer({ base }: { base: string }) {
       });
   }
   async function save(): Promise<boolean> {
+    if (deleting.current) return false;
     if (saving.current) return saving.current;
     const work = (async () => {
       try {
-        while (current.current && snapshot(current.current) !== saved.current) {
+        while (!deleting.current && current.current && snapshot(current.current) !== saved.current) {
           const sent = current.current;
           const sentSnapshot = snapshot(sent);
           setStatus("저장 중…");
@@ -164,6 +167,31 @@ export default function Writer({ base }: { base: string }) {
     } catch (e) {
       setError((e as Error).message);
     } finally {
+      setBusy(false);
+    }
+  }
+  async function remove() {
+    if (busy || deleting.current || !current.current) return;
+    if (!window.confirm(`“${current.current.metadata.title}” 글을 삭제할까요?\n게시글 파일과 저장하지 않은 변경사항이 삭제됩니다. 이 작업은 되돌릴 수 없습니다.`)) return;
+    deleting.current = true;
+    setBusy(true);
+    setError("");
+    try {
+      if (saving.current) await saving.current;
+      const selected = current.current!;
+      setStatus("삭제 중…");
+      await request("", "DELETE", { id: selected.id, revision: selected.revision });
+      current.current = null;
+      saved.current = "";
+      setPost(null);
+      setRows((items) => items.filter((row) => row.id !== selected.id));
+      setError("");
+      setStatus("글을 삭제했습니다.");
+    } catch (e) {
+      setError((e as Error).message);
+      setStatus("삭제 실패 · 글이 유지됩니다.");
+    } finally {
+      deleting.current = false;
       setBusy(false);
     }
   }
@@ -244,6 +272,9 @@ export default function Writer({ base }: { base: string }) {
                 </label>
                 <button disabled={busy} onClick={() => void save()}>
                   저장 ⌘/Ctrl S
+                </button>
+                <button className="delete-post" disabled={busy} onClick={() => void remove()}>
+                  글 삭제
                 </button>
                 <a
                   href={`${base}blog/${encodeURIComponent(post.id.replace(/\.mdx?$/, ""))}/`}

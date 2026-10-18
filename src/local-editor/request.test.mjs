@@ -37,12 +37,19 @@ test('API returns JSON for list, create, save, invalid data and forbidden reques
       [await call('POST', null), 400],
       [await call('POST', {}, {origin: 'https://elsewhere.example'}), 403],
       [await call('POST', {}, {'content-type': 'text/plain'}), 415],
-      [await call('DELETE'), 405],
+      [await call('PATCH'), 405],
+      [await call('DELETE', post), 409],
+      [await call('DELETE', post, {origin: 'https://elsewhere.example'}), 403],
+      [await call('DELETE', {id: '../outside.mdx', revision: post.revision}), 400],
       [await handleEditorRequest(new Request(url), '192.168.1.2', store), 403],
     ]) {
       assert.equal(response.status, expected);
       assert.match(response.headers.get('content-type'), /application\/json/);
       assert.equal(typeof (await response.json()).error, 'string');
     }
+    const latest = await store.get(post.id);
+    assert.equal((await call('DELETE', latest)).status, 200);
+    assert.deepEqual(await (await call()).json(), []);
+    assert.equal((await call('DELETE', latest)).status, 404);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

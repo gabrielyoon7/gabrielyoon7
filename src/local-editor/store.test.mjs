@@ -47,6 +47,13 @@ test("create, repeated save, metadata preservation, conflict and path protection
     await symlink(filepath, path.join(directory, "linked.mdx"));
     await assert.rejects(store.get("linked.mdx"), (e) => e.status === 403);
     assert.equal((await store.list()).length, 2);
+    await assert.rejects(store.remove('linked.mdx', latest), (e) => e.status === 403);
+    await assert.rejects(store.remove(post.id, latest), (e) => e.status === 409);
+    const beforeDelete = await store.get(post.id);
+    await store.remove(post.id, beforeDelete);
+    await assert.rejects(store.get(post.id), (e) => e.code === 'ENOENT');
+    await assert.rejects(store.save(post.id, beforeDelete), (e) => e.code === 'ENOENT');
+    assert.equal((await store.list()).length, 1);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
