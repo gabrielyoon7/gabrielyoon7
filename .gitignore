@@ -27,3 +27,6 @@ Thumbs.db
 # lock files (only pnpm allowed)
 package-lock.json
 yarn.lock
+
+# card studio output
+cards-out/

@@ -17,7 +17,10 @@ const navItems = [
   { href: `${base}tags/`, label: 'Tags' },
   { href: `${base}about/`, label: 'About' },
 ];
-if (import.meta.env.DEV) navItems.push({ href: `${base}editor/`, label: '글 작성' });
+if (import.meta.env.DEV) {
+  navItems.push({ href: `${base}editor/`, label: '글 작성' });
+  navItems.push({ href: `${base}cards/`, label: '카드' });
+}
 ---
 
 <header class="site-header">

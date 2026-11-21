@@ -6,6 +6,7 @@
   "packageManager": "pnpm@10.28.2",
   "scripts": {
     "new": "node scripts/new-post.mjs",
+    "cards": "node scripts/capture-cards.mjs",
     "clear": "node scripts/reset-history.mjs --push",
     "history:reset": "node scripts/reset-history.mjs",
     "dev": "astro dev",
@@ -30,6 +31,7 @@
     "@astrojs/check": "0.9.10",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "playwright": "1.52.0",
     "typescript": "^5.8.3"
   },
   "engines": {

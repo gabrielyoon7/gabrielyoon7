@@ -1,0 +1,15 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+}
+
+const { eyebrow, title, subtitle } = Astro.props;
+---
+
+<div class="slide slide-cover">
+  {eyebrow && <p class="slide-eyebrow">{eyebrow}</p>}
+  <h1 class="slide-title">{title}</h1>
+  {subtitle && <p class="slide-subtitle">{subtitle}</p>}
+</div>

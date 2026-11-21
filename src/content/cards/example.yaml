@@ -1,0 +1,27 @@
+# 카드 세트 예시. 파일 이름이 세트 이름이 됩니다: pnpm cards example
+title: 카드 시스템 예시
+format: portrait # portrait(1080×1350) | square(1080×1080) | og(1200×630)
+footer: gabrielyoon7.github.io/gabrielyoon7
+slides:
+  - type: cover
+    eyebrow: CARD NEWS
+    title: |- # |- 를 쓰면 줄바꿈이 그대로 카드에 반영됩니다
+      웹으로 그리고
+      이미지로 찍어내기
+    subtitle: Astro 페이지를 Playwright로 캡처합니다
+
+  - type: text
+    heading: 왜 웹으로 그리나요?
+    body: |
+      블로그와 같은 CSS·폰트·색을 그대로 씁니다.
+      문구와 데이터는 YAML 한 파일에 두고, 명령 한 줄로 모든 장을 PNG로 뽑습니다.
+
+  - type: bar-chart
+    heading: 예시 그래프
+    unit: 건
+    data:
+      - { label: 1월, value: 12 }
+      - { label: 2월, value: 18 }
+      - { label: 3월, value: 9 }
+      - { label: 4월, value: 24 }
+    caption: 예시 데이터입니다

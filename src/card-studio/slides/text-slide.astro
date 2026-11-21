@@ -1,0 +1,13 @@
+---
+interface Props {
+  heading: string;
+  body: string;
+}
+
+const { heading, body } = Astro.props;
+---
+
+<div class="slide slide-text">
+  <h2 class="slide-heading">{heading}</h2>
+  <p class="slide-body">{body.trim()}</p>
+</div>
