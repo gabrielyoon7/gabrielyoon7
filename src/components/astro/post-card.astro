@@ -1,8 +1,11 @@
 ---
+import { getText } from '../../i18n/ui';
 import {
   categoryLabel,
+  categoryUrl,
   formatDate,
   getTagLabels,
+  postLang,
   postUrl,
   tagKey,
   tagUrl,
@@ -14,26 +17,30 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const tagLabels = await getTagLabels();
+const lang = postLang(post);
+const t = getText(lang);
+const tagLabels = await getTagLabels(lang);
 ---
 
 <article class="post-list-item">
   <h2 class="post-list-title">
     <a href={postUrl(post)}>{post.data.title}</a>
-    {post.data.pinned && <span class="pinned-badge">고정</span>}
-    {post.data.draft && <span class="draft-badge">초안</span>}
+    {post.data.pinned && <span class="pinned-badge">{t('post.pinned')}</span>}
+    {post.data.draft && <span class="draft-badge">{t('post.draftShort')}</span>}
   </h2>
   <div class="post-meta">
-    <span class="post-category">{categoryLabel(post.data.category)}</span>
-    <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+    <a class="post-category" href={categoryUrl(post.data.category, lang)}>
+      {categoryLabel(post.data.category, lang)}
+    </a>
+    <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, lang)}</time>
   </div>
   <p class="post-description">{post.data.description}</p>
   {
     post.data.tags.length > 0 && (
-      <ul class="tag-list" aria-label="Tags">
+      <ul class="tag-list" aria-label={t('post.tags')}>
         {post.data.tags.map((tag) => (
           <li>
-            <a class="tag" href={tagUrl(tag)}>
+            <a class="tag" href={tagUrl(tag, lang)}>
               {tagLabels.get(tagKey(tag)) ?? tag}
             </a>
           </li>

@@ -1,18 +1,5 @@
 ---
-import PageLayout from '../../layouts/page-layout.astro';
-import PostCard from '../../components/astro/post-card.astro';
-import { getPosts } from '../../lib/posts';
-
-const posts = await getPosts();
+import BlogList from '../../views/blog-list.astro';
 ---
 
-<PageLayout title="Blog" description="모든 블로그 글 목록">
-  <header class="page-header">
-    <h1>Blog</h1>
-    <p>{posts.length} posts</p>
-  </header>
-
-  <div class="post-list">
-    {posts.map((post) => <PostCard post={post} />)}
-  </div>
-</PageLayout>
+<BlogList lang="ko" />

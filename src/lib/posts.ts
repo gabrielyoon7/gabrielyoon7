@@ -1,12 +1,11 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { SITE } from '../site.config';
-import { CATEGORY_LABELS, DEFAULT_LANG, LANGS } from '../content/taxonomy.mjs';
+import { CATEGORY_KEYS, CATEGORY_LABELS, DEFAULT_LANG, LANGS } from '../content/taxonomy.mjs';
+import { localizePath } from '../i18n/ui';
 
 export type Post = CollectionEntry<'blog'>;
 export type Lang = (typeof LANGS)[number];
 export type Category = Post['data']['category'];
-
-const base = import.meta.env.BASE_URL;
 
 export function isLang(value: string): value is Lang {
   return (LANGS as readonly string[]).includes(value);
@@ -28,13 +27,8 @@ export function postSlug(post: Post): string {
   return post.id.slice(post.id.indexOf('/') + 1).replace(/\.mdx?$/, '');
 }
 
-/** 기본 언어는 지금 URL 그대로, 그 외 언어는 /<lang>/ 아래에 둡니다. */
-export function langBase(lang: Lang): string {
-  return lang === DEFAULT_LANG ? base : `${base}${lang}/`;
-}
-
 export function postUrl(post: Post): string {
-  return `${langBase(postLang(post))}blog/${postSlug(post)}/`;
+  return localizePath(`blog/${postSlug(post)}/`, postLang(post));
 }
 
 type PostQuery = {
@@ -92,7 +86,11 @@ export function tagKey(tag: string): string {
 }
 
 export function tagUrl(tag: string, lang: Lang = DEFAULT_LANG): string {
-  return `${langBase(lang)}tags/${encodeURIComponent(tagKey(tag))}/`;
+  return localizePath(`tags/${encodeURIComponent(tagKey(tag))}/`, lang);
+}
+
+export function categoryUrl(category: Category, lang: Lang = DEFAULT_LANG): string {
+  return localizePath(`categories/${category}/`, lang);
 }
 
 export type TagSummary = { key: string; label: string; count: number };
@@ -157,4 +155,40 @@ export async function postPaths(lang: Lang) {
       nextPost: posts[index - 1] as Post | undefined,
     },
   }));
+}
+
+/** 태그 페이지의 getStaticPaths. 그 언어의 글에 쓰인 태그만 만듭니다. */
+export async function tagPaths(lang: Lang) {
+  const posts = await getPosts({ lang });
+  return summarizeTags(posts).map(({ key, label }) => ({
+    params: { tag: key },
+    props: {
+      lang,
+      tag: key,
+      label,
+      posts: posts.filter((p) => p.data.tags.some((t) => tagKey(t) === key)),
+    },
+  }));
+}
+
+/** 카테고리 페이지의 getStaticPaths. 글이 없어도 모든 카테고리 주소를 만듭니다. */
+export async function categoryPaths(lang: Lang) {
+  const posts = await getPosts({ lang });
+  return CATEGORY_KEYS.map((category) => ({
+    params: { category },
+    props: { lang, category, posts: posts.filter((p) => p.data.category === category) },
+  }));
+}
+
+/** 다른 언어에도 같은 태그 페이지가 있으면 그 주소들 */
+export async function tagAlternates(tag: string, lang: Lang) {
+  const others = LANGS.filter((l) => l !== lang);
+  const result: { lang: Lang; href: string }[] = [];
+  for (const other of others) {
+    const posts = await getPosts({ lang: other });
+    if (posts.some((p) => p.data.tags.some((t) => tagKey(t) === tag))) {
+      result.push({ lang: other, href: tagUrl(tag, other) });
+    }
+  }
+  return result;
 }

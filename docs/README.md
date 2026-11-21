@@ -72,6 +72,8 @@ src/
 │   ├── blog/en/          # 영어 글 (/en/blog/...)
 │   └── taxonomy.mjs      # 언어·카테고리 목록
 ├── lib/posts.ts          # 글 목록·URL·태그·시리즈 헬퍼
+├── i18n/ui.ts            # 언어별 화면 문구·언어별 주소 헬퍼
+├── views/                # 언어 공통 페이지 (pages/와 pages/en/이 불러 씀)
 ├── layouts/              # 페이지 레이아웃
 ├── pages/                # 라우트
 └── styles/global.css     # 전역 CSS
@@ -90,6 +92,22 @@ src/
 | CSS class | kebab-case | `post-list-item` |
 
 Astro 동적 라우트(`[...slug]`, `[tag]`)는 예외입니다.
+
+## 페이지 구조
+
+| 페이지 | 한국어 | English |
+|--------|--------|---------|
+| 홈 (고정 글 · 카테고리 · 최신 글) | `/` | `/en/` |
+| 전체 글 | `/blog/` | `/en/blog/` |
+| 카테고리별 글 | `/categories/<dev\|retrospective\|life>/` | `/en/categories/.../` |
+| 태그 목록 · 태그별 글 | `/tags/`, `/tags/<tag>/` | `/en/tags/`, `/en/tags/<tag>/` |
+| 글 | `/blog/<slug>/` | `/en/blog/<slug>/` |
+| About | `/about/` | `/en/about/` |
+| RSS | `/rss.xml` | `/en/rss.xml` |
+
+헤더의 언어 전환 링크는 같은 페이지의 다른 언어 버전으로 갑니다. 그 언어에 같은 글이나 태그가 없으면 그 언어의 홈으로 갑니다.
+
+화면 문구는 `src/i18n/ui.ts`에서 언어별로 관리합니다. 키를 추가하면 모든 언어에 값을 채워야 타입 검사를 통과합니다. 언어마다 내용이 다른 About은 `src/pages/about.astro`와 `src/pages/en/about.astro`를 각각 고칩니다.
 
 ## 새 블로그 글 작성
 

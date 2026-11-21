@@ -1,0 +1,32 @@
+---
+import PageLayout from '../layouts/page-layout.astro';
+import PostList from '../components/astro/post-list.astro';
+import { getText } from '../i18n/ui';
+import { tagAlternates, type Lang, type Post } from '../lib/posts';
+
+interface Props {
+  lang: Lang;
+  tag: string;
+  label: string;
+  posts: Post[];
+}
+
+const { lang, tag, label, posts } = Astro.props;
+const t = getText(lang);
+// 같은 태그가 다른 언어에 없으면 언어 전환은 그 언어의 홈으로 갑니다.
+const alternates = await tagAlternates(tag, lang);
+---
+
+<PageLayout
+  lang={lang}
+  title={t('tag.title', { name: label })}
+  description={t('tag.description', { name: label })}
+  alternates={alternates}
+>
+  <header class="page-header">
+    <h1>{t('tag.title', { name: label })}</h1>
+    <p>{t('blog.count', { n: posts.length })}</p>
+  </header>
+
+  <PostList posts={posts} lang={lang} />
+</PageLayout>

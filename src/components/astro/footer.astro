@@ -1,7 +1,14 @@
 ---
 import { SITE } from '../../site.config';
+import { getText, localizePath } from '../../i18n/ui';
+import type { Lang } from '../../lib/posts';
 
-const base = import.meta.env.BASE_URL;
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getText(lang);
 const year = new Date().getFullYear();
 ---
 
@@ -9,12 +16,12 @@ const year = new Date().getFullYear();
   <div class="container footer-inner">
     <p>&copy; {year} {SITE.author}.</p>
     <div class="footer-links">
-      <span title="사이트 조회 수 · 집계 반영까지 시간이 걸릴 수 있습니다">
-        오늘 <span id="visitor-count-today" aria-live="polite">—</span>
+      <span title={t('footer.views')}>
+        {t('footer.today')} <span id="visitor-count-today" aria-live="polite">—</span>
         <span aria-hidden="true"> / </span>
-        전체 <span id="visitor-count-total" aria-live="polite">—</span>
+        {t('footer.total')} <span id="visitor-count-total" aria-live="polite">—</span>
       </span>
-      <a href={`${base}rss.xml`}>RSS</a>
+      <a href={localizePath('rss.xml', lang)}>RSS</a>
       <a href={SITE.links.github} target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </div>

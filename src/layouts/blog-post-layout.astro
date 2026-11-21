@@ -4,9 +4,10 @@ import Header from '../components/astro/header.astro';
 import Footer from '../components/astro/footer.astro';
 import ThemeToggle from '../components/astro/theme-toggle.astro';
 import TableOfContents from '../components/astro/table-of-contents.astro';
-import { DEFAULT_LANG } from '../content/taxonomy.mjs';
+import { getText, LANG_NAMES } from '../i18n/ui';
 import {
   categoryLabel,
+  categoryUrl,
   formatDate,
   getSeriesPosts,
   getTagLabels,
@@ -15,7 +16,6 @@ import {
   postUrl,
   tagKey,
   tagUrl,
-  type Lang,
   type Post,
 } from '../lib/posts';
 
@@ -36,27 +36,8 @@ const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
 const translations = await getTranslations(post);
 const seriesPosts = await getSeriesPosts(post);
 
-// 화면 문구. 언어별 UI 문자열은 정보 구조 개편 때 한곳으로 모읍니다.
-const TEXT = {
-  ko: {
-    draft: '초안 · 배포되지 않는 글입니다',
-    published: '작성',
-    updated: '수정',
-    series: '시리즈',
-    previous: '이전 글',
-    next: '다음 글',
-  },
-  en: {
-    draft: 'Draft · not published',
-    published: 'Published',
-    updated: 'Updated',
-    series: 'Series',
-    previous: 'Previous',
-    next: 'Next',
-  },
-} satisfies Record<Lang, Record<string, string>>;
-const t = TEXT[lang];
-const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
+const t = getText(lang);
+const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p) }));
 ---
 
 <BaseLayout
@@ -69,9 +50,9 @@ const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
   modifiedTime={updatedDate}
   tags={tags.map(tagLabel)}
   lang={lang}
-  alternates={translations.map((p) => ({ lang: postLang(p), href: postUrl(p) }))}
+  alternates={alternates}
 >
-  <Header slot="header">
+  <Header slot="header" lang={lang} alternates={alternates}>
     <ThemeToggle slot="actions" />
   </Header>
 
@@ -79,16 +60,18 @@ const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
     <article class="post-layout">
       <div class="post-content-wrapper">
         <header class="post-header">
-          {draft && <p class="draft-badge">{t.draft}</p>}
-          <p class="post-category">{categoryLabel(category, lang)}</p>
+          {draft && <p class="draft-badge">{t('post.draft')}</p>}
+          <p class="post-category">
+            <a href={categoryUrl(category, lang)}>{categoryLabel(category, lang)}</a>
+          </p>
           <h1>{title}</h1>
           <p class="post-description">{description}</p>
           <div class="post-meta">
-            <time datetime={pubDate.toISOString()}>{t.published}: {formatDate(pubDate, lang)}</time>
+            <time datetime={pubDate.toISOString()}>{t('post.published')}: {formatDate(pubDate, lang)}</time>
             {
               updatedDate && (
                 <time datetime={updatedDate.toISOString()}>
-                  {t.updated}: {formatDate(updatedDate, lang)}
+                  {t('post.updated')}: {formatDate(updatedDate, lang)}
                 </time>
               )
             }
@@ -102,17 +85,12 @@ const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
           </div>
           {
             tags.length > 0 && (
-              <ul class="tag-list" aria-label="Tags">
+              <ul class="tag-list" aria-label={t('post.tags')}>
                 {tags.map((tag) => (
                   <li>
-                    {/* 다른 언어의 태그 페이지는 정보 구조 개편 때 만듭니다. */}
-                    {lang === DEFAULT_LANG ? (
-                      <a class="tag" href={tagUrl(tag, lang)}>
-                        {tagLabel(tag)}
-                      </a>
-                    ) : (
-                      <span class="tag">{tagLabel(tag)}</span>
-                    )}
+                    <a class="tag" href={tagUrl(tag, lang)}>
+                      {tagLabel(tag)}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -122,9 +100,9 @@ const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
 
         {
           seriesPosts.length > 0 && (
-            <nav class="series-box" aria-label={`${t.series}: ${series}`}>
+            <nav class="series-box" aria-label={`${t('post.series')}: ${series}`}>
               <p class="series-title">
-                {t.series} · {series}
+                {t('post.series')} · {series}
               </p>
               <ol>
                 {seriesPosts.map((p) => (
@@ -142,18 +120,18 @@ const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
         }
 
         <div class="toc-mobile">
-          <TableOfContents headings={headings} />
+          <TableOfContents headings={headings} lang={lang} />
         </div>
 
         <div class="prose">
           <slot />
         </div>
 
-        <nav class="post-nav" aria-label="Post navigation">
+        <nav class="post-nav" aria-label={t('post.navigation')}>
           {
             prevPost ? (
               <a class="post-nav-link prev" href={postUrl(prevPost)}>
-                <span class="post-nav-label">{t.previous}</span>
+                <span class="post-nav-label">{t('post.previous')}</span>
                 {prevPost.data.title}
               </a>
             ) : (
@@ -163,7 +141,7 @@ const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
           {
             nextPost ? (
               <a class="post-nav-link next" href={postUrl(nextPost)}>
-                <span class="post-nav-label">{t.next}</span>
+                <span class="post-nav-label">{t('post.next')}</span>
                 {nextPost.data.title}
               </a>
             ) : (
@@ -174,12 +152,12 @@ const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
       </div>
 
       <aside class="toc-sidebar">
-        <TableOfContents headings={headings} />
+        <TableOfContents headings={headings} lang={lang} />
       </aside>
     </article>
   </div>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang={lang} />
 
     <!-- Code block enhancements -->
     <script>

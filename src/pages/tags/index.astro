@@ -1,24 +1,5 @@
 ---
-import PageLayout from '../../layouts/page-layout.astro';
-import { getPosts, summarizeTags, tagUrl } from '../../lib/posts';
-
-const tags = summarizeTags(await getPosts());
+import TagsIndex from '../../views/tags-index.astro';
 ---
 
-<PageLayout title="Tags" description="블로그 글 태그 목록">
-  <header class="page-header">
-    <h1>Tags</h1>
-    <p>{tags.length} tags</p>
-  </header>
-
-  <div class="tag-cloud">
-    {
-      tags.map(({ key, label, count }) => (
-        <a class="tag" href={tagUrl(key)}>
-          {label}
-          <span class="tag-count">({count})</span>
-        </a>
-      ))
-    }
-  </div>
-</PageLayout>
+<TagsIndex lang="ko" />
