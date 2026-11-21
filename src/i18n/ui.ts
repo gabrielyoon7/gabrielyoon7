@@ -12,8 +12,6 @@ export const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English'
 const UI = {
   ko: {
     'site.description': '윤주현의 블로그',
-    'site.tagline': '한 번 사는 인생',
-    'site.taglineSub': '재미를 찾아서',
     'nav.blog': 'Blog',
     'nav.tags': 'Tags',
     'nav.about': 'About',
@@ -64,8 +62,6 @@ const UI = {
   },
   en: {
     'site.description': "Ju Hyun Yoon's blog",
-    'site.tagline': 'You only live once',
-    'site.taglineSub': 'In search of fun',
     'nav.blog': 'Blog',
     'nav.tags': 'Tags',
     'nav.about': 'About',

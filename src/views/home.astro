@@ -17,11 +17,6 @@ const latest = posts.filter((p) => !p.data.pinned).slice(0, 5);
 ---
 
 <PageLayout lang={lang}>
-  <section class="hero">
-    <h1>{t('site.tagline')}</h1>
-    <p>{t('site.taglineSub')}</p>
-  </section>
-
   {
     pinned.length > 0 && (
       <section class="home-section">
