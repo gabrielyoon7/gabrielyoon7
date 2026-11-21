@@ -13,4 +13,16 @@ export const SITE = {
     github: 'https://github.com/gabrielyoon7',
   },
   goatcounter: 'gabrielyoon7',
+  /**
+   * 댓글(giscus). repoId와 categoryId를 채우면 글 아래에 댓글이 보입니다.
+   * 1) GitHub 저장소 Settings → Features → Discussions 켜기
+   * 2) https://github.com/apps/giscus 앱을 이 저장소에 설치
+   * 3) https://giscus.app 에서 저장소·카테고리를 고르면 나오는 data-repo-id, data-category-id 붙여넣기
+   */
+  giscus: {
+    repo: 'gabrielyoon7/gabrielyoon7',
+    repoId: '',
+    category: 'Comments',
+    categoryId: '',
+  },
 } as const;

@@ -73,6 +73,12 @@ const languageLinks = LANGS.filter((l) => l !== lang).map((other) => ({
             ))
           }
         </nav>
+        <a class="icon-link" href={localizePath('search/', lang)} aria-label={t('nav.search')} title={t('nav.search')} aria-current={isActive('search/') ? 'page' : undefined}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="m20 20-4.2-4.2"></path>
+          </svg>
+        </a>
         <slot name="actions" />
       </div>
     </div>

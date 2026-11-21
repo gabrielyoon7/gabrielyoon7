@@ -4,16 +4,20 @@ import Header from '../components/astro/header.astro';
 import Footer from '../components/astro/footer.astro';
 import ThemeToggle from '../components/astro/theme-toggle.astro';
 import TableOfContents from '../components/astro/table-of-contents.astro';
+import Comments from '../components/astro/comments.astro';
 import { getText, LANG_NAMES } from '../i18n/ui';
 import {
   categoryLabel,
   categoryUrl,
   formatDate,
+  getRelatedPosts,
   getSeriesPosts,
   getTagLabels,
   getTranslations,
   postLang,
+  postSlug,
   postUrl,
+  readingMinutes,
   tagKey,
   tagUrl,
   type Post,
@@ -35,6 +39,7 @@ const tagLabels = await getTagLabels(lang);
 const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
 const translations = await getTranslations(post);
 const seriesPosts = await getSeriesPosts(post);
+const relatedPosts = await getRelatedPosts(post);
 
 const t = getText(lang);
 const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p) }));
@@ -45,7 +50,7 @@ const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p
   description={description}
   canonicalUrl={canonicalUrl}
   ogType="article"
-  ogImage={coverImage}
+  ogImage={coverImage ?? `og/${lang}/${postSlug(post)}.png`}
   publishedTime={pubDate}
   modifiedTime={updatedDate}
   tags={tags.map(tagLabel)}
@@ -58,13 +63,13 @@ const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p
 
   <div class="container-wide">
     <article class="post-layout">
-      <div class="post-content-wrapper">
+      <div class="post-content-wrapper" data-pagefind-body>
         <header class="post-header">
           {draft && <p class="draft-badge">{t('post.draft')}</p>}
           <p class="post-category">
             <a href={categoryUrl(category, lang)}>{categoryLabel(category, lang)}</a>
           </p>
-          <h1>{title}</h1>
+          <h1 data-pagefind-meta="title">{title}</h1>
           <p class="post-description">{description}</p>
           <div class="post-meta">
             <time datetime={pubDate.toISOString()}>{t('post.published')}: {formatDate(pubDate, lang)}</time>
@@ -75,6 +80,7 @@ const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p
                 </time>
               )
             }
+            <span>{t('post.readingTime', { n: readingMinutes(post) })}</span>
             {
               translations.map((p) => (
                 <a href={postUrl(p)} hreflang={postLang(p)} lang={postLang(p)}>
@@ -85,7 +91,7 @@ const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p
           </div>
           {
             tags.length > 0 && (
-              <ul class="tag-list" aria-label={t('post.tags')}>
+              <ul data-pagefind-ignore class="tag-list" aria-label={t('post.tags')}>
                 {tags.map((tag) => (
                   <li>
                     <a class="tag" href={tagUrl(tag, lang)}>
@@ -100,7 +106,7 @@ const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p
 
         {
           seriesPosts.length > 0 && (
-            <nav class="series-box" aria-label={`${t('post.series')}: ${series}`}>
+            <nav data-pagefind-ignore class="series-box" aria-label={`${t('post.series')}: ${series}`}>
               <p class="series-title">
                 {t('post.series')} · {series}
               </p>
@@ -119,7 +125,7 @@ const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p
           )
         }
 
-        <div class="toc-mobile">
+        <div class="toc-mobile" data-pagefind-ignore>
           <TableOfContents headings={headings} lang={lang} />
         </div>
 
@@ -127,7 +133,27 @@ const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p
           <slot />
         </div>
 
-        <nav class="post-nav" aria-label={t('post.navigation')}>
+        {
+          relatedPosts.length > 0 && (
+            <section data-pagefind-ignore class="related-posts" aria-labelledby="related-title">
+              <h2 id="related-title" class="section-title">
+                {t('post.related')}
+              </h2>
+              <ul>
+                {relatedPosts.map((p) => (
+                  <li>
+                    <a href={postUrl(p)}>{p.data.title}</a>
+                    <span>{p.data.description}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+
+        <Comments lang={lang} term={`blog/${postSlug(post)}`} />
+
+        <nav data-pagefind-ignore class="post-nav" aria-label={t('post.navigation')}>
           {
             prevPost ? (
               <a class="post-nav-link prev" href={postUrl(prevPost)}>

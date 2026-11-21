@@ -1,4 +1,6 @@
 ---
+// Pretendard: 직접 배포하며, 페이지에 쓰인 글자 묶음만 내려받는 dynamic subset
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import { SITE } from '../site.config';
 import { DEFAULT_LANG } from '../content/taxonomy.mjs';
 import type { Lang } from '../lib/posts';
@@ -61,12 +63,6 @@ const image = /^https?:\/\//.test(ogImage)
         )),
       ]
     }
-    <!-- Pretendard: 페이지에 실제로 쓰인 글자만 내려받는 dynamic subset -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-    />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href={localizePath('rss.xml', lang)} />
 

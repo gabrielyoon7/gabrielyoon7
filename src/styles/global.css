@@ -231,6 +231,7 @@ main {
 .lang-switch a { color: var(--muted); font-size: var(--text-sm); font-weight: 500; }
 .lang-switch a:hover { color: var(--foreground); }
 
+.icon-link,
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -245,7 +246,9 @@ main {
   cursor: pointer;
 }
 
+.icon-link:hover, .icon-link[aria-current='page'],
 .theme-toggle:hover { color: var(--foreground); background: var(--surface); }
+.icon-link svg { width: 1.125rem; height: 1.125rem; }
 .theme-toggle svg { width: 1.125rem; height: 1.125rem; }
 .theme-toggle .icon-sun, .theme-toggle .icon-moon { display: none; }
 :root:not([data-theme='dark']) .theme-toggle .icon-moon { display: inline; }
@@ -484,6 +487,14 @@ main {
   border-left-color: var(--toc-active);
 }
 .toc-list .toc-h3 a { padding-left: 1.5rem; }
+
+/* Related posts */
+.related-posts { margin-top: 4rem; }
+.related-posts ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--border); }
+.related-posts li { margin: 0; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.related-posts a { display: block; font-weight: 600; color: var(--foreground); line-height: 1.45; }
+.related-posts a:hover { color: var(--accent); }
+.related-posts span { display: block; margin-top: 0.25rem; font-size: var(--text-sm); color: var(--muted); }
 
 /* Previous / next */
 .post-nav {
@@ -741,3 +752,22 @@ main {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
+
+/* Search (Pagefind UI) */
+.search {
+  --pagefind-ui-scale: 0.9;
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--foreground);
+  --pagefind-ui-background: var(--background);
+  --pagefind-ui-border: var(--border);
+  --pagefind-ui-tag: var(--surface);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 0.5rem;
+  --pagefind-ui-font: var(--font-sans);
+  min-height: 40vh;
+}
+.search mark { background: var(--accent-soft); color: inherit; padding: 0 0.1em; border-radius: 0.15em; }
+.search-notice { color: var(--muted); padding: 1.5rem; border-radius: var(--radius); background: var(--surface); }
+
+/* Comments (giscus) */
+.comments { margin-top: 4rem; }

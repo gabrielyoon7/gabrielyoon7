@@ -1,0 +1,78 @@
+---
+import { SITE } from '../../site.config';
+import type { Lang } from '../../lib/posts';
+
+interface Props {
+  lang: Lang;
+  /** 번역본끼리 같은 토론을 쓰도록 언어를 뺀 글 slug를 넘깁니다. */
+  term: string;
+}
+
+const { lang, term } = Astro.props;
+const { repo, repoId, category, categoryId } = SITE.giscus;
+const enabled = Boolean(repoId && categoryId);
+---
+
+{
+  enabled && (
+    <section class="comments" data-pagefind-ignore>
+      <div
+        class="giscus-mount"
+        data-repo={repo}
+        data-repo-id={repoId}
+        data-category={category}
+        data-category-id={categoryId}
+        data-term={term}
+        data-lang={lang}
+      />
+    </section>
+  )
+}
+
+<script>
+  // 사이트 테마(라이트/다크)를 giscus에도 맞추고, 테마를 바꾸면 따라 바꿉니다.
+  const mount = document.querySelector<HTMLElement>('.giscus-mount');
+  if (mount) {
+    const currentTheme = () => {
+      const chosen = document.documentElement.getAttribute('data-theme');
+      if (chosen === 'light' || chosen === 'dark') return chosen;
+      return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    const d = mount.dataset;
+    const attrs: Record<string, string> = {
+      'data-repo': d.repo ?? '',
+      'data-repo-id': d.repoId ?? '',
+      'data-category': d.category ?? '',
+      'data-category-id': d.categoryId ?? '',
+      'data-mapping': 'specific',
+      'data-term': d.term ?? '',
+      'data-strict': '1',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-input-position': 'top',
+      'data-lang': d.lang ?? 'ko',
+      'data-loading': 'lazy',
+      'data-theme': currentTheme(),
+    };
+    for (const [key, value] of Object.entries(attrs)) script.setAttribute(key, value);
+    mount.append(script);
+
+    const sync = () => {
+      const frame = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+      frame?.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme: currentTheme() } } },
+        'https://giscus.app',
+      );
+    };
+    new MutationObserver(sync).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync);
+  }
+</script>

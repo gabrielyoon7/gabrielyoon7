@@ -211,3 +211,40 @@ export async function tagAlternates(tag: string, lang: Lang) {
   }
   return result;
 }
+
+/**
+ * 읽는 데 걸리는 대략의 시간(분). 코드 블록·import·태그는 빼고 셉니다.
+ * 한국어는 분당 500자(공백 제외), 영어는 분당 230단어로 잡습니다.
+ */
+export function readingMinutes(post: Post): number {
+  const text = (post.body ?? '')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/^(import|export)\s.*$/gm, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[#>*_`[\]()|-]/g, ' ');
+  const minutes =
+    postLang(post) === 'ko'
+      ? text.replace(/\s/g, '').length / 500
+      : text.split(/\s+/).filter(Boolean).length / 230;
+  return Math.max(1, Math.round(minutes));
+}
+
+/**
+ * 같은 언어에서 비슷한 글. 겹치는 태그 1개당 2점, 같은 카테고리 1점이고
+ * 점수가 같으면 최신 글을 먼저 둡니다. 같은 시리즈 글은 시리즈 상자에 있으므로 뺍니다.
+ */
+export async function getRelatedPosts(post: Post, limit = 3): Promise<Post[]> {
+  const tags = new Set(post.data.tags.map(tagKey));
+  return (await getPosts({ lang: postLang(post) }))
+    .filter((p) => p.id !== post.id && !(post.data.series && p.data.series === post.data.series))
+    .map((p) => ({
+      post: p,
+      score:
+        p.data.tags.filter((t) => tags.has(tagKey(t))).length * 2 +
+        (p.data.category === post.data.category ? 1 : 0),
+    }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
+    .slice(0, limit)
+    .map(({ post }) => post);
+}
