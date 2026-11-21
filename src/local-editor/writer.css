@@ -12,6 +12,7 @@ body {
 }
 button,
 input,
+select,
 textarea {
   font: inherit;
 }
@@ -39,6 +40,7 @@ button:disabled {
   cursor: default;
 }
 input:not([type="checkbox"]),
+select,
 textarea {
   width: 100%;
   border: 1px solid #dce1e8;
@@ -48,6 +50,7 @@ textarea {
   color: #242b36;
 }
 input:focus,
+select:focus,
 textarea:focus {
   outline: 2px solid #7295ed;
   outline-offset: 1px;

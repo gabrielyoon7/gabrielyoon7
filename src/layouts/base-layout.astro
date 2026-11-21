@@ -1,5 +1,7 @@
 ---
 import { SITE } from '../site.config';
+import { DEFAULT_LANG } from '../content/taxonomy.mjs';
+import type { Lang } from '../lib/posts';
 
 interface Props {
   /** 비우면 사이트 이름만 씁니다(홈). */
@@ -12,6 +14,10 @@ interface Props {
   publishedTime?: Date;
   modifiedTime?: Date;
   tags?: string[];
+  /** 페이지 언어. <html lang>과 og:locale에 쓰입니다. */
+  lang?: Lang;
+  /** 같은 페이지의 다른 언어 버전 (hreflang) */
+  alternates?: { lang: Lang; href: string }[];
 }
 
 const {
@@ -23,7 +29,11 @@ const {
   publishedTime,
   modifiedTime,
   tags = [],
+  lang = DEFAULT_LANG,
+  alternates = [],
 } = Astro.props;
+
+const OG_LOCALES: Record<Lang, string> = { ko: 'ko_KR', en: 'en_US' };
 
 const base = import.meta.env.BASE_URL;
 const pageTitle = title ? `${title} | ${SITE.name}` : SITE.name;
@@ -34,13 +44,21 @@ const image = /^https?:\/\//.test(ogImage)
 ---
 
 <!doctype html>
-<html lang={SITE.lang}>
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
+    {
+      alternates.length > 0 && [
+        <link rel="alternate" hreflang={lang} href={canonical} />,
+        ...alternates.map((a) => (
+          <link rel="alternate" hreflang={a.lang} href={new URL(a.href, Astro.site).href} />
+        )),
+      ]
+    }
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href={`${base}rss.xml`} />
 
@@ -51,7 +69,7 @@ const image = /^https?:\/\//.test(ogImage)
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
     <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:locale" content={OG_LOCALES[lang]} />
     {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
     {modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
     {ogType === 'article' && <meta property="article:author" content={SITE.author} />}

@@ -1,20 +1,9 @@
 ---
 import { render } from 'astro:content';
 import BlogPostLayout from '../../layouts/blog-post-layout.astro';
-import { getPosts, postSlug } from '../../lib/posts';
+import { postPaths } from '../../lib/posts';
 
-export async function getStaticPaths() {
-  const posts = await getPosts();
-
-  return posts.map((post, index) => ({
-    params: { slug: postSlug(post) },
-    props: {
-      post,
-      prevPost: posts[index + 1],
-      nextPost: posts[index - 1],
-    },
-  }));
-}
+export const getStaticPaths = () => postPaths('ko');
 
 const { post, prevPost, nextPost } = Astro.props;
 const { Content, headings } = await render(post);

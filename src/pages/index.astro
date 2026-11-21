@@ -1,10 +1,15 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
 import PostCard from "../components/astro/post-card.astro";
-import { getPosts } from "../lib/posts";
+import { getPosts, pinnedFirst } from "../lib/posts";
 
 const base = import.meta.env.BASE_URL;
-const latestPosts = (await getPosts()).slice(0, 3);
+// 고정 글은 개수와 상관없이 모두, 나머지는 최신 3개
+const posts = await getPosts();
+const latestPosts = pinnedFirst([
+  ...posts.filter((p) => p.data.pinned),
+  ...posts.filter((p) => !p.data.pinned).slice(0, 3),
+]);
 ---
 
 <PageLayout>

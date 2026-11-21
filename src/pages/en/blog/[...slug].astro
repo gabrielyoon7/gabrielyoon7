@@ -1,0 +1,14 @@
+---
+import { render } from 'astro:content';
+import BlogPostLayout from '../../../layouts/blog-post-layout.astro';
+import { postPaths } from '../../../lib/posts';
+
+export const getStaticPaths = () => postPaths('en');
+
+const { post, prevPost, nextPost } = Astro.props;
+const { Content, headings } = await render(post);
+---
+
+<BlogPostLayout post={post} headings={headings} prevPost={prevPost} nextPost={nextPost}>
+  <Content />
+</BlogPostLayout>

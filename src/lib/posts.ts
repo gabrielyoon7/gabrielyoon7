@@ -1,26 +1,89 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { SITE } from '../site.config';
+import { CATEGORY_LABELS, DEFAULT_LANG, LANGS } from '../content/taxonomy.mjs';
 
 export type Post = CollectionEntry<'blog'>;
+export type Lang = (typeof LANGS)[number];
+export type Category = Post['data']['category'];
 
 const base = import.meta.env.BASE_URL;
+
+export function isLang(value: string): value is Lang {
+  return (LANGS as readonly string[]).includes(value);
+}
+
+/** 글 언어는 폴더 이름으로 정해집니다 (src/content/blog/<lang>/...). */
+export function postLang(post: Post): Lang {
+  const lang = post.id.split('/')[0];
+  if (!isLang(lang) || !post.id.includes('/')) {
+    throw new Error(
+      `src/content/blog/${post.id}: 글은 ${LANGS.map((l) => `${l}/`).join(' 또는 ')} 폴더 안에 두세요.`,
+    );
+  }
+  return lang;
+}
+
+/** 언어 폴더를 뺀 slug. 번역본끼리는 slug가 같습니다. */
+export function postSlug(post: Post): string {
+  return post.id.slice(post.id.indexOf('/') + 1).replace(/\.mdx?$/, '');
+}
+
+/** 기본 언어는 지금 URL 그대로, 그 외 언어는 /<lang>/ 아래에 둡니다. */
+export function langBase(lang: Lang): string {
+  return lang === DEFAULT_LANG ? base : `${base}${lang}/`;
+}
+
+export function postUrl(post: Post): string {
+  return `${langBase(postLang(post))}blog/${postSlug(post)}/`;
+}
+
+type PostQuery = {
+  /** 'all'이면 모든 언어 */
+  lang?: Lang | 'all';
+  includeDrafts?: boolean;
+};
 
 /**
  * 글 목록을 최신순으로 가져옵니다.
  * 개발 서버에서는 draft도 함께 보여 주고, 빌드에서는 항상 뺍니다.
  * RSS처럼 개발 중에도 draft를 빼야 하는 곳은 includeDrafts: false를 넘깁니다.
  */
-export async function getPosts({ includeDrafts = import.meta.env.DEV } = {}): Promise<Post[]> {
-  const posts = await getCollection('blog', ({ data }) => includeDrafts || !data.draft);
+export async function getPosts({
+  lang = DEFAULT_LANG,
+  includeDrafts = import.meta.env.DEV,
+}: PostQuery = {}): Promise<Post[]> {
+  const posts = await getCollection(
+    'blog',
+    (post) => (includeDrafts || !post.data.draft) && (lang === 'all' || postLang(post) === lang),
+  );
   return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
-export function postSlug(post: Post): string {
-  return post.id.replace(/\.mdx?$/, '');
+/** 고정 글을 먼저, 나머지는 최신순으로 */
+export function pinnedFirst(posts: Post[]): Post[] {
+  return [...posts.filter((p) => p.data.pinned), ...posts.filter((p) => !p.data.pinned)];
 }
 
-export function postUrl(post: Post): string {
-  return `${base}blog/${postSlug(post)}/`;
+/** 같은 slug를 가진 다른 언어 글 */
+export async function getTranslations(post: Post): Promise<Post[]> {
+  const slug = postSlug(post);
+  const lang = postLang(post);
+  return (await getPosts({ lang: 'all' })).filter(
+    (p) => postSlug(p) === slug && postLang(p) !== lang,
+  );
+}
+
+/** 같은 언어, 같은 시리즈의 글을 순서대로. 시리즈가 아니면 빈 배열 */
+export async function getSeriesPosts(post: Post): Promise<Post[]> {
+  const { series } = post.data;
+  if (!series) return [];
+  return (await getPosts({ lang: postLang(post) }))
+    .filter((p) => p.data.series === series)
+    .sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0));
+}
+
+export function categoryLabel(category: Category, lang: Lang = DEFAULT_LANG): string {
+  return CATEGORY_LABELS[category][lang];
 }
 
 /** 태그 비교·URL용 키. "Astro"와 " astro"를 같은 태그로 봅니다. */
@@ -28,8 +91,8 @@ export function tagKey(tag: string): string {
   return tag.trim().toLowerCase();
 }
 
-export function tagUrl(tag: string): string {
-  return `${base}tags/${encodeURIComponent(tagKey(tag))}/`;
+export function tagUrl(tag: string, lang: Lang = DEFAULT_LANG): string {
+  return `${langBase(lang)}tags/${encodeURIComponent(tagKey(tag))}/`;
 }
 
 export type TagSummary = { key: string; label: string; count: number };
@@ -67,16 +130,31 @@ export function summarizeTags(posts: Post[]): TagSummary[] {
 }
 
 /** 글 카드·본문에서 태그를 통일된 표기로 보여 주기 위한 key → label 맵 */
-export async function getTagLabels(): Promise<Map<string, string>> {
-  const tags = summarizeTags(await getPosts());
+export async function getTagLabels(lang: Lang = DEFAULT_LANG): Promise<Map<string, string>> {
+  const tags = summarizeTags(await getPosts({ lang }));
   return new Map(tags.map((t) => [t.key, t.label]));
 }
 
-export function formatDate(date: Date): string {
-  return date.toLocaleDateString('ko-KR', {
+const DATE_LOCALES: Record<Lang, string> = { ko: 'ko-KR', en: 'en-US' };
+
+export function formatDate(date: Date, lang: Lang = DEFAULT_LANG): string {
+  return date.toLocaleDateString(DATE_LOCALES[lang], {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
     timeZone: SITE.timeZone,
   });
+}
+
+/** 글 상세 페이지의 getStaticPaths. 이전/다음 글은 같은 언어 안에서 이어집니다. */
+export async function postPaths(lang: Lang) {
+  const posts = await getPosts({ lang });
+  return posts.map((post, index) => ({
+    params: { slug: postSlug(post) },
+    props: {
+      post,
+      prevPost: posts[index + 1] as Post | undefined,
+      nextPost: posts[index - 1] as Post | undefined,
+    },
+  }));
 }

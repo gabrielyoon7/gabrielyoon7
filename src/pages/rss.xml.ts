@@ -17,6 +17,6 @@ export async function GET(context: APIContext) {
       link: postUrl(post),
       categories: post.data.tags,
     })),
-    customData: `<language>${SITE.locale.replace('_', '-').toLowerCase()}</language>`,
+    customData: `<language>ko-kr</language>`,
   });
 }

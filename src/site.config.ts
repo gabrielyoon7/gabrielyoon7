@@ -6,8 +6,6 @@ export const SITE = {
   name: 'Ju Hyun, Yoon',
   description: '윤주현의 블로그',
   author: 'Ju Hyun, Yoon',
-  lang: 'ko',
-  locale: 'ko_KR',
   timeZone: 'Asia/Seoul',
   /** public/ 기준 경로. 1200×630 PNG */
   defaultOgImage: 'og-default.png',

@@ -1,5 +1,13 @@
 ---
-import { formatDate, getTagLabels, postUrl, tagKey, tagUrl, type Post } from '../../lib/posts';
+import {
+  categoryLabel,
+  formatDate,
+  getTagLabels,
+  postUrl,
+  tagKey,
+  tagUrl,
+  type Post,
+} from '../../lib/posts';
 
 interface Props {
   post: Post;
@@ -12,9 +20,11 @@ const tagLabels = await getTagLabels();
 <article class="post-list-item">
   <h2 class="post-list-title">
     <a href={postUrl(post)}>{post.data.title}</a>
+    {post.data.pinned && <span class="pinned-badge">고정</span>}
     {post.data.draft && <span class="draft-badge">초안</span>}
   </h2>
   <div class="post-meta">
+    <span class="post-category">{categoryLabel(post.data.category)}</span>
     <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
   </div>
   <p class="post-description">{post.data.description}</p>

@@ -230,6 +230,33 @@ li { margin-bottom: 0.5rem; }
   border: 1px solid var(--callout-warn-border);
 }
 .post-header .draft-badge { margin: 0 0 0.75rem; }
+.pinned-badge {
+  display: inline-block;
+  margin: 0 0 0 0.5rem;
+  padding: 0.0625rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  vertical-align: middle;
+  border-radius: 999px;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.post-category { font-weight: 600; color: var(--accent); }
+.post-header .post-category { margin: 0 0 0.5rem; font-size: 0.875rem; }
+
+.series-box {
+  margin: 0 0 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--code-background);
+  font-size: 0.9375rem;
+}
+.series-title { margin: 0 0 0.5rem; font-weight: 600; }
+.series-box ol { margin: 0; }
+.series-box li { margin-bottom: 0.25rem; }
+.series-box [aria-current='page'] { font-weight: 600; }
 
 .post-meta {
   display: flex;

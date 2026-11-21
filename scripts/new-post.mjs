@@ -2,12 +2,32 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { LANGS, DEFAULT_LANG, CATEGORY_KEYS, DEFAULT_CATEGORY } from '../src/content/taxonomy.mjs';
 
-const directory = fileURLToPath(new URL('../src/content/blog/', import.meta.url));
-const title = process.argv.slice(2).join(' ').trim() || '새 글 제목';
+// 사용법: pnpm new [--lang en] [--category life] 글 제목
+const words = [];
+let lang = DEFAULT_LANG;
+let category = DEFAULT_CATEGORY;
+const argv = process.argv.slice(2);
+for (let i = 0; i < argv.length; i++) {
+  if (argv[i] === '--lang') lang = argv[++i];
+  else if (argv[i] === '--category') category = argv[++i];
+  else words.push(argv[i]);
+}
+if (!LANGS.includes(lang)) {
+  console.error(`--lang은 ${LANGS.join(', ')} 중 하나로 적어 주세요.`);
+  process.exit(1);
+}
+if (!CATEGORY_KEYS.includes(category)) {
+  console.error(`--category는 ${CATEGORY_KEYS.join(', ')} 중 하나로 적어 주세요.`);
+  process.exit(1);
+}
+
+const directory = fileURLToPath(new URL(`../src/content/blog/${lang}/`, import.meta.url));
+const title = words.join(' ').trim() || '새 글 제목';
 const now = new Date();
 const date = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, '0'), String(now.getDate()).padStart(2, '0')].join('-');
-const slug = process.argv.length > 2
+const slug = words.length > 0
   ? title.normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '')
   : 'new-post';
 // Limit filename length, and prefix with a date to avoid Windows reserved names.
@@ -16,6 +36,7 @@ const content = `---
 title: ${JSON.stringify(title)}
 description: "글을 소개하는 짧은 설명을 작성하세요."
 pubDate: ${date}
+category: ${category}
 tags: []
 draft: true
 ---

@@ -4,7 +4,20 @@ import Header from '../components/astro/header.astro';
 import Footer from '../components/astro/footer.astro';
 import ThemeToggle from '../components/astro/theme-toggle.astro';
 import TableOfContents from '../components/astro/table-of-contents.astro';
-import { formatDate, getTagLabels, postUrl, tagKey, tagUrl, type Post } from '../lib/posts';
+import { DEFAULT_LANG } from '../content/taxonomy.mjs';
+import {
+  categoryLabel,
+  formatDate,
+  getSeriesPosts,
+  getTagLabels,
+  getTranslations,
+  postLang,
+  postUrl,
+  tagKey,
+  tagUrl,
+  type Lang,
+  type Post,
+} from '../lib/posts';
 
 interface Props {
   post: Post;
@@ -14,10 +27,36 @@ interface Props {
 }
 
 const { post, headings, prevPost, nextPost } = Astro.props;
-const { title, description, pubDate, updatedDate, tags, coverImage, draft } = post.data;
+const { title, description, pubDate, updatedDate, category, tags, series, coverImage, draft } =
+  post.data;
+const lang = postLang(post);
 const canonicalUrl = new URL(postUrl(post), Astro.site).href;
-const tagLabels = await getTagLabels();
+const tagLabels = await getTagLabels(lang);
 const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
+const translations = await getTranslations(post);
+const seriesPosts = await getSeriesPosts(post);
+
+// 화면 문구. 언어별 UI 문자열은 정보 구조 개편 때 한곳으로 모읍니다.
+const TEXT = {
+  ko: {
+    draft: '초안 · 배포되지 않는 글입니다',
+    published: '작성',
+    updated: '수정',
+    series: '시리즈',
+    previous: '이전 글',
+    next: '다음 글',
+  },
+  en: {
+    draft: 'Draft · not published',
+    published: 'Published',
+    updated: 'Updated',
+    series: 'Series',
+    previous: 'Previous',
+    next: 'Next',
+  },
+} satisfies Record<Lang, Record<string, string>>;
+const t = TEXT[lang];
+const LANG_NAMES: Record<Lang, string> = { ko: '한국어', en: 'English' };
 ---
 
 <BaseLayout
@@ -29,6 +68,8 @@ const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
   publishedTime={pubDate}
   modifiedTime={updatedDate}
   tags={tags.map(tagLabel)}
+  lang={lang}
+  alternates={translations.map((p) => ({ lang: postLang(p), href: postUrl(p) }))}
 >
   <Header slot="header">
     <ThemeToggle slot="actions" />
@@ -38,15 +79,25 @@ const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
     <article class="post-layout">
       <div class="post-content-wrapper">
         <header class="post-header">
-          {draft && <p class="draft-badge">초안 · 배포되지 않는 글입니다</p>}
+          {draft && <p class="draft-badge">{t.draft}</p>}
+          <p class="post-category">{categoryLabel(category, lang)}</p>
           <h1>{title}</h1>
           <p class="post-description">{description}</p>
           <div class="post-meta">
-            <time datetime={pubDate.toISOString()}>Published: {formatDate(pubDate)}</time>
+            <time datetime={pubDate.toISOString()}>{t.published}: {formatDate(pubDate, lang)}</time>
             {
               updatedDate && (
-                <time datetime={updatedDate.toISOString()}>Updated: {formatDate(updatedDate)}</time>
+                <time datetime={updatedDate.toISOString()}>
+                  {t.updated}: {formatDate(updatedDate, lang)}
+                </time>
               )
+            }
+            {
+              translations.map((p) => (
+                <a href={postUrl(p)} hreflang={postLang(p)} lang={postLang(p)}>
+                  {LANG_NAMES[postLang(p)]}
+                </a>
+              ))
             }
           </div>
           {
@@ -54,15 +105,41 @@ const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
               <ul class="tag-list" aria-label="Tags">
                 {tags.map((tag) => (
                   <li>
-                    <a class="tag" href={tagUrl(tag)}>
-                      {tagLabel(tag)}
-                    </a>
+                    {/* 다른 언어의 태그 페이지는 정보 구조 개편 때 만듭니다. */}
+                    {lang === DEFAULT_LANG ? (
+                      <a class="tag" href={tagUrl(tag, lang)}>
+                        {tagLabel(tag)}
+                      </a>
+                    ) : (
+                      <span class="tag">{tagLabel(tag)}</span>
+                    )}
                   </li>
                 ))}
               </ul>
             )
           }
         </header>
+
+        {
+          seriesPosts.length > 0 && (
+            <nav class="series-box" aria-label={`${t.series}: ${series}`}>
+              <p class="series-title">
+                {t.series} · {series}
+              </p>
+              <ol>
+                {seriesPosts.map((p) => (
+                  <li>
+                    {p.id === post.id ? (
+                      <span aria-current="page">{p.data.title}</span>
+                    ) : (
+                      <a href={postUrl(p)}>{p.data.title}</a>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )
+        }
 
         <div class="toc-mobile">
           <TableOfContents headings={headings} />
@@ -76,7 +153,7 @@ const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
           {
             prevPost ? (
               <a class="post-nav-link prev" href={postUrl(prevPost)}>
-                <span class="post-nav-label">Previous</span>
+                <span class="post-nav-label">{t.previous}</span>
                 {prevPost.data.title}
               </a>
             ) : (
@@ -86,7 +163,7 @@ const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
           {
             nextPost ? (
               <a class="post-nav-link next" href={postUrl(nextPost)}>
-                <span class="post-nav-label">Next</span>
+                <span class="post-nav-label">{t.next}</span>
                 {nextPost.data.title}
               </a>
             ) : (

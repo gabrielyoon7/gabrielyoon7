@@ -5,6 +5,8 @@ import {
   newDraft,
   exportMdx,
   filename,
+  folder,
+  readDraft,
   saveDraft,
   listDrafts,
   PREFIX,
@@ -45,6 +47,9 @@ test("MDX export preserves quoted metadata and body in blog format", () => {
   assert.equal(metadata.pubDate, "2026-09-14");
   assert.deepEqual(metadata.tags, ["React", "TypeScript"]);
   assert.equal(metadata.draft, false);
+  assert.equal(metadata.category, "dev");
+  assert.equal("series" in metadata, false);
+  assert.equal("pinned" in metadata, false);
   assert.equal(body, "\n" + draft.body + "\n");
   assert.match(filename(draft), /^2026-09-14-한글-제목-다음-줄\.mdx$/);
 });
@@ -78,4 +83,33 @@ test("storage failures never report successful persistence", () => {
     /저장하지 못했습니다/,
   );
   assert.equal(storage.length, 0);
+});
+test("language, category, series and pinned are exported", () => {
+  const draft = {
+    ...newDraft(new Date(2026, 8, 14, 10)),
+    title: "Series post",
+    lang: "en" as const,
+    category: "retrospective" as const,
+    series: ' Astro: "blog" ',
+    seriesOrder: "3",
+    pinned: true,
+  };
+  const metadata = parse(exportMdx(draft).split("---\n")[1]);
+  assert.equal(metadata.category, "retrospective");
+  assert.equal(metadata.series, 'Astro: "blog"');
+  assert.equal(metadata.seriesOrder, 3);
+  assert.equal(metadata.pinned, true);
+  assert.equal(folder(draft), "src/content/blog/en/");
+  // 순서가 비정상이면 1로 내보내 스키마 검증을 통과시킵니다.
+  const fallback = parse(exportMdx({ ...draft, seriesOrder: "0" }).split("---\n")[1]);
+  assert.equal(fallback.seriesOrder, 1);
+});
+test("drafts saved before the new fields still open with defaults", () => {
+  const { lang, category, series, seriesOrder, pinned, ...old } = newDraft();
+  const draft = readDraft(JSON.stringify(old));
+  assert.equal(draft.lang, "ko");
+  assert.equal(draft.category, "dev");
+  assert.equal(draft.series, "");
+  assert.equal(draft.seriesOrder, "");
+  assert.equal(draft.pinned, false);
 });
