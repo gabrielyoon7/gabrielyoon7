@@ -176,9 +176,9 @@ const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p
 
           const lang = document.createElement('span');
           lang.className = 'code-block-lang';
-          const className = code.className || '';
-          const match = className.match(/language-(\w+)/);
-          lang.textContent = match ? match[1] : 'code';
+          // Shiki는 <pre data-language="ts">로 언어를 알려 줍니다.
+          const match = (code.className || '').match(/language-(\w+)/);
+          lang.textContent = pre.getAttribute('data-language') || (match ? match[1] : 'code');
 
           const copyBtn = document.createElement('button');
           copyBtn.className = 'code-copy-btn';

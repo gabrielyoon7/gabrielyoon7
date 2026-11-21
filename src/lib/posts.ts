@@ -135,6 +135,25 @@ export async function getTagLabels(lang: Lang = DEFAULT_LANG): Promise<Map<strin
 
 const DATE_LOCALES: Record<Lang, string> = { ko: 'ko-KR', en: 'en-US' };
 
+/** 목록용 짧은 날짜. 한국어 "2026.11.01", 영어 "Nov 1, 2026" */
+export function formatShortDate(date: Date, lang: Lang = DEFAULT_LANG): string {
+  if (lang === 'ko') {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      timeZone: SITE.timeZone,
+    }).format(date);
+    return parts.replaceAll('-', '.');
+  }
+  return date.toLocaleDateString(DATE_LOCALES[lang], {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: SITE.timeZone,
+  });
+}
+
 export function formatDate(date: Date, lang: Lang = DEFAULT_LANG): string {
   return date.toLocaleDateString(DATE_LOCALES[lang], {
     year: 'numeric',

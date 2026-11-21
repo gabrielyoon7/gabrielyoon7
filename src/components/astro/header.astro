@@ -1,6 +1,7 @@
 ---
 import { LANGS } from '../../content/taxonomy.mjs';
 import { getText, LANG_NAMES, localizePath, splitPath } from '../../i18n/ui';
+import { SITE } from '../../site.config';
 import type { Lang } from '../../lib/posts';
 
 interface Props {
@@ -20,8 +21,8 @@ function isActive(section: string): boolean {
   return currentPath.startsWith(section);
 }
 
+// 홈은 왼쪽 사이트 이름이 대신합니다.
 const navItems = [
-  { section: '', label: t('nav.home') },
   // 글 상세와 카테고리 페이지도 Blog 메뉴에 속합니다.
   { section: 'blog/', label: t('nav.blog'), also: ['categories/'] },
   { section: 'tags/', label: t('nav.tags') },
@@ -48,27 +49,32 @@ const languageLinks = LANGS.filter((l) => l !== lang).map((other) => ({
 
 <header class="site-header">
   <div class="container-wide header-inner">
-    <nav class="site-nav" aria-label={t('nav.main')}>
-      {
-        navItems.map((item) => (
-          <a href={item.href} aria-current={item.active ? 'page' : undefined}>
-            {item.label}
-          </a>
-        ))
-      }
-      {devItems.map((item) => <a href={item.href}>{item.label}</a>)}
-    </nav>
-    <div class="header-actions">
-      <nav class="lang-switch" aria-label={t('nav.langSwitch')}>
+    <a class="site-logo" href={localizePath('', lang)} aria-current={isActive('') ? 'page' : undefined}>
+      {SITE.name}
+    </a>
+    <div class="header-nav">
+      <nav class="site-nav" aria-label={t('nav.main')}>
         {
-          languageLinks.map((link) => (
-            <a href={link.href} hreflang={link.lang} lang={link.lang}>
-              {LANG_NAMES[link.lang]}
+          navItems.map((item) => (
+            <a href={item.href} aria-current={item.active ? 'page' : undefined}>
+              {item.label}
             </a>
           ))
         }
+        {devItems.map((item) => <a href={item.href}>{item.label}</a>)}
       </nav>
-      <slot name="actions" />
+      <div class="header-actions">
+        <nav class="lang-switch" aria-label={t('nav.langSwitch')}>
+          {
+            languageLinks.map((link) => (
+              <a href={link.href} hreflang={link.lang} lang={link.lang}>
+                {LANG_NAMES[link.lang]}
+              </a>
+            ))
+          }
+        </nav>
+        <slot name="actions" />
+      </div>
     </div>
   </div>
 </header>
