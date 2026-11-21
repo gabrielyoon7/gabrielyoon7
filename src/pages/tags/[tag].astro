@@ -1,36 +1,26 @@
 ---
 import PageLayout from '../../layouts/page-layout.astro';
-import { getCollection } from 'astro:content';
 import PostCard from '../../components/astro/post-card.astro';
+import { getPosts, summarizeTags, tagKey } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
-  const tagSet = new Set<string>();
+  const posts = await getPosts();
 
-  for (const post of posts) {
-    for (const tag of post.data.tags) {
-      tagSet.add(tag.toLowerCase());
-    }
-  }
-
-  return [...tagSet].map((tag) => ({
-    params: { tag },
+  return summarizeTags(posts).map(({ key, label }) => ({
+    params: { tag: key },
     props: {
-      tag,
-      posts: posts
-        .filter((p) => p.data.tags.some((t) => t.toLowerCase() === tag))
-        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+      label,
+      posts: posts.filter((p) => p.data.tags.some((t) => tagKey(t) === key)),
     },
   }));
 }
 
-const { tag, posts } = Astro.props;
-const displayTag = posts[0]?.data.tags.find((t) => t.toLowerCase() === tag) ?? tag;
+const { label, posts } = Astro.props;
 ---
 
-<PageLayout title={`Tag: ${displayTag}`} description={`${displayTag} 태그의 글 목록`}>
+<PageLayout title={`Tag: ${label}`} description={`${label} 태그의 글 목록`}>
   <header class="page-header">
-    <h1>Tag: {displayTag}</h1>
+    <h1>Tag: {label}</h1>
     <p>{posts.length} posts</p>
   </header>
 

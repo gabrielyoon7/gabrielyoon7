@@ -35,6 +35,8 @@ export default defineConfig({
         light: 'github-light',
         dark: 'github-dark',
       },
+      // Colors are switched in global.css with light-dark(), following the site theme.
+      defaultColor: false,
     },
   },
 

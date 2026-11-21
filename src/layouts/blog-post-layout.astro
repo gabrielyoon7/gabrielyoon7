@@ -1,41 +1,34 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './base-layout.astro';
 import Header from '../components/astro/header.astro';
 import Footer from '../components/astro/footer.astro';
 import ThemeToggle from '../components/astro/theme-toggle.astro';
 import TableOfContents from '../components/astro/table-of-contents.astro';
+import { formatDate, getTagLabels, postUrl, tagKey, tagUrl, type Post } from '../lib/posts';
 
 interface Props {
-  post: CollectionEntry<'blog'>;
+  post: Post;
   headings: import('astro').MarkdownHeading[];
-  prevPost?: CollectionEntry<'blog'>;
-  nextPost?: CollectionEntry<'blog'>;
+  prevPost?: Post;
+  nextPost?: Post;
 }
 
 const { post, headings, prevPost, nextPost } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const slug = post.id.replace(/\.mdx?$/, '');
-const canonicalUrl = new URL(`${base}blog/${slug}/`, Astro.site).href;
-
-const pubDate = post.data.pubDate.toLocaleDateString('ko-KR', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
-
-const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const { title, description, pubDate, updatedDate, tags, coverImage, draft } = post.data;
+const canonicalUrl = new URL(postUrl(post), Astro.site).href;
+const tagLabels = await getTagLabels();
+const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
 ---
 
 <BaseLayout
-  title={post.data.title}
-  description={post.data.description}
+  title={title}
+  description={description}
   canonicalUrl={canonicalUrl}
   ogType="article"
+  ogImage={coverImage}
+  publishedTime={pubDate}
+  modifiedTime={updatedDate}
+  tags={tags.map(tagLabel)}
 >
   <Header slot="header">
     <ThemeToggle slot="actions" />
@@ -45,23 +38,24 @@ const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
     <article class="post-layout">
       <div class="post-content-wrapper">
         <header class="post-header">
-          <h1>{post.data.title}</h1>
-          <p class="post-description">{post.data.description}</p>
+          {draft && <p class="draft-badge">초안 · 배포되지 않는 글입니다</p>}
+          <h1>{title}</h1>
+          <p class="post-description">{description}</p>
           <div class="post-meta">
-            <time datetime={post.data.pubDate.toISOString()}>Published: {pubDate}</time>
+            <time datetime={pubDate.toISOString()}>Published: {formatDate(pubDate)}</time>
             {
               updatedDate && (
-                <time datetime={post.data.updatedDate!.toISOString()}>Updated: {updatedDate}</time>
+                <time datetime={updatedDate.toISOString()}>Updated: {formatDate(updatedDate)}</time>
               )
             }
           </div>
           {
-            post.data.tags.length > 0 && (
+            tags.length > 0 && (
               <ul class="tag-list" aria-label="Tags">
-                {post.data.tags.map((tag) => (
+                {tags.map((tag) => (
                   <li>
-                    <a class="tag" href={`${base}tags/${encodeURIComponent(tag.toLowerCase())}/`}>
-                      {tag}
+                    <a class="tag" href={tagUrl(tag)}>
+                      {tagLabel(tag)}
                     </a>
                   </li>
                 ))}
@@ -81,7 +75,7 @@ const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
         <nav class="post-nav" aria-label="Post navigation">
           {
             prevPost ? (
-              <a class="post-nav-link prev" href={`${base}blog/${prevPost.id.replace(/\.mdx?$/, '')}/`}>
+              <a class="post-nav-link prev" href={postUrl(prevPost)}>
                 <span class="post-nav-label">Previous</span>
                 {prevPost.data.title}
               </a>
@@ -91,10 +85,7 @@ const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
           }
           {
             nextPost ? (
-              <a
-                class="post-nav-link next"
-                href={`${base}blog/${nextPost.id.replace(/\.mdx?$/, '')}/`}
-              >
+              <a class="post-nav-link next" href={postUrl(nextPost)}>
                 <span class="post-nav-label">Next</span>
                 {nextPost.data.title}
               </a>
@@ -112,4 +103,120 @@ const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
   </div>
 
   <Footer slot="footer" />
+
+    <!-- Code block enhancements -->
+    <script>
+      function enhanceCodeBlocks() {
+        document.querySelectorAll('.prose pre').forEach((pre) => {
+          if (pre.closest('.code-block-wrapper')) return;
+
+          const code = pre.querySelector('code');
+          if (!code) return;
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-block-wrapper';
+
+          const header = document.createElement('div');
+          header.className = 'code-block-header';
+
+          const lang = document.createElement('span');
+          lang.className = 'code-block-lang';
+          const className = code.className || '';
+          const match = className.match(/language-(\w+)/);
+          lang.textContent = match ? match[1] : 'code';
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'code-copy-btn';
+          copyBtn.type = 'button';
+          copyBtn.textContent = 'Copy';
+          copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
+          copyBtn.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(code.textContent || '');
+              copyBtn.textContent = 'Copied!';
+              copyBtn.classList.add('copied');
+              setTimeout(() => {
+                copyBtn.textContent = 'Copy';
+                copyBtn.classList.remove('copied');
+              }, 2000);
+            } catch {
+              copyBtn.textContent = 'Failed';
+            }
+          });
+
+          header.appendChild(lang);
+          header.appendChild(copyBtn);
+
+          pre.parentNode?.insertBefore(wrapper, pre);
+          wrapper.appendChild(header);
+          wrapper.appendChild(pre);
+        });
+      }
+
+      function initLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('lightbox-close');
+        if (!lightbox || !lightboxImg) return;
+
+        document.querySelectorAll('[data-lightbox]').forEach((img) => {
+          img.addEventListener('click', () => {
+            const src = img.getAttribute('data-lightbox') || img.getAttribute('src');
+            const alt = img.getAttribute('alt') || '';
+            if (src) {
+              lightboxImg.setAttribute('src', src);
+              lightboxImg.setAttribute('alt', alt);
+              lightbox.classList.add('is-open');
+              lightbox.setAttribute('aria-hidden', 'false');
+            }
+          });
+        });
+
+        const closeLightbox = () => {
+          lightbox.classList.remove('is-open');
+          lightbox.setAttribute('aria-hidden', 'true');
+          lightboxImg.removeAttribute('src');
+        };
+
+        closeBtn?.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeLightbox();
+        });
+      }
+
+      function initTocActive() {
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        const headings = document.querySelectorAll('.prose h2[id], .prose h3[id]');
+        if (!tocLinks.length || !headings.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                tocLinks.forEach((link) => {
+                  link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+                });
+              }
+            });
+          },
+          { rootMargin: '-80px 0px -70% 0px', threshold: 0 }
+        );
+
+        headings.forEach((h) => observer.observe(h));
+      }
+
+      enhanceCodeBlocks();
+      initLightbox();
+      initTocActive();
+    </script>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+      <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close image preview">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
 </BaseLayout>

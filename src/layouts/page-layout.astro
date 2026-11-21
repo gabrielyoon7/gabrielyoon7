@@ -1,27 +1,14 @@
 ---
+import type { ComponentProps } from 'astro/types';
 import BaseLayout from './base-layout.astro';
 import Header from '../components/astro/header.astro';
 import Footer from '../components/astro/footer.astro';
 import ThemeToggle from '../components/astro/theme-toggle.astro';
 
-interface Props {
-  title: string;
-  description?: string;
-  canonicalUrl?: string;
-  ogType?: string;
-  ogImage?: string;
-}
-
-const { title, description, canonicalUrl, ogType, ogImage } = Astro.props;
+type Props = ComponentProps<typeof BaseLayout>;
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonicalUrl={canonicalUrl}
-  ogType={ogType}
-  ogImage={ogImage}
->
+<BaseLayout {...Astro.props}>
   <Header slot="header">
     <ThemeToggle slot="actions" />
   </Header>
