@@ -52,7 +52,7 @@ const cardSlide = z.discriminatedUnion('type', [
   }),
 ]);
 
-/** 카드뉴스·그래프 이미지 세트. pnpm cards로 PNG를 뽑습니다. */
+/** 카드뉴스·그래프 세트. 글에는 <CardSet set="..." />로 HTML 그대로 넣고, PNG는 dev /cards/ 페이지에서 내려받습니다. */
 const cards = defineCollection({
   loader: glob({ pattern: '**/*.{yml,yaml}', base: './src/content/cards' }),
   schema: z.object({
