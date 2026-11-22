@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import { getText } from '../../i18n/ui';
+import { categoryLabel, formatShortDate, postLang, postUrl, type Post } from '../../lib/posts';
+import { postThumbnail } from '../../lib/thumbnail';
+
+interface Props {
+  post: Post;
+  /** 첫 화면에 보이는 카드는 바로 불러옵니다 */
+  eager?: boolean;
+}
+
+// 홈 화면용 썸네일 카드. 썸네일은 본문 첫 이미지에서 가져오고, 없으면 카테고리 색 카드로 대신합니다.
+const { post, eager = false } = Astro.props;
+const lang = postLang(post);
+const t = getText(lang);
+const thumb = await postThumbnail(post);
+const category = post.data.category;
+---
+
+<article class="post-tile" data-category={category}>
+  <a class="post-tile-link" href={postUrl(post)}>
+    <div class="post-tile-media">
+      {
+        thumb ? (
+          <Image
+            src={thumb}
+            alt=""
+            widths={[400, 720]}
+            sizes="(min-width: 960px) 330px, (min-width: 600px) 50vw, 100vw"
+            class="post-tile-image"
+            loading={eager ? 'eager' : 'lazy'}
+          />
+        ) : (
+          <div class="post-tile-fallback" aria-hidden="true">
+            <span>{categoryLabel(category, lang)}</span>
+          </div>
+        )
+      }
+    </div>
+    <div class="post-tile-body">
+      <div class="post-meta">
+        <span class="post-category">{categoryLabel(category, lang)}</span>
+        <time datetime={post.data.pubDate.toISOString()}>{formatShortDate(post.data.pubDate, lang)}</time>
+        {post.data.pinned && <span class="pinned-badge">{t('post.pinned')}</span>}
+        {post.data.draft && <span class="draft-badge">{t('post.draftShort')}</span>}
+      </div>
+      <h3 class="post-tile-title">{post.data.title}</h3>
+      {post.data.description && <p class="post-tile-description">{post.data.description}</p>}
+    </div>
+  </a>
+</article>
