@@ -1,0 +1,36 @@
+---
+import PostCard from './post-card.astro';
+import { LANGS } from '../../content/taxonomy.mjs';
+import { getText, LANG_NAMES, localizePath } from '../../i18n/ui';
+import type { Lang, Post } from '../../lib/posts';
+
+interface Props {
+  posts: Post[];
+  lang: Lang;
+}
+
+const { posts, lang } = Astro.props;
+const t = getText(lang);
+---
+
+{
+  posts.length > 0 ? (
+    <div class="post-list">
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+  ) : (
+    <div class="empty-state">
+      <p>{t('blog.empty')}</p>
+      <p>
+        {t('blog.emptyOther')}:{' '}
+        {LANGS.filter((l) => l !== lang).map((other) => (
+          <a href={localizePath('blog/', other)} hreflang={other} lang={other}>
+            {LANG_NAMES[other]}
+          </a>
+        ))}
+      </p>
+    </div>
+  )
+}

@@ -20,7 +20,7 @@ import sharp from 'sharp';
 import YAML from 'yaml';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const CONTENT_DIR = path.join(ROOT, 'src/content/blog');
+const CONTENT_DIR = path.join(ROOT, 'src/content/blog/ko');
 const ASSET_DIR = path.join(ROOT, 'src/assets/blog');
 const PUBLIC_IMG_DIR = path.join(ROOT, 'public/images/tistory');
 
@@ -30,7 +30,7 @@ const WEBP_QUALITY = 80;
 
 /** 티스토리 카테고리 → 블로그 태그 */
 const CATEGORY_TAGS = {
-  'Study/일상·회고': ['회고'],
+  'Study/일상·회고': [],
   'Frontend/JavaScript': ['Frontend', 'JavaScript'],
   'Frontend/React·React Native': ['Frontend', 'React'],
   'Frontend/HTML5': ['Frontend', 'HTML'],
@@ -43,10 +43,16 @@ const CATEGORY_TAGS = {
   'Study/Python3': ['Python'],
   'Study/Computer Security': ['Security'],
   'Study/Android': ['Android'],
-  'Life/사진': ['사진'],
+  'Life/사진': [],
   'Study/임시': [],
 };
 const DRAFT_CATEGORIES = new Set(['Study/임시']);
+
+/** 티스토리 카테고리 → 블로그 카테고리(src/content/taxonomy.mjs). 없으면 dev */
+const CATEGORY_MAP = {
+  'Study/일상·회고': 'retrospective',
+  'Life/사진': 'life',
+};
 
 /** 첨부파일(fileblock) → 외부 링크 대체 */
 const FILE_LINKS = {
@@ -205,7 +211,6 @@ for (const post of posts) {
 
   // 1) 이미지 블록: 이미지 최적화 + 마크다운 이미지로 치환
   let imgN = 0;
-  let firstImage;
   imgMds.length = 0;
   const imgEls = body.find('img').toArray();
   for (const el of imgEls) {
@@ -243,8 +248,8 @@ for (const post of posts) {
         // 글 주소(/blog/<slug>/) 기준 상대경로 → public/images/tistory/<slug>/
         md = `<img src="../../images/tistory/${slug}/${result.file}" alt="${safeAlt}" loading="lazy" />`;
       } else {
-        const rel = `../../assets/blog/${slug}/${result.file}`;
-        firstImage ??= rel;
+        // src/content/blog/ko/<글>.md 기준 상대경로
+        const rel = `../../../assets/blog/${slug}/${result.file}`;
         md = `![${safeAlt}](${rel})`;
       }
     }
@@ -339,10 +344,10 @@ for (const post of posts) {
     title: post.title,
     description,
     pubDate: post.date,
+    category: CATEGORY_MAP[post.category] ?? 'dev',
     tags: tags ?? [],
     draft: DRAFT_CATEGORIES.has(post.category) || md.length < 50,
   };
-  if (firstImage) fm.coverImage = firstImage;
 
   const content = `---\n${YAML.stringify(fm)}---\n\n> 이 글은 ${post.datetime.slice(0, 10)}에 티스토리 블로그(${TISTORY_HOST}/${post.id})에 처음 작성한 글을 옮겨온 것입니다.\n\n${md}\n`;
   await writeFile(outFile, content);

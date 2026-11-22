@@ -1,0 +1,10 @@
+---
+import BlogList from '../../views/blog-list.astro';
+import { categoryPaths } from '../../lib/posts';
+
+export const getStaticPaths = () => categoryPaths('ko');
+
+const { lang, category } = Astro.props;
+---
+
+<BlogList lang={lang} category={category} />

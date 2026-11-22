@@ -1,0 +1,33 @@
+---
+import PageLayout from '../layouts/page-layout.astro';
+import PostList from '../components/astro/post-list.astro';
+import CategoryNav from '../components/astro/category-nav.astro';
+import { getText } from '../i18n/ui';
+import { categoryLabel, getPosts, type Category, type Lang } from '../lib/posts';
+
+interface Props {
+  lang: Lang;
+  /** 있으면 그 카테고리의 글만 보여 줍니다 (/categories/<key>/). */
+  category?: Category;
+}
+
+const { lang, category } = Astro.props;
+const t = getText(lang);
+const allPosts = await getPosts({ lang });
+const posts = category ? allPosts.filter((p) => p.data.category === category) : allPosts;
+const heading = category ? categoryLabel(category, lang) : t('blog.title');
+---
+
+<PageLayout
+  lang={lang}
+  title={heading}
+  description={category ? t('category.description', { name: heading }) : t('blog.description')}
+>
+  <header class="page-header">
+    <h1>{heading}</h1>
+    <p>{t('blog.count', { n: posts.length })}</p>
+  </header>
+
+  <CategoryNav lang={lang} posts={allPosts} current={category} />
+  <PostList posts={posts} lang={lang} />
+</PageLayout>

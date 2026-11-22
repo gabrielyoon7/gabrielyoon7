@@ -50,10 +50,10 @@ npm run history:reset -- --push
 node scripts/import-tistory.mjs ~/Downloads/leirbag-1-1
 ```
 
-- 글: `src/content/blog/<날짜>-tistory-<번호>.md`
+- 글: `src/content/blog/ko/<날짜>-tistory-<번호>.md`
 - 정적 이미지: 긴 변 기준 최대 1600px webp로 줄여서 `src/assets/blog/<slug>/`에 저장
 - 움직이는 GIF와 표 안의 이미지: `public/images/tistory/<slug>/`에 저장
-- 태그: 티스토리 카테고리에서 변환(`CATEGORY_TAGS`). `Study/임시` 카테고리는 `draft: true`
+- 카테고리·태그: 티스토리 카테고리에서 변환(`CATEGORY_MAP`, `CATEGORY_TAGS`). `Study/임시` 카테고리는 `draft: true`
 - 옛 글 링크(`leirbag.tistory.com/<번호>`)는 백업에 있는 글이면 새 주소로 바꿈
 
 이미 변환한 글은 건너뜁니다. 다시 만들려면 `--force`, 이미지까지 다시 변환하려면 `--reimage`, 일부 글만 처리하려면 `--only 73,84`를 붙입니다.

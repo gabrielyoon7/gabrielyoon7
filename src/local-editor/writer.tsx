@@ -24,16 +24,51 @@ import {
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import "./writer.css";
+import {
+  LANGS,
+  DEFAULT_LANG,
+  CATEGORY_KEYS,
+  CATEGORY_LABELS,
+  DEFAULT_CATEGORY,
+} from "../content/taxonomy.mjs";
+
+type Lang = (typeof LANGS)[number];
+type Category = (typeof CATEGORY_KEYS)[number];
+const LANG_NAMES: Record<Lang, string> = { ko: "한국어", en: "English" };
 
 type Metadata = {
   title: string;
   description: string;
   pubDate: string;
+  category: Category;
   tags: string[];
+  series?: string;
+  seriesOrder?: number | null;
+  pinned?: boolean;
   draft: boolean;
 };
 type Post = { id: string; metadata: Metadata; body: string; revision: string };
-type Row = { id: string; title: string; draft?: boolean; error?: boolean };
+type Row = { id: string; lang: Lang; title: string; draft?: boolean; error?: boolean };
+const langOf = (id: string) => id.split("/")[0] as Lang;
+/** 미리보기 주소: 기본 언어는 /blog/, 그 외는 /<lang>/blog/ */
+const previewPath = (id: string) => {
+  const lang = langOf(id);
+  const slug = id.slice(id.indexOf("/") + 1).replace(/\.mdx?$/, "");
+  return `${lang === DEFAULT_LANG ? "" : `${lang}/`}blog/${encodeURIComponent(slug)}/`;
+};
+/** 예전 글에 없는 항목은 기본값으로 채워 폼에서 다룰 수 있게 합니다. */
+const normalize = (post: Post): Post => ({
+  ...post,
+  metadata: {
+    ...post.metadata,
+    category: CATEGORY_KEYS.includes(post.metadata.category)
+      ? post.metadata.category
+      : DEFAULT_CATEGORY,
+    series: post.metadata.series ?? "",
+    seriesOrder: post.metadata.seriesOrder ?? null,
+    pinned: post.metadata.pinned === true,
+  },
+});
 const specialMDX = (body: string) =>
   /^(import|export)\s/m.test(body) ||
   /<[A-Za-z]|\{/.test(body.replace(/```[\s\S]*?```/g, ""));
@@ -51,6 +86,7 @@ export default function Writer({ base }: { base: string }) {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [title, setTitle] = useState("");
+  const [newLang, setNewLang] = useState<Lang>(DEFAULT_LANG);
   const [source, setSource] = useState(false);
   const [editorKey, setEditorKey] = useState(0);
   const [autoSave, setAutoSave] = useState(true);
@@ -148,13 +184,17 @@ export default function Writer({ base }: { base: string }) {
       window.removeEventListener("keydown", key);
     };
   }, []);
-  async function open(id?: string) {
+  async function open(id?: string, translateTo?: Lang) {
     setBusy(true);
     try {
       if (current.current && !(await save())) return;
-      const next: Post = id
-        ? await request(`?id=${encodeURIComponent(id)}`)
-        : await request("", "POST", { title });
+      const next: Post = normalize(
+        id && !translateTo
+          ? await request(`?id=${encodeURIComponent(id)}`)
+          : translateTo
+            ? await request("", "POST", { lang: translateTo, translationOf: id })
+            : await request("", "POST", { title, lang: newLang }),
+      );
       current.current = next;
       saved.current = snapshot(next);
       setPost(next);
@@ -211,6 +251,17 @@ export default function Writer({ base }: { base: string }) {
               void open();
             }}
           >
+            <select
+              aria-label="새 글 언어"
+              value={newLang}
+              onChange={(e) => setNewLang(e.target.value as Lang)}
+            >
+              {LANGS.map((lang) => (
+                <option key={lang} value={lang}>
+                  {LANG_NAMES[lang]}
+                </option>
+              ))}
+            </select>
             <input
               aria-label="새 글 제목"
               placeholder="새 글 제목"
@@ -233,14 +284,16 @@ export default function Writer({ base }: { base: string }) {
               >
                 <span>{row.title}</span>
                 <small>
+                  {LANG_NAMES[row.lang] ?? row.lang} ·{" "}
                   {row.error ? "파일 확인 필요" : row.draft ? "초안" : "공개"} ·{" "}
-                  {row.id}
+                  {row.id.slice(row.id.indexOf("/") + 1)}
                 </small>
               </button>
             ))}
           </nav>
           <p className="hint">
-            파일은 src/content/blog에 저장됩니다. 공개 여부를 바꿔도 배포는 Git
+            파일은 src/content/blog/&lt;언어&gt;/에 저장됩니다. 언어 폴더에 같은
+            파일명이 있으면 번역본으로 연결됩니다. 공개 여부를 바꿔도 배포는 Git
             push 후 진행됩니다.
           </p>
         </aside>
@@ -276,18 +329,27 @@ export default function Writer({ base }: { base: string }) {
                 <button className="delete-post" disabled={busy} onClick={() => void remove()}>
                   글 삭제
                 </button>
+                {LANGS.filter(
+                  (lang) =>
+                    lang !== langOf(post.id) &&
+                    !rows.some((row) => row.id === `${lang}/${post.id.split("/")[1]}`),
+                ).map((lang) => (
+                  <button
+                    key={lang}
+                    disabled={busy}
+                    onClick={() => void open(post.id, lang)}
+                  >
+                    {LANG_NAMES[lang]} 번역본 만들기
+                  </button>
+                ))}
                 <a
-                  href={`${base}blog/${encodeURIComponent(post.id.replace(/\.mdx?$/, ""))}/`}
+                  href={`${base}${previewPath(post.id)}`}
                   target="_blank"
                   rel="noreferrer"
                   onClick={async (e) => {
                     e.preventDefault();
                     if (await save())
-                      window.open(
-                        `${base}blog/${encodeURIComponent(post.id.replace(/\.mdx?$/, ""))}/`,
-                        "_blank",
-                        "noopener",
-                      );
+                      window.open(`${base}${previewPath(post.id)}`, "_blank", "noopener");
                   }}
                 >
                   미리보기 ↗
@@ -310,6 +372,19 @@ export default function Writer({ base }: { base: string }) {
                   />
                 </label>
                 <div className="metadata-row">
+                  <label>
+                    카테고리
+                    <select
+                      value={post.metadata.category}
+                      onChange={(e) => metadata("category", e.target.value)}
+                    >
+                      {CATEGORY_KEYS.map((key) => (
+                        <option key={key} value={key}>
+                          {CATEGORY_LABELS[key][langOf(post.id)]}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
                   <label>
                     작성일
                     <input
@@ -334,6 +409,52 @@ export default function Writer({ base }: { base: string }) {
                       onChange={(e) => metadata("draft", e.target.checked)}
                     />{" "}
                     초안으로 보관
+                  </label>
+                  <label className="draft">
+                    <input
+                      type="checkbox"
+                      checked={post.metadata.pinned === true}
+                      onChange={(e) => metadata("pinned", e.target.checked)}
+                    />{" "}
+                    홈에 고정
+                  </label>
+                </div>
+                <div className="metadata-row">
+                  <label>
+                    시리즈 (선택)
+                    <input
+                      placeholder="비워 두면 시리즈 아님"
+                      value={post.metadata.series ?? ""}
+                      onChange={(e) => {
+                        const series = e.target.value;
+                        const m = post.metadata;
+                        // 이름과 순서는 함께 있어야 하므로 한쪽에 맞춰 다른 쪽을 채우거나 비웁니다.
+                        change({
+                          ...post,
+                          metadata: {
+                            ...m,
+                            series,
+                            seriesOrder: series.trim() ? (m.seriesOrder ?? 1) : null,
+                          },
+                        });
+                      }}
+                    />
+                  </label>
+                  <label>
+                    시리즈 순서
+                    <input
+                      type="number"
+                      min={1}
+                      step={1}
+                      disabled={!post.metadata.series?.trim()}
+                      value={post.metadata.seriesOrder ?? ""}
+                      onChange={(e) =>
+                        metadata(
+                          "seriesOrder",
+                          e.target.value === "" ? null : Number(e.target.value),
+                        )
+                      }
+                    />
                   </label>
                 </div>
               </fieldset>

@@ -1,0 +1,53 @@
+---
+interface Props {
+  heading: string;
+  unit: string;
+  data: { label: string; value: number }[];
+  caption?: string;
+}
+
+const { heading, unit, data, caption } = Astro.props;
+
+// SVG 좌표계. 실제 크기는 CSS가 카드 폭에 맞춥니다.
+const W = 1000;
+const H = 640;
+const labelArea = 72;
+const valueArea = 64;
+const plotH = H - labelArea - valueArea;
+const max = Math.max(...data.map((d) => d.value), 0) || 1;
+const slot = W / data.length;
+const barW = Math.min(slot * 0.6, 160);
+const format = (n: number) => n.toLocaleString('ko-KR');
+---
+
+<div class="slide slide-chart">
+  <h2 class="slide-heading">{heading}</h2>
+  <svg
+    class="bar-chart"
+    viewBox={`0 0 ${W} ${H}`}
+    role="img"
+    aria-label={`${heading}: ${data.map((d) => `${d.label} ${format(d.value)}${unit}`).join(', ')}`}
+  >
+    <line class="bar-axis" x1="0" x2={W} y1={valueArea + plotH} y2={valueArea + plotH} />
+    {
+      data.map((d, i) => {
+        const h = Math.max((d.value / max) * plotH, 0);
+        const x = slot * i + (slot - barW) / 2;
+        const y = valueArea + plotH - h;
+        return (
+          <g>
+            <rect class="bar" x={x} y={y} width={barW} height={h} rx="8" />
+            <text class="bar-value" x={x + barW / 2} y={y - 18} text-anchor="middle">
+              {format(d.value)}
+              {unit}
+            </text>
+            <text class="bar-label" x={x + barW / 2} y={H - 18} text-anchor="middle">
+              {d.label}
+            </text>
+          </g>
+        );
+      })
+    }
+  </svg>
+  {caption && <p class="slide-caption">{caption}</p>}
+</div>

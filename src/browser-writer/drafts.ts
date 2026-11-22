@@ -1,9 +1,25 @@
+import {
+  LANGS,
+  DEFAULT_LANG,
+  CATEGORY_KEYS,
+  DEFAULT_CATEGORY,
+} from "../content/taxonomy.mjs";
+
+export type Lang = (typeof LANGS)[number];
+export type Category = (typeof CATEGORY_KEYS)[number];
 export type Draft = {
   id: string;
   title: string;
   description: string;
   pubDate: string;
+  lang: Lang;
+  category: Category;
   tags: string;
+  /** 비어 있으면 시리즈 아님 */
+  series: string;
+  /** 입력칸 값 그대로 (숫자 문자열) */
+  seriesOrder: string;
+  pinned: boolean;
   draft: boolean;
   body: string;
   modified: string;
@@ -15,7 +31,12 @@ export function newDraft(now = new Date()): Draft {
     title: "",
     description: "",
     pubDate: `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`,
+    lang: DEFAULT_LANG,
+    category: DEFAULT_CATEGORY,
     tags: "",
+    series: "",
+    seriesOrder: "",
+    pinned: false,
     draft: true,
     body: "",
     modified: now.toISOString(),
@@ -40,7 +61,15 @@ export function readDraft(raw: string): Draft {
       "저장된 초안을 읽을 수 없습니다. 브라우저 데이터를 지우지 말고 다른 초안을 이용해 주세요.",
     );
   }
-  return d;
+  // 언어·카테고리·시리즈가 생기기 전에 저장한 초안도 그대로 열 수 있게 기본값을 채웁니다.
+  return {
+    ...d,
+    lang: LANGS.includes(d.lang) ? d.lang : DEFAULT_LANG,
+    category: CATEGORY_KEYS.includes(d.category) ? d.category : DEFAULT_CATEGORY,
+    series: typeof d.series === "string" ? d.series : "",
+    seriesOrder: typeof d.seriesOrder === "string" ? d.seriesOrder : "",
+    pinned: d.pinned === true,
+  };
 }
 export function listDrafts(storage: Storage): {
   drafts: Draft[];
@@ -89,8 +118,30 @@ export function exportMdx(d: Draft): string {
     .split(",")
     .map((t) => t.trim())
     .filter(Boolean);
+  const series = d.series.trim();
   // JSON strings/arrays are valid YAML and safely quote colons, newlines and quotes.
-  return `---\ntitle: ${JSON.stringify(d.title)}\ndescription: ${JSON.stringify(d.description)}\npubDate: ${JSON.stringify(d.pubDate)}\ntags: ${JSON.stringify(tags)}\ndraft: ${d.draft}\n---\n\n${d.body}\n`;
+  const lines = [
+    `title: ${JSON.stringify(d.title)}`,
+    `description: ${JSON.stringify(d.description)}`,
+    `pubDate: ${JSON.stringify(d.pubDate)}`,
+    `category: ${d.category}`,
+    `tags: ${JSON.stringify(tags)}`,
+    ...(series
+      ? [`series: ${JSON.stringify(series)}`, `seriesOrder: ${seriesOrder(d) ?? 1}`]
+      : []),
+    ...(d.pinned ? ["pinned: true"] : []),
+    `draft: ${d.draft}`,
+  ];
+  return `---\n${lines.join("\n")}\n---\n\n${d.body}\n`;
+}
+/** 시리즈 순서 입력값. 1 이상의 정수가 아니면 null */
+export function seriesOrder(d: Draft): number | null {
+  const n = Number(d.seriesOrder);
+  return d.seriesOrder.trim() && Number.isInteger(n) && n > 0 ? n : null;
+}
+/** GitHub에서 파일을 만들 폴더 */
+export function folder(d: Draft): string {
+  return `src/content/blog/${d.lang}/`;
 }
 export function filename(d: Draft): string {
   const slug = Array.from(

@@ -1,67 +1,101 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './base-layout.astro';
 import Header from '../components/astro/header.astro';
 import Footer from '../components/astro/footer.astro';
 import ThemeToggle from '../components/astro/theme-toggle.astro';
 import TableOfContents from '../components/astro/table-of-contents.astro';
+import Comments from '../components/astro/comments.astro';
+import { getText, LANG_NAMES } from '../i18n/ui';
+import {
+  categoryLabel,
+  categoryUrl,
+  formatDate,
+  getRelatedPosts,
+  getSeriesPosts,
+  getTagLabels,
+  getTranslations,
+  postLang,
+  postSlug,
+  postUrl,
+  readingMinutes,
+  tagKey,
+  tagUrl,
+  type Post,
+} from '../lib/posts';
 
 interface Props {
-  post: CollectionEntry<'blog'>;
+  post: Post;
   headings: import('astro').MarkdownHeading[];
-  prevPost?: CollectionEntry<'blog'>;
-  nextPost?: CollectionEntry<'blog'>;
+  prevPost?: Post;
+  nextPost?: Post;
 }
 
 const { post, headings, prevPost, nextPost } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const slug = post.id.replace(/\.mdx?$/, '');
-const canonicalUrl = new URL(`${base}blog/${slug}/`, Astro.site).href;
+const { title, description, pubDate, updatedDate, category, tags, series, coverImage, draft } =
+  post.data;
+const lang = postLang(post);
+const canonicalUrl = new URL(postUrl(post), Astro.site).href;
+const tagLabels = await getTagLabels(lang);
+const tagLabel = (tag: string) => tagLabels.get(tagKey(tag)) ?? tag;
+const translations = await getTranslations(post);
+const seriesPosts = await getSeriesPosts(post);
+const relatedPosts = await getRelatedPosts(post);
 
-const pubDate = post.data.pubDate.toLocaleDateString('ko-KR', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
-
-const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const t = getText(lang);
+const alternates = translations.map((p) => ({ lang: postLang(p), href: postUrl(p) }));
 ---
 
 <BaseLayout
-  title={post.data.title}
-  description={post.data.description}
+  title={title}
+  description={description}
   canonicalUrl={canonicalUrl}
   ogType="article"
+  ogImage={coverImage ?? `og/${lang}/${postSlug(post)}.png`}
+  publishedTime={pubDate}
+  modifiedTime={updatedDate}
+  tags={tags.map(tagLabel)}
+  lang={lang}
+  alternates={alternates}
 >
-  <Header slot="header">
+  <Header slot="header" lang={lang} alternates={alternates}>
     <ThemeToggle slot="actions" />
   </Header>
 
   <div class="container-wide">
     <article class="post-layout">
-      <div class="post-content-wrapper">
+      <div class="post-content-wrapper" data-pagefind-body>
         <header class="post-header">
-          <h1>{post.data.title}</h1>
-          <p class="post-description">{post.data.description}</p>
+          {draft && <p class="draft-badge">{t('post.draft')}</p>}
+          <p class="post-category">
+            <a href={categoryUrl(category, lang)}>{categoryLabel(category, lang)}</a>
+          </p>
+          <h1 data-pagefind-meta="title">{title}</h1>
+          <p class="post-description">{description}</p>
           <div class="post-meta">
-            <time datetime={post.data.pubDate.toISOString()}>Published: {pubDate}</time>
+            <time datetime={pubDate.toISOString()}>{t('post.published')}: {formatDate(pubDate, lang)}</time>
             {
               updatedDate && (
-                <time datetime={post.data.updatedDate!.toISOString()}>Updated: {updatedDate}</time>
+                <time datetime={updatedDate.toISOString()}>
+                  {t('post.updated')}: {formatDate(updatedDate, lang)}
+                </time>
               )
+            }
+            <span>{t('post.readingTime', { n: readingMinutes(post) })}</span>
+            {
+              translations.map((p) => (
+                <a href={postUrl(p)} hreflang={postLang(p)} lang={postLang(p)}>
+                  {LANG_NAMES[postLang(p)]}
+                </a>
+              ))
             }
           </div>
           {
-            post.data.tags.length > 0 && (
-              <ul class="tag-list" aria-label="Tags">
-                {post.data.tags.map((tag) => (
+            tags.length > 0 && (
+              <ul data-pagefind-ignore class="tag-list" aria-label={t('post.tags')}>
+                {tags.map((tag) => (
                   <li>
-                    <a class="tag" href={`${base}tags/${encodeURIComponent(tag.toLowerCase())}/`}>
-                      {tag}
+                    <a class="tag" href={tagUrl(tag, lang)}>
+                      {tagLabel(tag)}
                     </a>
                   </li>
                 ))}
@@ -70,19 +104,60 @@ const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
           }
         </header>
 
-        <div class="toc-mobile">
-          <TableOfContents headings={headings} />
+        {
+          seriesPosts.length > 0 && (
+            <nav data-pagefind-ignore class="series-box" aria-label={`${t('post.series')}: ${series}`}>
+              <p class="series-title">
+                {t('post.series')} · {series}
+              </p>
+              <ol>
+                {seriesPosts.map((p) => (
+                  <li>
+                    {p.id === post.id ? (
+                      <span aria-current="page">{p.data.title}</span>
+                    ) : (
+                      <a href={postUrl(p)}>{p.data.title}</a>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )
+        }
+
+        <div class="toc-mobile" data-pagefind-ignore>
+          <TableOfContents headings={headings} lang={lang} />
         </div>
 
         <div class="prose">
           <slot />
         </div>
 
-        <nav class="post-nav" aria-label="Post navigation">
+        {
+          relatedPosts.length > 0 && (
+            <section data-pagefind-ignore class="related-posts" aria-labelledby="related-title">
+              <h2 id="related-title" class="section-title">
+                {t('post.related')}
+              </h2>
+              <ul>
+                {relatedPosts.map((p) => (
+                  <li>
+                    <a href={postUrl(p)}>{p.data.title}</a>
+                    <span>{p.data.description}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+
+        <Comments lang={lang} term={`blog/${postSlug(post)}`} />
+
+        <nav data-pagefind-ignore class="post-nav" aria-label={t('post.navigation')}>
           {
             prevPost ? (
-              <a class="post-nav-link prev" href={`${base}blog/${prevPost.id.replace(/\.mdx?$/, '')}/`}>
-                <span class="post-nav-label">Previous</span>
+              <a class="post-nav-link prev" href={postUrl(prevPost)}>
+                <span class="post-nav-label">{t('post.previous')}</span>
                 {prevPost.data.title}
               </a>
             ) : (
@@ -91,11 +166,8 @@ const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
           }
           {
             nextPost ? (
-              <a
-                class="post-nav-link next"
-                href={`${base}blog/${nextPost.id.replace(/\.mdx?$/, '')}/`}
-              >
-                <span class="post-nav-label">Next</span>
+              <a class="post-nav-link next" href={postUrl(nextPost)}>
+                <span class="post-nav-label">{t('post.next')}</span>
                 {nextPost.data.title}
               </a>
             ) : (
@@ -106,10 +178,126 @@ const updatedDate = post.data.updatedDate?.toLocaleDateString('ko-KR', {
       </div>
 
       <aside class="toc-sidebar">
-        <TableOfContents headings={headings} />
+        <TableOfContents headings={headings} lang={lang} />
       </aside>
     </article>
   </div>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang={lang} />
+
+    <!-- Code block enhancements -->
+    <script>
+      function enhanceCodeBlocks() {
+        document.querySelectorAll('.prose pre').forEach((pre) => {
+          if (pre.closest('.code-block-wrapper')) return;
+
+          const code = pre.querySelector('code');
+          if (!code) return;
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-block-wrapper';
+
+          const header = document.createElement('div');
+          header.className = 'code-block-header';
+
+          const lang = document.createElement('span');
+          lang.className = 'code-block-lang';
+          // Shiki는 <pre data-language="ts">로 언어를 알려 줍니다.
+          const match = (code.className || '').match(/language-(\w+)/);
+          lang.textContent = pre.getAttribute('data-language') || (match ? match[1] : 'code');
+
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'code-copy-btn';
+          copyBtn.type = 'button';
+          copyBtn.textContent = 'Copy';
+          copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
+          copyBtn.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(code.textContent || '');
+              copyBtn.textContent = 'Copied!';
+              copyBtn.classList.add('copied');
+              setTimeout(() => {
+                copyBtn.textContent = 'Copy';
+                copyBtn.classList.remove('copied');
+              }, 2000);
+            } catch {
+              copyBtn.textContent = 'Failed';
+            }
+          });
+
+          header.appendChild(lang);
+          header.appendChild(copyBtn);
+
+          pre.parentNode?.insertBefore(wrapper, pre);
+          wrapper.appendChild(header);
+          wrapper.appendChild(pre);
+        });
+      }
+
+      function initLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('lightbox-close');
+        if (!lightbox || !lightboxImg) return;
+
+        document.querySelectorAll('[data-lightbox]').forEach((img) => {
+          img.addEventListener('click', () => {
+            const src = img.getAttribute('data-lightbox') || img.getAttribute('src');
+            const alt = img.getAttribute('alt') || '';
+            if (src) {
+              lightboxImg.setAttribute('src', src);
+              lightboxImg.setAttribute('alt', alt);
+              lightbox.classList.add('is-open');
+              lightbox.setAttribute('aria-hidden', 'false');
+            }
+          });
+        });
+
+        const closeLightbox = () => {
+          lightbox.classList.remove('is-open');
+          lightbox.setAttribute('aria-hidden', 'true');
+          lightboxImg.removeAttribute('src');
+        };
+
+        closeBtn?.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeLightbox();
+        });
+      }
+
+      function initTocActive() {
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        const headings = document.querySelectorAll('.prose h2[id], .prose h3[id]');
+        if (!tocLinks.length || !headings.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                tocLinks.forEach((link) => {
+                  link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+                });
+              }
+            });
+          },
+          { rootMargin: '-80px 0px -70% 0px', threshold: 0 }
+        );
+
+        headings.forEach((h) => observer.observe(h));
+      }
+
+      enhanceCodeBlocks();
+      initLightbox();
+      initTocActive();
+    </script>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+      <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close image preview">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
 </BaseLayout>
