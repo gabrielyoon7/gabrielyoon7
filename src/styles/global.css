@@ -301,6 +301,90 @@ main {
 
 .more-link { margin: 2rem 0 0; font-size: var(--text-sm); font-weight: 500; }
 
+/* Home: post cards */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 2rem 1.5rem;
+}
+
+.post-tile { --tile-color: var(--accent); min-width: 0; }
+.post-tile[data-category='retrospective'] { --tile-color: var(--callout-warn-border); }
+.post-tile[data-category='life'] { --tile-color: var(--callout-tip-border); }
+
+.post-tile-link { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
+
+.post-tile-media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.post-tile-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: transform 0.3s ease;
+}
+
+.post-tile-fallback {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  padding: 1.25rem;
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--tile-color) 45%, transparent), transparent 60%),
+    linear-gradient(135deg, color-mix(in srgb, var(--tile-color) 14%, var(--surface)), var(--surface));
+}
+.post-tile-fallback span {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+  color: color-mix(in srgb, var(--tile-color) 70%, var(--foreground));
+}
+
+.post-tile-body { padding-top: 1rem; }
+.post-tile-body .post-meta { margin-bottom: 0.5rem; font-size: var(--text-xs); }
+.post-tile .post-category { color: color-mix(in srgb, var(--tile-color) 80%, var(--foreground)); }
+
+.post-tile-title {
+  margin: 0 0 0.375rem;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--foreground);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.15s;
+}
+
+.post-tile-description {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-tile-link:hover .post-tile-title { color: var(--accent); }
+.post-tile-link:hover .post-tile-image { transform: scale(1.03); }
+.post-tile-link:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; border-radius: var(--radius); }
+
+@media (prefers-reduced-motion: reduce) {
+  .post-tile-image { transition: none; }
+  .post-tile-link:hover .post-tile-image { transform: none; }
+}
+
 .page-header { margin-bottom: 2.5rem; }
 .page-header h1 { font-size: var(--text-4xl); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
 .page-header p { color: var(--muted); margin: 0; }
@@ -637,6 +721,11 @@ main {
 .figure-image { border-radius: var(--radius); cursor: zoom-in; transition: opacity 0.15s; }
 .figure-image:hover { opacity: 0.92; }
 .figure-caption { margin-top: 0.75rem; font-size: var(--text-sm); color: var(--muted); text-align: center; }
+
+/* Imported posts (Tistory): image captions, embedded video */
+.prose > p > img { margin: 2.5rem auto 0; }
+.prose > p:has(> img) + p > em:only-child { display: block; margin-top: -0.75rem; font-size: var(--text-sm); color: var(--muted); text-align: center; }
+.prose iframe { display: block; width: 100%; max-width: 100%; margin: 2.5rem 0; border: 0; border-radius: var(--radius); }
 
 .lightbox {
   display: none;

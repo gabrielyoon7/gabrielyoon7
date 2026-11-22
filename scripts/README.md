@@ -41,3 +41,19 @@ npm run history:reset -- --push
 `--push`는 원격 상태를 먼저 가져와 로컬에 포함되어 있는지 확인하고, `--force-with-lease`로 덮어씁니다. 원격에만 있는 변경이 있으면 중단합니다. 브랜치 보호 규칙에 따라 강제 푸시가 거절될 수 있습니다. 푸시가 실패해도 로컬 정리는 이미 완료된 상태입니다. 이 경우 출력된 Previous HEAD로 `git reset --soft <Previous-HEAD>`를 실행하면 로컬 브랜치를 복구할 수 있습니다.
 
 다른 브랜치, 태그, reflog, 기존 클론 및 GitHub 내부에 남은 객체까지 영구 삭제하는 명령은 아닙니다.
+
+# 티스토리 백업 가져오기
+
+티스토리 백업 폴더(`<글번호>/<글번호>-제목.html` + `img/`)를 이 블로그 형식으로 변환합니다.
+
+```sh
+node scripts/import-tistory.mjs ~/Downloads/leirbag-1-1
+```
+
+- 글: `src/content/blog/ko/<날짜>-tistory-<번호>.md`
+- 정적 이미지: 긴 변 기준 최대 1600px webp로 줄여서 `src/assets/blog/<slug>/`에 저장
+- 움직이는 GIF와 표 안의 이미지: `public/images/tistory/<slug>/`에 저장
+- 카테고리·태그: 티스토리 카테고리에서 변환(`CATEGORY_MAP`, `CATEGORY_TAGS`). `Study/임시` 카테고리는 `draft: true`
+- 옛 글 링크(`leirbag.tistory.com/<번호>`)는 백업에 있는 글이면 새 주소로 바꿈
+
+이미 변환한 글은 건너뜁니다. 다시 만들려면 `--force`, 이미지까지 다시 변환하려면 `--reimage`, 일부 글만 처리하려면 `--only 73,84`를 붙입니다.
