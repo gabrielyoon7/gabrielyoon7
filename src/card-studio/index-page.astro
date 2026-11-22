@@ -27,7 +27,6 @@ const sets = (await getCollection('cards')).sort((a, b) => a.id.localeCompare(b.
           return (
             <li>
               <a href={`${base}cards/${set.id}/`}>{set.data.title}</a>
-              <code>pnpm cards {set.id}</code>
               <span>
                 {set.data.slides.length}장 · {width}×{height}
               </span>

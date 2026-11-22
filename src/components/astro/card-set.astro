@@ -1,0 +1,65 @@
+---
+/**
+ * 카드 세트(src/content/cards/<set>.yaml)를 HTML/CSS로 그립니다. 이미지는 만들지 않습니다.
+ *
+ *   import CardSet from '../../../components/astro/card-set.astro';
+ *   <CardSet set="example" />
+ *
+ * 글 본문에서는 컨테이너 폭에 맞춰 줄어드는 가로 스크롤 줄로 보이고,
+ * 사이트 라이트/다크 테마를 따릅니다. PNG가 필요하면 dev 서버의 /cards/ 페이지에서 내려받으세요.
+ */
+import { getEntry } from 'astro:content';
+import { CARD_FORMATS } from '../../card-studio/formats';
+import CardFrame from '../../card-studio/card-frame.astro';
+import CoverSlide from '../../card-studio/slides/cover-slide.astro';
+import TextSlide from '../../card-studio/slides/text-slide.astro';
+import BarChartSlide from '../../card-studio/slides/bar-chart-slide.astro';
+import '../../card-studio/cards.css';
+
+interface Props {
+  /** src/content/cards 안의 파일 이름 (확장자 빼고) */
+  set: string;
+  /** row: 가로 스크롤 (기본) · stack: 세로로 쌓기 */
+  layout?: 'row' | 'stack';
+}
+
+const { set: setId, layout = 'row' } = Astro.props;
+const entry = await getEntry('cards', setId);
+if (!entry) throw new Error(`카드 세트를 찾을 수 없습니다: src/content/cards/${setId}.yaml`);
+
+const { title, format, footer, slides } = entry.data;
+const { width, height } = CARD_FORMATS[format];
+---
+
+<figure
+  class:list={['card-set', `card-set--${format}`, `card-set--${layout}`]}
+  data-card-set={setId}
+  data-format={format}
+  style={`--card-w:${width};--card-h:${height}`}
+>
+  <ul
+    class="card-set-track"
+    role="list"
+    aria-label={`${title} (${slides.length}장)`}
+    tabindex={layout === 'row' && slides.length > 1 ? 0 : undefined}
+  >
+    {
+      slides.map((slide, i) => (
+        <li aria-label={`${i + 1} / ${slides.length}`}>
+          <CardFrame format={format} index={i + 1} total={slides.length} footer={footer}>
+            {slide.type === 'cover' && <CoverSlide {...slide} />}
+            {slide.type === 'text' && <TextSlide {...slide} />}
+            {slide.type === 'bar-chart' && <BarChartSlide {...slide} />}
+          </CardFrame>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    layout === 'row' && slides.length > 1 && (
+      <figcaption class="card-set-hint">
+        {title} · {slides.length}장, 옆으로 넘겨 보세요
+      </figcaption>
+    )
+  }
+</figure>
