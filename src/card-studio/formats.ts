@@ -1,4 +1,4 @@
-/** 카드 크기(px). 캡처 스크립트도 이 값을 그대로 씁니다. */
+/** 카드 원본 크기(px). PNG로 내보낼 때 이 크기 그대로 뽑습니다. */
 export const CARD_FORMATS = {
   /** 인스타그램 피드 세로형 4:5 */
   portrait: { width: 1080, height: 1350 },

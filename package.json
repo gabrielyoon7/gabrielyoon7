@@ -6,7 +6,6 @@
   "packageManager": "pnpm@10.28.2",
   "scripts": {
     "new": "node scripts/new-post.mjs",
-    "cards": "node scripts/capture-cards.mjs",
     "clear": "node scripts/reset-history.mjs --push",
     "history:reset": "node scripts/reset-history.mjs",
     "dev": "astro dev",
@@ -33,8 +32,8 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "cheerio": "^1.2.0",
+    "html-to-image": "1.11.13",
     "pagefind": "1.3.0",
-    "playwright": "1.52.0",
     "pretendard": "1.3.9",
     "satori": "0.12.2",
     "turndown": "^7.2.5",

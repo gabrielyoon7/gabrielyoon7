@@ -1,5 +1,5 @@
 ---
-import { CARD_FORMATS, type CardFormat } from './formats';
+import type { CardFormat } from './formats';
 
 interface Props {
   format: CardFormat;
@@ -9,24 +9,25 @@ interface Props {
 }
 
 const { format, index, total, footer } = Astro.props;
-const { width, height } = CARD_FORMATS[format];
 const name = String(index).padStart(2, '0');
 ---
 
-<section
-  class:list={['card', `card--${format}`]}
-  data-card={name}
-  style={`width:${width}px;height:${height}px`}
->
-  <div class="card-body">
-    <slot />
-  </div>
-  {
-    total > 1 || footer ? (
-      <footer class="card-footer">
-        <span>{footer}</span>
-        {total > 1 && <span>{index} / {total}</span>}
-      </footer>
-    ) : null
-  }
-</section>
+<div class="card-frame" data-card={name}>
+  <section class:list={['card', `card--${format}`]}>
+    <div class="card-body">
+      <slot />
+    </div>
+    {
+      total > 1 || footer ? (
+        <footer class="card-footer">
+          <span>{footer}</span>
+          {total > 1 && (
+            <span>
+              {index} / {total}
+            </span>
+          )}
+        </footer>
+      ) : null
+    }
+  </section>
+</div>

@@ -28,5 +28,3 @@ Thumbs.db
 package-lock.json
 yarn.lock
 
-# card studio output
-cards-out/
