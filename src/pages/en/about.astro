@@ -1,0 +1,61 @@
+---
+import PageLayout from '../../layouts/page-layout.astro';
+import { SITE } from '../../site.config';
+---
+
+<PageLayout lang="en" title="About" description="About the author">
+  <header class="page-header">
+    <h1>About</h1>
+  </header>
+
+  <div class="prose prose-lg">
+    <p class="lead">
+      I'm a frontend engineer at <strong>Toss Bank</strong>, working on compliance products since
+      January 2024.
+    </p>
+
+    <p>
+      I build customer-facing experiences and internal tools for compliance operations serving both
+      individual and corporate customers.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Customer-facing:</strong> KYC (customer due diligence) and FATCA/CRS (tax residency
+        self-certification).
+      </li>
+      <li>
+        <strong>Back-office:</strong> KYC reviews, end-to-end FATCA/CRS operations (reviews,
+        regulatory reporting, and ongoing submissions), AML, STR/CTR (transaction reporting), and
+        watchlist screening.
+      </li>
+      <li>
+        <strong>Frontend engineering:</strong> Performance optimization, shared UI architecture,
+        monorepo tooling, and developer experience.
+      </li>
+    </ul>
+
+    <blockquote>
+      <p>
+        I enjoy making complex domain logic easier to understand and maintain, without losing the
+        details that matter.
+      </p>
+    </blockquote>
+
+    <h2>Contact</h2>
+    <ul>
+      <li>
+        <a href={SITE.links.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      </li>
+      <li>
+        <a
+          href="https://www.linkedin.com/in/%EA%B0%80%EB%A6%BD-%EC%9C%A4-51a23b235/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>
+      </li>
+    </ul>
+  </div>
+</PageLayout>

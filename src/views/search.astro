@@ -1,0 +1,70 @@
+---
+import PageLayout from '../layouts/page-layout.astro';
+import { getText } from '../i18n/ui';
+import type { Lang } from '../lib/posts';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getText(lang);
+const base = import.meta.env.BASE_URL;
+---
+
+<PageLayout lang={lang} title={t('search.title')} description={t('search.description')}>
+  <header class="page-header">
+    <h1>{t('search.title')}</h1>
+  </header>
+
+  <div
+    id="search"
+    class="search"
+    data-base={base}
+    data-unavailable={t('search.unavailable')}
+  >
+  </div>
+</PageLayout>
+
+<script>
+  // Pagefind 색인과 UI는 `pnpm build` 때 dist/pagefind/에 만들어집니다.
+  // 페이지의 <html lang>과 같은 언어의 색인만 검색합니다.
+  const root = document.getElementById('search');
+  if (root) {
+    const base = root.dataset.base ?? '/';
+    const showNotice = () => {
+      const p = document.createElement('p');
+      p.className = 'search-notice';
+      p.textContent = root.dataset.unavailable ?? '';
+      root.replaceChildren(p);
+    };
+
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = `${base}pagefind/pagefind-ui.css`;
+    document.head.append(css);
+
+    const script = document.createElement('script');
+    script.src = `${base}pagefind/pagefind-ui.js`;
+    script.onerror = showNotice;
+    script.onload = () => {
+      // @ts-expect-error pagefind-ui.js가 전역에 등록합니다.
+      new window.PagefindUI({
+        element: '#search',
+        baseUrl: base,
+        bundlePath: `${base}pagefind/`,
+        showImages: false,
+        showSubResults: true,
+        resetStyles: false,
+        autofocus: true,
+      });
+      const query = new URLSearchParams(location.search).get('q');
+      const input = root.querySelector<HTMLInputElement>('input');
+      if (query && input) {
+        input.value = query;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    };
+    document.head.append(script);
+  }
+</script>

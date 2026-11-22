@@ -1,0 +1,30 @@
+---
+import { CATEGORY_KEYS } from '../../content/taxonomy.mjs';
+import { getText, localizePath } from '../../i18n/ui';
+import { categoryLabel, categoryUrl, type Category, type Lang, type Post } from '../../lib/posts';
+
+interface Props {
+  lang: Lang;
+  /** 전체 글 (개수 표시용) */
+  posts: Post[];
+  /** 지금 보고 있는 카테고리. 없으면 "전체" */
+  current?: Category;
+}
+
+const { lang, posts, current } = Astro.props;
+const t = getText(lang);
+const count = (category: Category) => posts.filter((p) => p.data.category === category).length;
+---
+
+<nav class="category-nav" aria-label={t('home.categories')}>
+  <a href={localizePath('blog/', lang)} aria-current={current ? undefined : 'page'}>
+    {t('blog.all')} <span class="tag-count">{posts.length}</span>
+  </a>
+  {
+    CATEGORY_KEYS.map((category) => (
+      <a href={categoryUrl(category, lang)} aria-current={current === category ? 'page' : undefined}>
+        {categoryLabel(category, lang)} <span class="tag-count">{count(category)}</span>
+      </a>
+    ))
+  }
+</nav>

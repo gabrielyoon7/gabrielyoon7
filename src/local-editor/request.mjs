@@ -41,7 +41,9 @@ export async function handleEditorRequest(request, clientAddress, store) {
     catch { throw new EditorError(400, '잘못된 JSON 요청입니다.'); }
     if (!input || typeof input !== 'object') throw new EditorError(400, '잘못된 요청입니다.');
     if (request.method === 'DELETE') return json(await store.remove(input.id, input));
-    return json(request.method === 'POST' ? await store.create(input.title) : await store.save(input.id, input));
+    return json(request.method === 'POST'
+      ? await store.create(input.title, { lang: input.lang, translationOf: input.translationOf })
+      : await store.save(input.id, input));
   } catch (error) {
     const status = error.status || (error.code === 'ENOENT' ? 404 : 500);
     return json({ error: error.status ? error.message : status === 404 ? '파일을 찾을 수 없습니다.' : '파일 처리에 실패했습니다.' }, status);

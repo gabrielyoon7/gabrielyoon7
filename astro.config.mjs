@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import localEditor from './src/local-editor/integration.mjs';
 import pocketPwa from './src/browser-writer/pwa/integration.mjs';
+import cardStudio from './src/card-studio/integration.mjs';
 
 const REPO_NAME = 'gabrielyoon7';
 const GITHUB_USERNAME = 'gabrielyoon7';
@@ -27,6 +28,7 @@ export default defineConfig({
     sitemap(),
     localEditor(),
     pocketPwa(),
+    cardStudio(),
   ],
 
   markdown: {
@@ -35,6 +37,8 @@ export default defineConfig({
         light: 'github-light',
         dark: 'github-dark',
       },
+      // Colors are switched in global.css with light-dark(), following the site theme.
+      defaultColor: false,
     },
   },
 

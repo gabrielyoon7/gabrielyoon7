@@ -3,14 +3,15 @@ title: "React useState 이해하기"
 description: "MDX 안에서 실제 동작하는 React Interactive Demo를 사용하는 방법을 소개합니다."
 pubDate: 2026-08-17
 updatedDate: 2026-08-18
+category: dev
 tags:
   - React
   - TypeScript
 draft: true
 ---
 
-import Callout from '../../components/astro/callout.astro';
-import InteractiveDemo from '../../components/react/interactive-demo.tsx';
+import Callout from '../../../components/astro/callout.astro';
+import InteractiveDemo from '../../../components/react/interactive-demo.tsx';
 
 ## useState란
 
@@ -47,7 +48,7 @@ function Counter() {
 MDX 파일 상단에서 React 컴포넌트를 import하고, hydration directive와 함께 사용합니다.
 
 ```mdx
-import InteractiveDemo from '../../components/react/interactive-demo.tsx';
+import InteractiveDemo from '../../../components/react/interactive-demo.tsx';
 
 <InteractiveDemo client:visible />
 ```

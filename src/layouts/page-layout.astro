@@ -1,32 +1,28 @@
 ---
+import type { ComponentProps } from 'astro/types';
 import BaseLayout from './base-layout.astro';
 import Header from '../components/astro/header.astro';
 import Footer from '../components/astro/footer.astro';
 import ThemeToggle from '../components/astro/theme-toggle.astro';
+import { DEFAULT_LANG, LANGS } from '../content/taxonomy.mjs';
+import { localizePath, splitPath } from '../i18n/ui';
 
-interface Props {
-  title: string;
-  description?: string;
-  canonicalUrl?: string;
-  ogType?: string;
-  ogImage?: string;
-}
+type Props = ComponentProps<typeof BaseLayout>;
 
-const { title, description, canonicalUrl, ogType, ogImage } = Astro.props;
+const { lang = DEFAULT_LANG, alternates, ...rest } = Astro.props;
+
+// 따로 넘기지 않으면 같은 경로가 모든 언어에 있다고 봅니다 (홈, 목록, About 등).
+const { path } = splitPath(Astro.url.pathname);
+const pageAlternates =
+  alternates ?? LANGS.filter((l) => l !== lang).map((l) => ({ lang: l, href: localizePath(path, l) }));
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonicalUrl={canonicalUrl}
-  ogType={ogType}
-  ogImage={ogImage}
->
-  <Header slot="header">
+<BaseLayout {...rest} lang={lang} alternates={pageAlternates}>
+  <Header slot="header" lang={lang} alternates={pageAlternates}>
     <ThemeToggle slot="actions" />
   </Header>
   <div class="container">
     <slot />
   </div>
-  <Footer slot="footer" />
+  <Footer slot="footer" lang={lang} />
 </BaseLayout>

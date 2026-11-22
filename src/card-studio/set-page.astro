@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import { CARD_FORMATS } from './formats';
+import CardFrame from './card-frame.astro';
+import CoverSlide from './slides/cover-slide.astro';
+import TextSlide from './slides/text-slide.astro';
+import BarChartSlide from './slides/bar-chart-slide.astro';
+import './studio.css';
+
+export async function getStaticPaths() {
+  const sets = await getCollection('cards');
+  return sets.map((set) => ({ params: { set: set.id }, props: { set } }));
+}
+
+const { set } = Astro.props;
+const { title, format, footer, slides } = set.data;
+const size = CARD_FORMATS[format];
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <title>{title} · 카드 스튜디오</title>
+    <script is:inline>
+      // ?capture 로 열면 미리보기 축소와 툴바를 끄고 원본 크기로 보여 줍니다.
+      if (new URLSearchParams(location.search).has('capture')) {
+        document.documentElement.setAttribute('data-capture', '');
+      }
+    </script>
+  </head>
+  <body class="studio">
+    <header class="studio-bar">
+      <a href={`${base}cards/`}>← 목록</a>
+      <strong>{title}</strong>
+      <span>{slides.length}장 · {size.width}×{size.height}</span>
+      <code>pnpm cards {set.id}</code>
+    </header>
+    <div class="card-stack">
+      {
+        slides.map((slide, i) => (
+          <CardFrame
+            format={format}
+            index={i + 1}
+            total={slides.length}
+            footer={footer}
+          >
+            {slide.type === 'cover' && <CoverSlide {...slide} />}
+            {slide.type === 'text' && <TextSlide {...slide} />}
+            {slide.type === 'bar-chart' && <BarChartSlide {...slide} />}
+          </CardFrame>
+        ))
+      }
+    </div>
+  </body>
+</html>

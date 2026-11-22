@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import { CARD_FORMATS } from './formats';
+import './studio.css';
+
+const base = import.meta.env.BASE_URL;
+const sets = (await getCollection('cards')).sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <title>카드 스튜디오</title>
+  </head>
+  <body class="studio">
+    <header class="studio-bar">
+      <strong>카드 스튜디오</strong>
+      <span>src/content/cards/*.yaml</span>
+    </header>
+    <ul class="studio-list">
+      {
+        sets.map((set) => {
+          const { width, height } = CARD_FORMATS[set.data.format];
+          return (
+            <li>
+              <a href={`${base}cards/${set.id}/`}>{set.data.title}</a>
+              <code>pnpm cards {set.id}</code>
+              <span>
+                {set.data.slides.length}장 · {width}×{height}
+              </span>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </body>
+</html>

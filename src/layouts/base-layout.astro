@@ -1,59 +1,102 @@
 ---
+// Pretendard: 직접 배포하며, 페이지에 쓰인 글자 묶음만 내려받는 dynamic subset
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+import { SITE } from '../site.config';
+import { DEFAULT_LANG } from '../content/taxonomy.mjs';
+import type { Lang } from '../lib/posts';
+import { getText, localizePath } from '../i18n/ui';
+
 interface Props {
-  title: string;
+  /** 비우면 사이트 이름만 씁니다(홈). */
+  title?: string;
   description?: string;
   canonicalUrl?: string;
-  ogType?: string;
+  ogType?: 'website' | 'article';
+  /** public/ 기준 경로(예: "covers/a.png") 또는 절대 URL */
   ogImage?: string;
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  tags?: string[];
+  /** 페이지 언어. <html lang>과 og:locale에 쓰입니다. */
+  lang?: Lang;
+  /** 같은 페이지의 다른 언어 버전 (hreflang) */
+  alternates?: { lang: Lang; href: string }[];
 }
 
 const {
   title,
-  description = 'React/TypeScript 개발자의 기술 블로그',
+  description,
   canonicalUrl,
   ogType = 'website',
-  ogImage,
+  ogImage = SITE.defaultOgImage,
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  lang = DEFAULT_LANG,
+  alternates = [],
 } = Astro.props;
 
-const siteTitle = title === 'Home' ? 'Dev Blog' : `${title} | Dev Blog`;
+const metaDescription = description ?? getText(lang)('site.description');
+const OG_LOCALES: Record<Lang, string> = { ko: 'ko_KR', en: 'en_US' };
+
+const base = import.meta.env.BASE_URL;
+const pageTitle = title ? `${title} | ${SITE.name}` : SITE.name;
 const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).href;
-const defaultOgImage = new URL('/favicon.svg', Astro.site).href;
-const image = ogImage ?? defaultOgImage;
+const image = /^https?:\/\//.test(ogImage)
+  ? ogImage
+  : new URL(`${base}${ogImage.replace(/^\//, '')}`, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="ko">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href={`${import.meta.env.BASE_URL}rss.xml`} />
+    {
+      alternates.length > 0 && [
+        <link rel="alternate" hreflang={lang} href={canonical} />,
+        ...alternates.map((a) => (
+          <link rel="alternate" hreflang={a.lang} href={new URL(a.href, Astro.site).href} />
+        )),
+      ]
+    }
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href={localizePath('rss.xml', lang)} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={siteTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
-    <meta property="og:site_name" content="Dev Blog" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={OG_LOCALES[lang]} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+    {ogType === 'article' && <meta property="article:author" content={SITE.author} />}
+    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={siteTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={image} />
 
-    <title>{siteTitle}</title>
+    <title>{pageTitle}</title>
 
     <!-- Theme: prevent flash -->
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem('theme');
-        if (stored === 'light' || stored === 'dark') {
-          document.documentElement.setAttribute('data-theme', stored);
+        try {
+          const stored = localStorage.getItem('theme');
+          if (stored === 'light' || stored === 'dark') {
+            document.documentElement.setAttribute('data-theme', stored);
+          }
+        } catch {
+          // Storage can be blocked; fall back to the system theme.
         }
       })();
     </script>
@@ -70,127 +113,11 @@ const image = ogImage ?? defaultOgImage;
     {import.meta.env.PROD && (
       <script
         is:inline
-        data-goatcounter="https://gabrielyoon7.goatcounter.com/count"
+        data-goatcounter={`https://${SITE.goatcounter}.goatcounter.com/count`}
         async
         src="https://gc.zgo.at/count.js"
       ></script>
     )}
-
-    <!-- Code block enhancements -->
-    <script>
-      function enhanceCodeBlocks() {
-        document.querySelectorAll('.prose pre').forEach((pre) => {
-          if (pre.closest('.code-block-wrapper')) return;
-
-          const code = pre.querySelector('code');
-          if (!code) return;
-
-          const wrapper = document.createElement('div');
-          wrapper.className = 'code-block-wrapper';
-
-          const header = document.createElement('div');
-          header.className = 'code-block-header';
-
-          const lang = document.createElement('span');
-          lang.className = 'code-block-lang';
-          const className = code.className || '';
-          const match = className.match(/language-(\w+)/);
-          lang.textContent = match ? match[1] : 'code';
-
-          const copyBtn = document.createElement('button');
-          copyBtn.className = 'code-copy-btn';
-          copyBtn.type = 'button';
-          copyBtn.textContent = 'Copy';
-          copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
-          copyBtn.addEventListener('click', async () => {
-            try {
-              await navigator.clipboard.writeText(code.textContent || '');
-              copyBtn.textContent = 'Copied!';
-              copyBtn.classList.add('copied');
-              setTimeout(() => {
-                copyBtn.textContent = 'Copy';
-                copyBtn.classList.remove('copied');
-              }, 2000);
-            } catch {
-              copyBtn.textContent = 'Failed';
-            }
-          });
-
-          header.appendChild(lang);
-          header.appendChild(copyBtn);
-
-          pre.parentNode?.insertBefore(wrapper, pre);
-          wrapper.appendChild(header);
-          wrapper.appendChild(pre);
-        });
-      }
-
-      function initLightbox() {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.getElementById('lightbox-close');
-        if (!lightbox || !lightboxImg) return;
-
-        document.querySelectorAll('[data-lightbox]').forEach((img) => {
-          img.addEventListener('click', () => {
-            const src = img.getAttribute('data-lightbox') || img.getAttribute('src');
-            const alt = img.getAttribute('alt') || '';
-            if (src) {
-              lightboxImg.setAttribute('src', src);
-              lightboxImg.setAttribute('alt', alt);
-              lightbox.classList.add('is-open');
-              lightbox.setAttribute('aria-hidden', 'false');
-            }
-          });
-        });
-
-        const closeLightbox = () => {
-          lightbox.classList.remove('is-open');
-          lightbox.setAttribute('aria-hidden', 'true');
-          lightboxImg.removeAttribute('src');
-        };
-
-        closeBtn?.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) closeLightbox();
-        });
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') closeLightbox();
-        });
-      }
-
-      function initTocActive() {
-        const tocLinks = document.querySelectorAll('.toc-list a');
-        const headings = document.querySelectorAll('.prose h2[id], .prose h3[id]');
-        if (!tocLinks.length || !headings.length) return;
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                tocLinks.forEach((link) => {
-                  link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
-                });
-              }
-            });
-          },
-          { rootMargin: '-80px 0px -70% 0px', threshold: 0 }
-        );
-
-        headings.forEach((h) => observer.observe(h));
-      }
-
-      enhanceCodeBlocks();
-      initLightbox();
-      initTocActive();
-    </script>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
-      <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close image preview">&times;</button>
-      <img id="lightbox-img" src="" alt="" />
-    </div>
   </body>
 </html>
 

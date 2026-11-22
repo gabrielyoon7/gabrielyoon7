@@ -67,7 +67,13 @@ src/
 ├── components/
 │   ├── astro/            # Astro 컴포넌트
 │   └── react/            # React Interactive Demo
-├── content/blog/         # MDX 블로그 글
+├── content/
+│   ├── blog/ko/          # 한국어 글 (기본 언어, /blog/...)
+│   ├── blog/en/          # 영어 글 (/en/blog/...)
+│   └── taxonomy.mjs      # 언어·카테고리 목록
+├── lib/posts.ts          # 글 목록·URL·태그·시리즈 헬퍼
+├── i18n/ui.ts            # 언어별 화면 문구·언어별 주소 헬퍼
+├── views/                # 언어 공통 페이지 (pages/와 pages/en/이 불러 씀)
 ├── layouts/              # 페이지 레이아웃
 ├── pages/                # 라우트
 └── styles/global.css     # 전역 CSS
@@ -87,6 +93,22 @@ src/
 
 Astro 동적 라우트(`[...slug]`, `[tag]`)는 예외입니다.
 
+## 페이지 구조
+
+| 페이지 | 한국어 | English |
+|--------|--------|---------|
+| 홈 (고정 글 · 카테고리 · 최신 글) | `/` | `/en/` |
+| 전체 글 | `/blog/` | `/en/blog/` |
+| 카테고리별 글 | `/categories/<dev\|retrospective\|life>/` | `/en/categories/.../` |
+| 태그 목록 · 태그별 글 | `/tags/`, `/tags/<tag>/` | `/en/tags/`, `/en/tags/<tag>/` |
+| 글 | `/blog/<slug>/` | `/en/blog/<slug>/` |
+| About | `/about/` | `/en/about/` |
+| RSS | `/rss.xml` | `/en/rss.xml` |
+
+헤더의 언어 전환 링크는 같은 페이지의 다른 언어 버전으로 갑니다. 그 언어에 같은 글이나 태그가 없으면 그 언어의 홈으로 갑니다.
+
+화면 문구는 `src/i18n/ui.ts`에서 언어별로 관리합니다. 키를 추가하면 모든 언어에 값을 채워야 타입 검사를 통과합니다. 언어마다 내용이 다른 About은 `src/pages/about.astro`와 `src/pages/en/about.astro`를 각각 고칩니다.
+
 ## 새 블로그 글 작성
 
 Mac과 Windows 모두 다음 명령으로 새 글 템플릿을 생성합니다.
@@ -94,17 +116,33 @@ Mac과 Windows 모두 다음 명령으로 새 글 템플릿을 생성합니다.
 ```sh
 pnpm new
 pnpm new "React 상태 관리"
+pnpm new --lang en --category life "A new post"
 ```
 
-`src/content/blog/YYYY-MM-DD-new-post.mdx`에 오늘 날짜(실행하는 컴퓨터 기준)의 초안을 만듭니다. 제목을 지정하면 파일명에도 반영하며, 파일명이 겹치면 `-2`, `-3`을 붙여 기존 글을 보존합니다.
+`src/content/blog/<언어>/YYYY-MM-DD-new-post.mdx`에 오늘 날짜(실행하는 컴퓨터 기준)의 초안을 만듭니다. 언어를 적지 않으면 `ko`, 카테고리를 적지 않으면 `dev`입니다. 제목을 지정하면 파일명에도 반영하며, 파일명이 겹치면 `-2`, `-3`을 붙여 기존 글을 보존합니다.
 
 생성된 파일의 제목, 설명, 태그와 본문을 작성하고 공개할 때 `draft: false`로 바꾸세요.
 
-`src/content/blog/`에 MDX 파일을 추가합니다.
+글은 언어 폴더 안에 MDX 파일로 둡니다.
 
 ```bash
-src/content/blog/my-new-post.mdx
+src/content/blog/ko/my-new-post.mdx   # → /blog/my-new-post/
+src/content/blog/en/my-new-post.mdx   # → /en/blog/my-new-post/
 ```
+
+### 번역본
+
+번역은 선택입니다. 다른 언어 폴더에 **같은 파일명**으로 글을 두면 서로의 번역본으로 연결되고, 글 상단에 언어 전환 링크와 `hreflang` 태그가 붙습니다. 한쪽 언어로만 쓴 글도 괜찮습니다.
+
+### 카테고리
+
+글마다 하나를 고릅니다. 목록과 표시 이름은 `src/content/taxonomy.mjs`에서 관리합니다.
+
+| 키 | 한국어 | English |
+|----|--------|---------|
+| `dev` | 개발 | Dev |
+| `retrospective` | 회고 | Retrospective |
+| `life` | 일상 | Life |
 
 ## frontmatter 작성
 
@@ -114,15 +152,19 @@ title: "글 제목"
 description: "글 설명 (SEO, RSS, OG에 사용)"
 pubDate: 2026-08-18
 updatedDate: 2026-08-19  # 선택
+category: dev             # dev | retrospective | life
 tags:
   - React
   - TypeScript
+series: "Astro 블로그 만들기"  # 선택. 같은 언어에서 이름이 같은 글끼리 묶임
+seriesOrder: 1            # series를 적으면 함께 적기 (1부터)
+pinned: true              # 선택. 홈 상단에 고정
 draft: false              # true면 빌드에서 제외
 ---
 ```
 
 예시 글 `first-post.mdx`와 `second-post.mdx`는 문법 참고용으로 보관하며, `draft: true`로 숨겨져 있습니다.
-`draft: true`인 글은 홈, 글 목록, 태그, RSS, 개별 글 페이지에서 제외됩니다.
+`draft: true`인 글은 빌드(배포)에서 모두 제외됩니다. 개발 서버(`pnpm dev`)에서는 "초안" 배지와 함께 보입니다.
 새 글을 공개하려면 frontmatter에 `draft: false`를 설정하세요. `published` 항목은 사용하지 않습니다.
 
 ## 이미지 추가
@@ -138,8 +180,8 @@ src/assets/blog/my-post/
 MDX에서 import 후 사용:
 
 ```mdx
-import Figure from '../../components/astro/figure.astro';
-import screenshot from '../../assets/blog/my-post/screenshot.png';
+import Figure from '../../../components/astro/figure.astro';
+import screenshot from '../../../assets/blog/my-post/screenshot.png';
 
 <Figure src={screenshot} alt="스크린샷 설명" caption="캡션 (선택)" />
 ```
@@ -165,7 +207,7 @@ const message: string = 'Hello';
 MDX 파일 상단에서 컴포넌트를 import합니다.
 
 ```mdx
-import Callout from '../../components/astro/callout.astro';
+import Callout from '../../../components/astro/callout.astro';
 
 <Callout type="info">
   설명입니다.
@@ -175,8 +217,8 @@ import Callout from '../../components/astro/callout.astro';
 ## Astro component 사용법
 
 ```mdx
-import Callout from '../../components/astro/callout.astro';
-import Figure from '../../components/astro/figure.astro';
+import Callout from '../../../components/astro/callout.astro';
+import Figure from '../../../components/astro/figure.astro';
 
 <Callout type="warn" title="주의">
   경고 내용
@@ -186,7 +228,7 @@ import Figure from '../../components/astro/figure.astro';
 ## React component 사용법
 
 ```mdx
-import InteractiveDemo from '../../components/react/interactive-demo.tsx';
+import InteractiveDemo from '../../../components/react/interactive-demo.tsx';
 
 <InteractiveDemo client:visible />
 ```
@@ -281,7 +323,7 @@ export default function CounterDemo() {
 ```
 
 ```mdx
-import CounterDemo from '../../components/react/counter-demo.tsx';
+import CounterDemo from '../../../components/react/counter-demo.tsx';
 
 <CounterDemo client:visible />
 ```
@@ -304,7 +346,8 @@ MIT
 
 `pnpm dev` 실행 후 상단 **글 작성** 메뉴 또는 `http://localhost:4321/gabrielyoon7/editor/`를 여세요.
 
-- 제목을 입력하고 **새 글 만들기**를 누르면 `src/content/blog/날짜-제목.mdx` 초안이 즉시 생성됩니다.
+- 제목을 입력하고 **새 글 만들기**를 누르면 `src/content/blog/<언어>/날짜-제목.mdx` 초안이 즉시 생성됩니다.
+- 새 글의 언어를 고를 수 있고, 글을 연 뒤 **English 번역본 만들기**(또는 한국어)를 누르면 같은 파일명으로 다른 언어 폴더에 번역 초안이 생깁니다. 카테고리·태그·시리즈는 원문에서 이어받습니다.
 - 본문은 WYSIWYG로 작성하며 제목, 설명, 날짜, 태그와 초안 여부를 별도로 편집합니다.
 - 입력을 멈춘 뒤 1.2초 후 자동 저장합니다. 자동 저장을 끄거나 **저장**, `⌘S` / `Ctrl+S`로 직접 저장할 수도 있습니다.
 - 목록에서 기존 글을 다시 열어 계속 작성할 수 있습니다. 글을 전환할 때 현재 변경사항을 먼저 저장합니다.
@@ -324,7 +367,7 @@ MIT
 2. 설명·날짜·태그·초안 여부는 접힌 글 정보 설정에서 입력합니다.
 3. 입력 즉시 현재 브라우저의 localStorage에 저장됩니다. 여러 초안을 보관하고 **내 초안**에서 다시 열 수 있습니다.
 4. **전체 MDX 복사**로 YAML 메타데이터와 본문을 함께 복사합니다. **파일명 복사**, **.mdx 다운로드**, **내보낼 내용 보기**도 제공합니다.
-5. GitHub에서 `src/content/blog/` 아래 파일을 만들고 복사한 내용을 붙여넣어 커밋합니다. 공개할 글은 **초안으로 내보내기** 체크를 해제하세요.
+5. GitHub에서 화면에 보이는 `src/content/blog/<언어>/` 폴더 아래 파일을 만들고 복사한 내용을 붙여넣어 커밋합니다. 공개할 글은 **초안으로 내보내기** 체크를 해제하세요.
 
 복사 권한이 없으면 직접 선택해 복사할 수 있는 텍스트 상자가 열립니다. MDX 컴포넌트가 포함된 본문은 원문 편집을 사용합니다. 이미지는 URL로 삽입합니다.
 

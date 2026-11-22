@@ -29,9 +29,19 @@ import {
   saveDraft,
   exportMdx,
   filename,
+  folder,
   needsSource,
   type Draft,
+  type Lang,
+  type Category,
 } from "./drafts";
+import {
+  LANGS,
+  CATEGORY_KEYS,
+  CATEGORY_LABELS,
+} from "../content/taxonomy.mjs";
+
+const LANG_NAMES: Record<Lang, string> = { ko: "한국어", en: "English" };
 import "@mdxeditor/editor/style.css";
 import "./browser-writer.css";
 import PwaControls from "./pwa/pwa-controls";
@@ -236,8 +246,36 @@ export default function BrowserWriter({ base }: { base: string }) {
                 />
               </label>
               <details>
-                <summary>설명 · 날짜 · 태그 · 공개 설정</summary>
+                <summary>설명 · 날짜 · 분류 · 공개 설정</summary>
                 <div className="pocket-fields">
+                  <label>
+                    언어
+                    <select
+                      value={active.lang}
+                      onChange={(e) => change({ lang: e.target.value as Lang })}
+                    >
+                      {LANGS.map((lang) => (
+                        <option key={lang} value={lang}>
+                          {LANG_NAMES[lang]}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    카테고리
+                    <select
+                      value={active.category}
+                      onChange={(e) =>
+                        change({ category: e.target.value as Category })
+                      }
+                    >
+                      {CATEGORY_KEYS.map((key) => (
+                        <option key={key} value={key}>
+                          {CATEGORY_LABELS[key][active.lang]}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
                   <label>
                     설명
                     <textarea
@@ -261,6 +299,42 @@ export default function BrowserWriter({ base }: { base: string }) {
                       value={active.tags}
                       onChange={(e) => change({ tags: e.target.value })}
                     />
+                  </label>
+                  <label>
+                    시리즈 (선택)
+                    <input
+                      placeholder="비워 두면 시리즈 아님"
+                      value={active.series}
+                      onChange={(e) =>
+                        change({
+                          series: e.target.value,
+                          seriesOrder:
+                            e.target.value.trim() && !active.seriesOrder
+                              ? "1"
+                              : active.seriesOrder,
+                        })
+                      }
+                    />
+                  </label>
+                  <label>
+                    시리즈 순서
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      min={1}
+                      step={1}
+                      disabled={!active.series.trim()}
+                      value={active.seriesOrder}
+                      onChange={(e) => change({ seriesOrder: e.target.value })}
+                    />
+                  </label>
+                  <label className="pocket-check">
+                    <input
+                      type="checkbox"
+                      checked={active.pinned}
+                      onChange={(e) => change({ pinned: e.target.checked })}
+                    />{" "}
+                    홈에 고정 (pinned: true)
                   </label>
                   <label className="pocket-check">
                     <input
@@ -363,8 +437,9 @@ export default function BrowserWriter({ base }: { base: string }) {
             >
               <h2>완성한 글 옮기기</h2>
               <p>
-                GitHub에서 <code>src/content/blog/</code> 아래 파일을 만들고,
-                전체 MDX를 붙여넣으세요.
+                GitHub에서 <code>{folder(active)}</code> 아래 파일을 만들고,
+                전체 MDX를 붙여넣으세요. 다른 언어 폴더에 같은 파일명으로 두면
+                번역본으로 연결됩니다.
               </p>
               <code className="pocket-filename">{filename(active)}</code>
               {(!active.title.trim() || !active.pubDate) && (
