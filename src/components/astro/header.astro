@@ -1,0 +1,86 @@
+---
+import { LANGS } from '../../content/taxonomy.mjs';
+import { getText, LANG_NAMES, localizePath, splitPath } from '../../i18n/ui';
+import { SITE } from '../../site.config';
+import type { Lang } from '../../lib/posts';
+
+interface Props {
+  lang: Lang;
+  /** 이 페이지의 다른 언어 주소. 없는 언어는 그 언어의 홈으로 연결합니다. */
+  alternates?: { lang: Lang; href: string }[];
+}
+
+const { lang, alternates = [] } = Astro.props;
+const t = getText(lang);
+const base = import.meta.env.BASE_URL;
+const { path: currentPath } = splitPath(Astro.url.pathname);
+
+/** 언어 접두사를 뺀 경로 기준으로 현재 메뉴를 표시합니다. */
+function isActive(section: string): boolean {
+  if (section === '') return currentPath === '' || currentPath === 'index/';
+  return currentPath.startsWith(section);
+}
+
+// 홈은 왼쪽 사이트 이름이 대신합니다.
+const navItems = [
+  // 글 상세와 카테고리 페이지도 Blog 메뉴에 속합니다.
+  { section: 'blog/', label: t('nav.blog'), also: ['categories/'] },
+  { section: 'tags/', label: t('nav.tags') },
+  { section: 'about/', label: t('nav.about') },
+].map((item) => ({
+  href: localizePath(item.section, lang),
+  label: item.label,
+  active: isActive(item.section) || (item.also ?? []).some(isActive),
+}));
+
+// 개발 서버 전용 도구는 언어와 상관없이 한 주소입니다.
+const devItems = import.meta.env.DEV
+  ? [
+      { href: `${base}editor/`, label: '글 작성' },
+      { href: `${base}cards/`, label: '카드' },
+    ]
+  : [];
+
+const languageLinks = LANGS.filter((l) => l !== lang).map((other) => ({
+  lang: other,
+  href: alternates.find((a) => a.lang === other)?.href ?? localizePath('', other),
+}));
+---
+
+<header class="site-header">
+  <div class="container-wide header-inner">
+    <a class="site-logo" href={localizePath('', lang)} aria-current={isActive('') ? 'page' : undefined}>
+      {SITE.name}
+    </a>
+    <div class="header-nav">
+      <nav class="site-nav" aria-label={t('nav.main')}>
+        {
+          navItems.map((item) => (
+            <a href={item.href} aria-current={item.active ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))
+        }
+        {devItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <div class="header-actions">
+        <nav class="lang-switch" aria-label={t('nav.langSwitch')}>
+          {
+            languageLinks.map((link) => (
+              <a href={link.href} hreflang={link.lang} lang={link.lang}>
+                {LANG_NAMES[link.lang]}
+              </a>
+            ))
+          }
+        </nav>
+        <a class="icon-link" href={localizePath('search/', lang)} aria-label={t('nav.search')} title={t('nav.search')} aria-current={isActive('search/') ? 'page' : undefined}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="m20 20-4.2-4.2"></path>
+          </svg>
+        </a>
+        <slot name="actions" />
+      </div>
+    </div>
+  </div>
+</header>

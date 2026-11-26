@@ -1,0 +1,101 @@
+---
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+import { getCollection } from 'astro:content';
+import { CARD_FORMATS } from './formats';
+import CardSet from '../components/astro/card-set.astro';
+import './studio.css';
+
+export async function getStaticPaths() {
+  const sets = await getCollection('cards');
+  return sets.map((set) => ({ params: { set: set.id }, props: { set } }));
+}
+
+const { set } = Astro.props;
+const { title, format, slides } = set.data;
+const size = CARD_FORMATS[format];
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <title>{title} · 카드 스튜디오</title>
+  </head>
+  <body class="studio">
+    <header class="studio-bar">
+      <a href={`${base}cards/`}>← 목록</a>
+      <strong>{title}</strong>
+      <span>{slides.length}장 · {size.width}×{size.height}</span>
+      <label class="studio-scheme">
+        PNG 테마
+        <select data-export-scheme>
+          <option value="light">라이트</option>
+          <option value="dark">다크</option>
+        </select>
+      </label>
+      <button type="button" data-export-all>전체 다운로드</button>
+      <span class="studio-status" data-export-status role="status"></span>
+    </header>
+    <main class="studio-main" data-set-id={set.id} data-width={size.width} data-height={size.height}>
+      <CardSet set={set.id} layout="stack" />
+    </main>
+    <script>
+      import { exportCardPng, downloadDataUrl, type ExportScheme } from './export-png';
+
+      const main = document.querySelector<HTMLElement>('.studio-main')!;
+      const setId = main.dataset.setId!;
+      const width = Number(main.dataset.width);
+      const height = Number(main.dataset.height);
+      const schemeSelect = document.querySelector<HTMLSelectElement>('[data-export-scheme]')!;
+      const status = document.querySelector<HTMLElement>('[data-export-status]')!;
+      const allButton = document.querySelector<HTMLButtonElement>('[data-export-all]')!;
+      const frames = Array.from(main.querySelectorAll<HTMLElement>('.card-frame'));
+
+      async function download(frame: HTMLElement) {
+        const name = frame.dataset.card!;
+        const scheme = schemeSelect.value as ExportScheme;
+        status.textContent = `${name} 만드는 중…`;
+        const dataUrl = await exportCardPng(frame, { width, height, scheme });
+        downloadDataUrl(dataUrl, `${setId}-${name}${scheme === 'dark' ? '-dark' : ''}.png`);
+        status.textContent = `${name}.png 완료`;
+      }
+
+      async function run(task: () => Promise<void>) {
+        const buttons = document.querySelectorAll<HTMLButtonElement>('[data-export-one], [data-export-all]');
+        buttons.forEach((b) => (b.disabled = true));
+        try {
+          await task();
+        } catch (error) {
+          console.error(error);
+          status.textContent = `실패: ${(error as Error).message}`;
+        } finally {
+          buttons.forEach((b) => (b.disabled = false));
+        }
+      }
+
+      for (const frame of frames) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.exportOne = '';
+        button.className = 'studio-slide-button';
+        button.textContent = `PNG 다운로드 (${frame.dataset.card})`;
+        button.addEventListener('click', () => run(() => download(frame)));
+        frame.after(button);
+      }
+
+      allButton.addEventListener('click', () =>
+        run(async () => {
+          for (const frame of frames) {
+            await download(frame);
+            // 브라우저가 연속 다운로드를 묶어 막지 않도록 잠깐 쉽니다.
+            await new Promise((r) => setTimeout(r, 300));
+          }
+          status.textContent = `${frames.length}장 모두 완료`;
+        }),
+      );
+    </script>
+  </body>
+</html>

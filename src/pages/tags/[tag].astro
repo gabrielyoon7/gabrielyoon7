@@ -1,0 +1,8 @@
+---
+import TagPosts from '../../views/tag-posts.astro';
+import { tagPaths } from '../../lib/posts';
+
+export const getStaticPaths = () => tagPaths('ko');
+---
+
+<TagPosts {...Astro.props} />

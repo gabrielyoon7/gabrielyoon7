@@ -1,0 +1,47 @@
+---
+import PageLayout from '../layouts/page-layout.astro';
+import PostTile from '../components/astro/post-tile.astro';
+import CategoryNav from '../components/astro/category-nav.astro';
+import { getText, localizePath } from '../i18n/ui';
+import { getPosts, type Lang } from '../lib/posts';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getText(lang);
+const posts = await getPosts({ lang });
+const pinned = posts.filter((p) => p.data.pinned);
+const latest = posts.filter((p) => !p.data.pinned).slice(0, 6);
+---
+
+<PageLayout lang={lang} wide>
+  {
+    pinned.length > 0 && (
+      <section class="home-section">
+        <h2 class="section-title">{t('home.pinned')}</h2>
+        <div class="post-grid">
+          {pinned.map((post) => <PostTile post={post} eager />)}
+        </div>
+      </section>
+    )
+  }
+
+  <section class="home-section">
+    <h2 class="section-title">{t('home.categories')}</h2>
+    <CategoryNav lang={lang} posts={posts} />
+  </section>
+
+  <section class="home-section">
+    <h2 class="section-title">{t('home.latest')}</h2>
+    <div class="post-grid">
+      {latest.map((post, i) => <PostTile post={post} eager={i < 3} />)}
+    </div>
+    {posts.length > pinned.length + latest.length && (
+      <p class="more-link">
+        <a href={localizePath('blog/', lang)}>{t('home.allPosts')}</a>
+      </p>
+    )}
+  </section>
+</PageLayout>

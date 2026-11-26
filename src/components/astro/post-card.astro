@@ -1,0 +1,35 @@
+---
+import { getText } from '../../i18n/ui';
+import {
+  categoryLabel,
+  categoryUrl,
+  formatShortDate,
+  postLang,
+  postUrl,
+  type Post,
+} from '../../lib/posts';
+
+interface Props {
+  post: Post;
+}
+
+// 목록은 날짜 · 카테고리 / 제목 / 설명만 보여 줍니다. 태그는 글 본문과 태그 페이지에서 봅니다.
+const { post } = Astro.props;
+const lang = postLang(post);
+const t = getText(lang);
+---
+
+<article class="post-list-item">
+  <div class="post-meta">
+    <time datetime={post.data.pubDate.toISOString()}>{formatShortDate(post.data.pubDate, lang)}</time>
+    <a class="post-category" href={categoryUrl(post.data.category, lang)}>
+      {categoryLabel(post.data.category, lang)}
+    </a>
+  </div>
+  <h2 class="post-list-title">
+    <a href={postUrl(post)}>{post.data.title}</a>
+    {post.data.pinned && <span class="pinned-badge">{t('post.pinned')}</span>}
+    {post.data.draft && <span class="draft-badge">{t('post.draftShort')}</span>}
+  </h2>
+  {post.data.description && <p class="post-description">{post.data.description}</p>}
+</article>

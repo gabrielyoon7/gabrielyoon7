@@ -1,0 +1,60 @@
+---
+import { SITE } from '../../site.config';
+import { getText, localizePath } from '../../i18n/ui';
+import type { Lang } from '../../lib/posts';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getText(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>&copy; {year} {SITE.author}.</p>
+    <div class="footer-links">
+      <span title={t('footer.views')}>
+        {t('footer.today')} <span id="visitor-count-today" aria-live="polite">—</span>
+        <span aria-hidden="true"> / </span>
+        {t('footer.total')} <span id="visitor-count-total" aria-live="polite">—</span>
+      </span>
+      <a href={localizePath('rss.xml', lang)}>RSS</a>
+      <a href={SITE.links.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script is:inline define:vars={{ goatcounter: SITE.goatcounter, timeZone: SITE.timeZone }}>
+  async function loadVisitorCount(id, url) {
+    const counter = document.getElementById(id);
+    if (!counter) return;
+
+    try {
+      const response = await fetch(url, {
+        credentials: 'omit',
+        signal: AbortSignal.timeout(8000),
+      });
+      if (!response.ok) return;
+      const data = await response.json();
+      if (typeof data.count === 'string' || typeof data.count === 'number') {
+        counter.textContent = String(data.count);
+      }
+    } catch {
+      // Keep the placeholder when public counts are disabled or unavailable.
+    }
+  }
+
+  const endpoint = `https://${goatcounter}.goatcounter.com/counter/TOTAL.json`;
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date());
+
+  loadVisitorCount('visitor-count-today', `${endpoint}?start=${encodeURIComponent(today)}`);
+  loadVisitorCount('visitor-count-total', endpoint);
+</script>

@@ -1,0 +1,33 @@
+---
+import type { CardFormat } from './formats';
+
+interface Props {
+  format: CardFormat;
+  index: number;
+  total: number;
+  footer?: string;
+}
+
+const { format, index, total, footer } = Astro.props;
+const name = String(index).padStart(2, '0');
+---
+
+<div class="card-frame" data-card={name}>
+  <section class:list={['card', `card--${format}`]}>
+    <div class="card-body">
+      <slot />
+    </div>
+    {
+      total > 1 || footer ? (
+        <footer class="card-footer">
+          <span>{footer}</span>
+          {total > 1 && (
+            <span>
+              {index} / {total}
+            </span>
+          )}
+        </footer>
+      ) : null
+    }
+  </section>
+</div>
